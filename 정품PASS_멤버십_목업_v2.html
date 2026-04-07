@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>정품PASS 멤버십 목업 v2</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --purple: #6C47FF;
+  --purple-light: #EDE9FF;
+  --purple-mid: #A98BFF;
+  --dark: #1A1025;
+  --gray-1: #F7F6FB;
+  --gray-2: #EEECF7;
+  --gray-3: #C9C4E0;
+  --gray-4: #8B85A8;
+  --text: #2D2640;
+  --text-sub: #6B6585;
+  --border: #E8E4F5;
+  --tbd: #FF3B30;
+  --tbd-bg: #FFF0EE;
+  --green: #00C46A;
+  --red: #FF3B30;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(--text); min-height: 100vh; }
+
+/* NAV */
+.nav { background: var(--dark); padding: 0 24px; display: flex; align-items: center; gap: 4px; position: sticky; top: 0; z-index: 100; height: 52px; overflow-x: auto; scrollbar-width: none; }
+.nav::-webkit-scrollbar { display: none; }
+.nav-btn { background: none; border: none; color: var(--gray-3); font-family: 'Noto Sans KR',sans-serif; font-size: 12px; font-weight: 500; padding: 6px 12px; border-radius: 20px; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
+.nav-btn:hover { color: white; background: rgba(255,255,255,0.1); }
+.nav-btn.active { color: white; background: var(--purple); }
+
+/* LEGEND */
+.legend { background: var(--dark); padding: 6px 24px 10px; display: flex; align-items: center; gap: 20px; }
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--gray-3); }
+.legend-dot { width: 10px; height: 10px; border-radius: 2px; }
+.legend-dot.tbd { background: var(--tbd); }
+.legend-dot.done { background: var(--green); }
+
+/* CONTENT */
+.content { display: none; padding: 28px; max-width: 1100px; margin: 0 auto; }
+.content.active { display: block; }
+.section-title { font-size: 20px; font-weight: 700; color: var(--dark); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+.section-title span { font-size: 12px; font-weight: 500; color: var(--gray-4); background: var(--gray-2); padding: 3px 10px; border-radius: 20px; }
+
+/* PHONE */
+.phone-wrap { display: flex; gap: 28px; flex-wrap: wrap; align-items: flex-start; }
+.phone-box { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.phone-label { font-size: 11px; font-weight: 600; color: var(--gray-4); text-transform: uppercase; letter-spacing: 0.06em; }
+.phone { width: 360px; background: white; border-radius: 38px; overflow: hidden; box-shadow: 0 16px 48px rgba(108,71,255,0.14), 0 4px 12px rgba(0,0,0,0.07); border: 8px solid var(--dark); }
+.phone-inner { height: 740px; overflow-y: auto; scrollbar-width: none; background: var(--gray-1); }
+.phone-inner::-webkit-scrollbar { display: none; }
+
+/* PHONE HEADER */
+.ph-header { background: white; padding: 14px 18px 12px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10; }
+.ph-title { font-size: 16px; font-weight: 700; color: var(--dark); }
+.ph-back { font-size: 20px; color: var(--text); cursor: pointer; width: 28px; }
+
+/* STEP BAR */
+.step-bar { display: flex; align-items: center; padding: 10px 18px; background: white; border-bottom: 1px solid var(--border); }
+.step { display: flex; align-items: center; gap: 5px; }
+.step-num { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; }
+.step-num.active { background: var(--purple); color: white; }
+.step-num.done { background: var(--purple); color: white; }
+.step-num.inactive { background: var(--gray-2); color: var(--gray-4); }
+.step-text { font-size: 12px; }
+.step-text.active { color: var(--purple); font-weight: 600; }
+.step-text.inactive { color: var(--gray-4); }
+.step-line { flex: 1; height: 2px; background: var(--gray-2); margin: 0 6px; }
+.step-line.done { background: var(--purple); }
+
+/* PRODUCT SECTION */
+.checkout-section { background: white; margin: 8px; border-radius: 14px; overflow: hidden; }
+.checkout-section-header { padding: 12px 16px; border-bottom: 1px solid var(--border); }
+.checkout-section-sub { font-size: 10px; color: var(--gray-4); margin-bottom: 2px; }
+.checkout-section-title { font-size: 13px; font-weight: 700; color: var(--dark); }
+.checkout-product { display: flex; gap: 12px; padding: 12px 16px; align-items: flex-start; }
+.checkout-product-img { width: 72px; height: 72px; background: var(--gray-2); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 32px; flex-shrink: 0; }
+.checkout-product-info { flex: 1; }
+.checkout-product-brand { font-size: 13px; font-weight: 700; color: var(--dark); margin-bottom: 1px; }
+.checkout-product-name { font-size: 12px; color: var(--text-sub); line-height: 1.4; margin-bottom: 2px; }
+.checkout-product-size { font-size: 11px; color: var(--gray-4); margin-bottom: 4px; }
+.checkout-product-price { font-size: 15px; font-weight: 700; color: var(--dark); }
+.coupon-badge { display: inline-flex; align-items: center; gap: 3px; background: var(--purple-light); color: var(--purple); font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 20px; margin-left: 6px; font-size: 10px; }
+
+/* SERVICE ROW */
+.service-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 16px; border-top: 1px solid var(--gray-2); }
+.service-label { font-size: 13px; color: var(--text); }
+.service-badge { display: inline-block; font-size: 10px; font-weight: 600; background: #E8FFF4; color: #00A854; padding: 1px 6px; border-radius: 10px; margin-left: 4px; }
+.service-badge.discount { background: #FFF0E8; color: #E8650A; }
+.service-price-wrap { display: flex; align-items: center; gap: 5px; }
+.service-original { font-size: 11px; color: var(--gray-3); text-decoration: line-through; }
+.service-price { font-size: 13px; font-weight: 700; color: var(--dark); }
+
+/* TOTAL ROW */
+.total-row { padding: 12px 16px; background: var(--gray-1); display: flex; justify-content: space-between; align-items: center; border-top: 2px solid var(--border); }
+.total-label { font-size: 14px; font-weight: 700; color: var(--dark); }
+.total-price { font-size: 17px; font-weight: 900; color: var(--purple); }
+
+/* MEMBERSHIP HOOK INLINE */
+.membership-inline-hook { margin: 0 8px 8px; }
+.membership-hook-card { background: var(--purple-light); border: 1.5px solid var(--purple-mid); border-radius: 12px; padding: 12px 14px; position: relative; }
+.membership-hook-card.tbd-box { border: 2px dashed var(--tbd); background: var(--tbd-bg); }
+.tbd-badge { position: absolute; top: -9px; right: 12px; background: var(--tbd); color: white; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; letter-spacing: 0.04em; }
+.hook-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.hook-text-area { flex: 1; }
+.hook-eyebrow { font-size: 10px; font-weight: 700; color: var(--purple); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 2px; }
+.hook-main { font-size: 13px; font-weight: 700; color: var(--dark); line-height: 1.4; }
+.hook-main .highlight { color: var(--purple); }
+.hook-sub { font-size: 11px; color: var(--text-sub); margin-top: 2px; }
+.hook-cta-area { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
+.btn-join { background: var(--purple); color: white; border: none; border-radius: 8px; padding: 8px 14px; font-size: 12px; font-weight: 700; font-family: 'Noto Sans KR',sans-serif; cursor: pointer; white-space: nowrap; }
+.btn-detail { background: none; border: none; font-size: 11px; color: var(--purple); font-family: 'Noto Sans KR',sans-serif; cursor: pointer; text-decoration: underline; }
+
+/* SELECTED STATE */
+.membership-selected-row { display: flex; align-items: center; justify-content: space-between; padding: 8px 14px; background: #E8FFF4; border-radius: 8px; margin-top: 8px; }
+.membership-selected-label { font-size: 12px; font-weight: 700; color: #00A854; }
+.membership-cancel-btn { font-size: 10px; color: var(--gray-4); background: none; border: none; font-family: 'Noto Sans KR',sans-serif; cursor: pointer; text-decoration: underline; }
+
+/* UV CARD */
+.uv-card { margin: 0 8px 8px; background: white; border-radius: 12px; border: 1.5px solid var(--border); padding: 12px 14px; position: relative; }
+.uv-card.tbd-box { border: 2px dashed var(--tbd); background: var(--tbd-bg); }
+.uv-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.uv-check { width: 18px; height: 18px; border: 2px solid var(--gray-3); border-radius: 4px; flex-shrink: 0; }
+.uv-check.checked { background: var(--purple); border-color: var(--purple); display: flex; align-items: center; justify-content: center; color: white; font-size: 10px; }
+.uv-title { font-size: 13px; font-weight: 700; color: var(--dark); flex: 1; }
+.uv-link { font-size: 11px; color: var(--purple); text-decoration: underline; cursor: pointer; }
+.uv-desc { font-size: 11px; color: var(--text-sub); line-height: 1.6; padding-left: 26px; }
+.uv-fee { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--gray-2); padding-left: 26px; }
+.membership-benefit-tag { background: var(--purple-light); border-radius: 6px; padding: 5px 10px; margin: 6px 0 0 26px; font-size: 11px; color: var(--purple); font-weight: 600; }
+
+/* PAY SUMMARY (결제 step 3) */
+.pay-summary { background: white; margin: 8px; border-radius: 14px; padding: 14px 16px; }
+.pay-summary-title { font-size: 13px; font-weight: 700; color: var(--dark); margin-bottom: 10px; }
+.pay-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; }
+.pay-label { font-size: 12px; color: var(--text-sub); }
+.pay-value { font-size: 12px; font-weight: 600; color: var(--dark); }
+.pay-value.purple { color: var(--purple); font-weight: 700; }
+.pay-divider { height: 1px; background: var(--border); margin: 8px 0; }
+.pay-total-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; }
+.pay-total-label { font-size: 14px; font-weight: 700; color: var(--dark); }
+.pay-total-value { font-size: 17px; font-weight: 900; color: var(--purple); }
+
+/* BOTTOM BTN */
+.bottom-btn { padding: 14px 16px; background: white; border-top: 1px solid var(--border); position: sticky; bottom: 0; }
+.btn-primary { width: 100%; background: var(--purple); color: white; border: none; border-radius: 12px; padding: 16px; font-size: 15px; font-weight: 700; font-family: 'Noto Sans KR',sans-serif; cursor: pointer; }
+
+/* MYPAGE */
+.mypage-topbar { background: white; padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; }
+.mypage-topbar-title { font-size: 16px; font-weight: 700; }
+.mypage-topbar-icons { display: flex; gap: 12px; font-size: 18px; }
+
+.mypage-profile { background: white; padding: 16px 18px; display: flex; align-items: center; gap: 12px; border-bottom: 8px solid var(--gray-1); }
+.profile-avatar { width: 52px; height: 52px; border-radius: 50%; background: #E8503A; display: flex; align-items: center; justify-content: center; position: relative; flex-shrink: 0; }
+.profile-avatar-inner { font-size: 22px; color: white; }
+.profile-edit { position: absolute; bottom: 0; right: 0; width: 18px; height: 18px; background: var(--gray-3); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9px; color: white; }
+.profile-name { font-size: 16px; font-weight: 700; color: var(--dark); }
+.profile-grade { font-size: 12px; color: var(--purple); font-weight: 600; display: flex; align-items: center; gap: 3px; margin-top: 2px; }
+
+.mypage-wallet { background: white; display: flex; border-bottom: 8px solid var(--gray-1); }
+.wallet-item { flex: 1; padding: 14px 12px; text-align: center; border-right: 1px solid var(--border); }
+.wallet-item:last-child { border-right: none; }
+.wallet-label { font-size: 12px; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+.wallet-value { font-size: 13px; color: var(--text-sub); }
+
+/* MEMBERSHIP BANNER in mypage */
+.mypage-membership-banner { margin: 8px; border-radius: 14px; overflow: hidden; }
+.membership-banner-active { background: linear-gradient(135deg, var(--purple) 0%, #9B72FF 100%); padding: 16px; position: relative; overflow: hidden; }
+.membership-banner-active::before { content: ''; position: absolute; top: -20px; right: -20px; width: 90px; height: 90px; border-radius: 50%; background: rgba(255,255,255,0.1); }
+.membership-banner-active::after { content: ''; position: absolute; bottom: -30px; right: 20px; width: 60px; height: 60px; border-radius: 50%; background: rgba(255,255,255,0.07); }
+.mem-status-badge { display: inline-flex; align-items: center; gap: 4px; background: rgba(255,255,255,0.2); border-radius: 20px; padding: 3px 10px; font-size: 11px; font-weight: 600; color: white; margin-bottom: 8px; }
+.mem-status-dot { width: 6px; height: 6px; border-radius: 50%; background: #00FF87; }
+.mem-banner-title { font-size: 15px; font-weight: 700; color: white; margin-bottom: 2px; }
+.mem-banner-period { font-size: 12px; color: rgba(255,255,255,0.7); margin-bottom: 10px; }
+.mem-banner-bottom { display: flex; align-items: center; justify-content: space-between; }
+.mem-remain { font-size: 11px; color: rgba(255,255,255,0.6); }
+.mem-history-btn { background: rgba(255,255,255,0.2); color: white; border: none; border-radius: 8px; padding: 5px 12px; font-size: 11px; font-weight: 600; font-family: 'Noto Sans KR',sans-serif; cursor: pointer; }
+.membership-banner-expired { background: var(--gray-2); padding: 16px; border-radius: 14px; }
+
+.mypage-menu-group { background: white; margin: 8px 0 0; }
+.mypage-menu-item { display: flex; align-items: center; justify-content: space-between; padding: 16px 18px; border-bottom: 1px solid var(--gray-2); cursor: pointer; }
+.mypage-menu-item:last-child { border-bottom: none; }
+.mypage-menu-label { font-size: 15px; color: var(--dark); }
+.mypage-menu-arrow { font-size: 14px; color: var(--gray-3); }
+.mypage-menu-divider { height: 8px; background: var(--gray-1); }
+
+/* HISTORY BOTTOM SHEET (마이페이지 이용내역) */
+.history-sheet { background: white; padding: 16px; }
+.history-sheet-title { font-size: 14px; font-weight: 700; color: var(--dark); margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
+.history-count { font-size: 12px; font-weight: 400; color: var(--gray-4); }
+.history-item { display: flex; gap: 10px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--gray-2); }
+.history-item:last-child { border-bottom: none; }
+.history-icon { width: 36px; height: 36px; background: var(--purple-light); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+.history-info { flex: 1; }
+.history-name { font-size: 12px; font-weight: 600; color: var(--dark); margin-bottom: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px; }
+.history-date { font-size: 10px; color: var(--gray-4); }
+.history-badge { font-size: 10px; font-weight: 600; background: var(--purple-light); color: var(--purple); padding: 2px 8px; border-radius: 20px; white-space: nowrap; }
+
+/* ORDER COMPLETE */
+.order-complete-wrap { padding: 20px 16px; }
+.order-complete-header { text-align: center; margin-bottom: 20px; }
+.order-complete-icon { font-size: 44px; margin-bottom: 8px; }
+.order-complete-title { font-size: 17px; font-weight: 700; color: var(--dark); margin-bottom: 3px; }
+.order-complete-sub { font-size: 12px; color: var(--text-sub); }
+.membership-congrats { background: linear-gradient(135deg, var(--purple) 0%, #9B72FF 100%); border-radius: 16px; padding: 18px 16px; margin-bottom: 12px; color: white; }
+.congrats-icon { font-size: 24px; margin-bottom: 6px; }
+.congrats-title { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.congrats-sub { font-size: 12px; color: rgba(255,255,255,0.8); margin-bottom: 12px; }
+.congrats-period { background: rgba(255,255,255,0.2); border-radius: 10px; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; }
+.congrats-period-label { font-size: 11px; color: rgba(255,255,255,0.7); }
+.congrats-period-value { font-size: 13px; font-weight: 700; }
+
+/* MODAL */
+.modal-phone-inner { height: 740px; overflow: hidden; position: relative; background: var(--gray-1); }
+.modal-dim { position: absolute; inset: 0; background: rgba(26,16,37,0.55); z-index: 5; }
+.modal-sheet { position: absolute; bottom: 0; left: 0; right: 0; background: white; border-radius: 24px 24px 0 0; z-index: 10; max-height: 92%; overflow-y: auto; }
+.modal-sheet::-webkit-scrollbar { display: none; }
+.modal-handle { width: 36px; height: 4px; background: var(--gray-2); border-radius: 2px; margin: 16px auto 0; }
+.modal-hero { padding: 20px 20px 0; }
+.modal-hero-eyebrow { font-size: 11px; font-weight: 700; color: var(--purple); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+.modal-hero-title { font-size: 22px; font-weight: 900; color: var(--dark); line-height: 1.3; margin-bottom: 4px; }
+.modal-hero-sub { font-size: 13px; color: var(--text-sub); margin-bottom: 16px; }
+
+/* MODAL DARK SECTION (like the reference image) */
+.modal-dark-section { background: var(--dark); margin: 0 -0px; padding: 16px 20px; }
+.modal-dark-title { font-size: 13px; font-weight: 700; color: var(--gray-3); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 12px; }
+.modal-benefit-item { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 14px; }
+.modal-benefit-item:last-child { margin-bottom: 0; }
+.modal-benefit-icon-wrap { width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.modal-benefit-text h4 { font-size: 13px; font-weight: 700; color: white; margin-bottom: 2px; }
+.modal-benefit-text p { font-size: 11px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+.modal-benefit-item.tbd-item .modal-benefit-text h4 { color: var(--tbd); }
+.modal-benefit-item.tbd-item .modal-benefit-text p { color: rgba(255,59,48,0.7); }
+
+/* HOW TO section */
+.modal-how-section { padding: 16px 20px; background: white; }
+.modal-how-title { font-size: 14px; font-weight: 700; color: var(--dark); margin-bottom: 12px; }
+.modal-how-item { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px; }
+.modal-how-num { width: 26px; height: 26px; background: var(--purple); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: white; flex-shrink: 0; }
+.modal-how-text h4 { font-size: 12px; font-weight: 700; color: var(--dark); margin-bottom: 1px; }
+.modal-how-text p { font-size: 11px; color: var(--text-sub); line-height: 1.4; }
+
+/* FAQ */
+.modal-faq-section { padding: 16px 20px; background: var(--gray-1); }
+.modal-faq-title { font-size: 13px; font-weight: 700; color: var(--dark); margin-bottom: 10px; }
+.faq-item { padding: 10px 0; border-bottom: 1px solid var(--border); }
+.faq-item:last-child { border-bottom: none; }
+.faq-q { font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+.faq-a { font-size: 11px; color: var(--text-sub); line-height: 1.5; }
+
+.modal-cta { padding: 14px 20px 24px; background: white; }
+
+/* SDP */
+.sdp-hero { height: 220px; background: linear-gradient(135deg, #E8E4F5, #D4CCF0); display: flex; align-items: center; justify-content: center; font-size: 70px; }
+.sdp-info { background: white; padding: 12px 16px 8px; }
+.sdp-pass-chip { display: inline-block; background: var(--dark); color: white; font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; margin-bottom: 6px; }
+.sdp-brand { font-size: 11px; color: var(--gray-4); }
+.sdp-name { font-size: 15px; font-weight: 700; color: var(--dark); line-height: 1.4; margin-bottom: 4px; }
+.sdp-price-row { display: flex; align-items: baseline; gap: 8px; }
+.sdp-discount { font-size: 14px; font-weight: 700; color: var(--red); }
+.sdp-original { font-size: 12px; color: var(--gray-3); text-decoration: line-through; }
+.sdp-price { font-size: 20px; font-weight: 900; color: var(--dark); }
+.sdp-member-banner { margin: 8px; border-radius: 12px; padding: 12px 14px; background: var(--purple); }
+.sdp-member-banner p { font-size: 11px; color: rgba(255,255,255,0.8); margin-bottom: 2px; }
+.sdp-member-banner strong { font-size: 13px; color: white; font-weight: 700; }
+.sdp-nonmember-banner { margin: 8px; border-radius: 12px; padding: 12px 14px; background: var(--purple-light); border: 1.5px solid var(--purple-mid); }
+.sdp-nonmember-banner p { font-size: 11px; color: var(--purple); margin-bottom: 2px; }
+.sdp-nonmember-banner strong { font-size: 13px; color: var(--dark); font-weight: 700; }
+.sdp-btns { display: flex; gap: 8px; padding: 10px 12px; background: white; }
+.sdp-btn-cart { flex: 1; background: white; border: 1.5px solid var(--purple); color: var(--purple); border-radius: 10px; padding: 13px; font-size: 13px; font-weight: 700; font-family: 'Noto Sans KR',sans-serif; cursor: pointer; }
+.sdp-btn-buy { flex: 1; background: var(--purple); color: white; border: none; border-radius: 10px; padding: 13px; font-size: 13px; font-weight: 700; font-family: 'Noto Sans KR',sans-serif; cursor: pointer; }
+
+/* ADMIN */
+.desktop-wrap { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 32px rgba(108,71,255,0.1); border: 1px solid var(--border); }
+.admin-topbar { background: var(--dark); padding: 12px 20px; display: flex; align-items: center; gap: 20px; }
+.admin-logo { font-size: 14px; font-weight: 700; color: white; }
+.admin-logo span { color: var(--purple-mid); }
+.admin-nav-item { font-size: 12px; color: rgba(255,255,255,0.45); cursor: pointer; }
+.admin-nav-item.active { color: white; font-weight: 600; }
+.admin-body { display: flex; }
+.admin-sidebar { width: 172px; background: #F8F7FC; border-right: 1px solid var(--border); padding: 14px 0; flex-shrink: 0; min-height: 500px; }
+.admin-menu-group { font-size: 10px; font-weight: 700; color: var(--gray-4); letter-spacing: 0.08em; padding: 10px 18px 4px; }
+.admin-menu-item { padding: 8px 18px; font-size: 12px; color: var(--text-sub); cursor: pointer; transition: all 0.15s; }
+.admin-menu-item.active { background: var(--purple-light); color: var(--purple); font-weight: 700; border-right: 2px solid var(--purple); }
+.admin-main { flex: 1; padding: 18px; overflow: hidden; }
+.admin-page-title { font-size: 15px; font-weight: 700; color: var(--dark); margin-bottom: 14px; }
+.admin-tabs { display: flex; border-bottom: 2px solid var(--border); margin-bottom: 14px; }
+.admin-tab { padding: 7px 14px; font-size: 12px; font-weight: 600; color: var(--gray-4); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.2s; }
+.admin-tab.active { color: var(--purple); border-bottom-color: var(--purple); }
+
+.stats-row { display: flex; gap: 8px; margin-bottom: 12px; }
+.stat-card { flex: 1; background: white; border: 1px solid var(--border); border-radius: 10px; padding: 10px; text-align: center; }
+.stat-card.highlight { background: var(--purple); border-color: var(--purple); }
+.stat-value { font-size: 18px; font-weight: 700; color: var(--dark); }
+.stat-card.highlight .stat-value { color: white; }
+.stat-label { font-size: 10px; color: var(--gray-4); margin-top: 1px; }
+.stat-card.highlight .stat-label { color: rgba(255,255,255,0.7); }
+
+.filter-bar { background: var(--gray-1); border-radius: 8px; padding: 10px 12px; display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; align-items: center; }
+.filter-input { border: 1px solid var(--border); border-radius: 5px; padding: 5px 9px; font-size: 11px; font-family: 'Noto Sans KR',sans-serif; color: var(--text); background: white; outline: none; width: 110px; }
+.filter-select { border: 1px solid var(--border); border-radius: 5px; padding: 5px 9px; font-size: 11px; font-family: 'Noto Sans KR',sans-serif; color: var(--text); background: white; outline: none; }
+.filter-btn { background: var(--purple); color: white; border: none; border-radius: 5px; padding: 5px 12px; font-size: 11px; font-weight: 700; font-family: 'Noto Sans KR',sans-serif; cursor: pointer; }
+.excel-btn { background: white; color: var(--text-sub); border: 1px solid var(--border); border-radius: 5px; padding: 5px 10px; font-size: 11px; font-weight: 600; font-family: 'Noto Sans KR',sans-serif; cursor: pointer; margin-left: auto; }
+
+.admin-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+.admin-table th { background: var(--gray-1); padding: 7px 9px; text-align: left; font-weight: 700; color: var(--text-sub); border-bottom: 2px solid var(--border); white-space: nowrap; }
+.admin-table td { padding: 7px 9px; border-bottom: 1px solid var(--gray-2); color: var(--text); vertical-align: middle; }
+.admin-table tr:hover td { background: var(--gray-1); }
+
+.status-badge { display: inline-flex; align-items: center; gap: 3px; padding: 2px 7px; border-radius: 20px; font-size: 10px; font-weight: 700; }
+.status-badge.active { background: #E6FAF0; color: #00A854; }
+.status-badge.expired { background: var(--gray-2); color: var(--gray-4); }
+.status-badge.cancelled { background: #FFF0EE; color: var(--red); }
+.cancel-btn { background: none; border: 1px solid var(--red); color: var(--red); border-radius: 4px; padding: 2px 7px; font-size: 10px; font-weight: 600; font-family: 'Noto Sans KR',sans-serif; cursor: pointer; }
+
+.matrix-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+.matrix-table th { background: var(--dark); color: white; padding: 7px 10px; font-weight: 600; text-align: center; }
+.matrix-table td { padding: 7px 10px; border: 1px solid var(--border); text-align: center; color: var(--text); }
+.matrix-table td:first-child { text-align: left; font-weight: 600; background: var(--gray-1); }
+.matrix-input { border: 1px solid var(--border); border-radius: 4px; padding: 3px 6px; font-size: 11px; font-family: 'Noto Sans KR',sans-serif; width: 80px; text-align: right; outline: none; }
+.matrix-input.tbd-input { border: 1.5px dashed var(--tbd); background: var(--tbd-bg); color: var(--tbd); }
+
+.expiry-item { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--gray-2); }
+.expiry-days { width: 38px; height: 38px; background: var(--purple); border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0; }
+.expiry-days.urgent { background: var(--red); }
+.expiry-days span:first-child { font-size: 14px; font-weight: 700; color: white; line-height: 1; }
+.expiry-days span:last-child { font-size: 8px; color: rgba(255,255,255,0.7); }
+.expiry-info { flex: 1; }
+.expiry-name { font-size: 12px; font-weight: 600; color: var(--dark); }
+.expiry-date { font-size: 10px; color: var(--gray-4); }
+.notify-btn { background: var(--purple-light); color: var(--purple); border: none; border-radius: 6px; padding: 4px 9px; font-size: 11px; font-weight: 700; font-family: 'Noto Sans KR',sans-serif; cursor: pointer; }
+
+.detail-section { background: var(--gray-1); border-radius: 10px; padding: 12px; margin-bottom: 10px; }
+.detail-section-title { font-size: 10px; font-weight: 700; color: var(--gray-4); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
+.detail-row { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; }
+.detail-label { font-size: 11px; color: var(--text-sub); }
+.detail-value { font-size: 11px; font-weight: 600; color: var(--dark); }
+
+.tbd-notice { margin-top: 10px; background: var(--tbd-bg); border: 1.5px dashed var(--tbd); border-radius: 8px; padding: 10px 12px; }
+.tbd-notice-title { font-size: 11px; font-weight: 700; color: var(--tbd); margin-bottom: 3px; }
+.tbd-notice-body { font-size: 11px; color: var(--tbd); }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <button class="nav-btn active" onclick="showTab('checkout-logic',this)">체크아웃 — 조건 로직</button>
+  <button class="nav-btn" onclick="showTab('checkout-pay',this)">결제 Summary</button>
+  <button class="nav-btn" onclick="showTab('checkout-complete',this)">주문완료</button>
+  <button class="nav-btn" onclick="showTab('mypage',this)">마이페이지</button>
+  <button class="nav-btn" onclick="showTab('admin1',this)">어드민 방안1</button>
+  <button class="nav-btn" onclick="showTab('admin2',this)">어드민 방안2</button>
+  <button class="nav-btn" onclick="showTab('modal',this)">멤버십 소개 모달</button>
+  <button class="nav-btn" onclick="showTab('sdp',this)">SDP</button>
+</nav>
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot tbd"></div> TBD — 확정 필요</div>
+  <div class="legend-item"><div class="legend-dot done"></div> 확정</div>
+</div>
+
+<!-- ① 체크아웃 조건 로직 -->
+<div class="content active" id="checkout-logic">
+  <div class="section-title">체크아웃 — 조건 로직 <span>고객 조건에 따라 다른 화면이 노출됩니다</span></div>
+
+  <!-- 조건 토글 -->
+  <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px;">
+    <button class="cond-btn active" onclick="switchCond(this,'c1')" style="background:var(--purple); color:white; border:none; border-radius:20px; padding:8px 16px; font-size:12px; font-weight:700; font-family:'Noto Sans KR',sans-serif; cursor:pointer; white-space:nowrap;">케이스 1 — 구매 3회 미만 · 미가입</button>
+    <button class="cond-btn" onclick="switchCond(this,'c2')" style="background:white; color:var(--text-sub); border:1.5px solid var(--border); border-radius:20px; padding:8px 16px; font-size:12px; font-weight:700; font-family:'Noto Sans KR',sans-serif; cursor:pointer; white-space:nowrap;">케이스 2 — 구매 3회 이상 · 미가입 [TBD]</button>
+    <button class="cond-btn" onclick="switchCond(this,'c3')" style="background:white; color:var(--text-sub); border:1.5px solid var(--border); border-radius:20px; padding:8px 16px; font-size:12px; font-weight:700; font-family:'Noto Sans KR',sans-serif; cursor:pointer; white-space:nowrap;">케이스 3 — 멤버십 이용중</button>
+    <button class="cond-btn" onclick="switchCond(this,'c4')" style="background:white; color:var(--text-sub); border:1.5px solid var(--border); border-radius:20px; padding:8px 16px; font-size:12px; font-weight:700; font-family:'Noto Sans KR',sans-serif; cursor:pointer; white-space:nowrap;">케이스 4 — 멤버십 만료 [TBD]</button>
+  </div>
+
+  <!-- 케이스별 로직 설명 + 폰 -->
+  <div style="display:flex; gap:28px; align-items:flex-start; flex-wrap:wrap;">
+
+    <!-- 로직 설명 패널 -->
+    <div style="width:320px; flex-shrink:0;">
+
+      <!-- C1 -->
+      <div class="cond-panel" id="panel-c1">
+        <div style="background:white; border-radius:16px; padding:20px; border:2px solid var(--purple);">
+          <div style="font-size:11px; font-weight:700; color:var(--purple); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:10px;">케이스 1 · 후킹 노출</div>
+          <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:14px;">구매 3회 미만 + 멤버십 미가입</div>
+
+          <div style="font-size:11px; font-weight:700; color:var(--gray-4); margin-bottom:6px;">적용 조건 (모두 충족 시)</div>
+          <div style="display:flex; flex-direction:column; gap:6px; margin-bottom:16px;">
+            <div style="display:flex; align-items:center; gap:8px; background:var(--gray-1); border-radius:8px; padding:8px 10px;">
+              <span style="font-size:14px;">✓</span>
+              <span style="font-size:12px; color:var(--dark);">멤버십 미가입 상태</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px; background:var(--gray-1); border-radius:8px; padding:8px 10px;">
+              <span style="font-size:14px;">✓</span>
+              <span style="font-size:12px; color:var(--dark);">구매확정 완료 + 주문금액 30만원 이상 건 기준 <strong>3회 미만</strong></span>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px; background:var(--gray-1); border-radius:8px; padding:8px 10px;">
+              <span style="font-size:14px;">✓</span>
+              <span style="font-size:12px; color:var(--dark);">체크아웃에서 정품PASS 탭 선택</span>
+            </div>
+          </div>
+
+          <div style="font-size:11px; font-weight:700; color:var(--gray-4); margin-bottom:6px;">결과 화면</div>
+          <div style="background:var(--purple-light); border-radius:8px; padding:10px 12px; margin-bottom:8px;">
+            <div style="font-size:12px; font-weight:700; color:var(--purple); margin-bottom:2px;">→ 멤버십 후킹 UI 노출</div>
+            <div style="font-size:11px; color:var(--text-sub);">PASS 카드 하단에 "N만원 더 내면 1년 무제한" 문구 + 멤버십 가입하기 버튼 노출</div>
+          </div>
+
+          <div style="font-size:11px; font-weight:700; color:var(--gray-4); margin-bottom:6px;">추가 금액 계산</div>
+          <div style="background:var(--gray-1); border-radius:8px; padding:10px 12px; font-size:11px; color:var(--text-sub); line-height:1.6;">
+            상품가격 구간 → PASS 단건가 확인<br>
+            구매 횟수 구간 확인<br>
+            → 매트릭스 기반 <strong style="color:var(--dark);">추가 금액 동적 산출</strong>
+          </div>
+
+          <div style="margin-top:12px; background:var(--tbd-bg); border:1.5px dashed var(--tbd); border-radius:8px; padding:8px 10px;">
+            <div style="font-size:10px; font-weight:700; color:var(--tbd);">🔴 TBD</div>
+            <div style="font-size:11px; color:var(--tbd);">전체 가격 매트릭스 추가금액 확정 필요</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- C2 -->
+      <div class="cond-panel" id="panel-c2" style="display:none;">
+        <div style="background:white; border-radius:16px; padding:20px; border:2px dashed var(--tbd);">
+          <div style="font-size:11px; font-weight:700; color:var(--tbd); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:10px;">케이스 2 · TBD</div>
+          <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:14px;">구매 3회 이상 + 멤버십 미가입</div>
+
+          <div style="font-size:11px; font-weight:700; color:var(--gray-4); margin-bottom:6px;">적용 조건 (모두 충족 시)</div>
+          <div style="display:flex; flex-direction:column; gap:6px; margin-bottom:16px;">
+            <div style="display:flex; align-items:center; gap:8px; background:var(--gray-1); border-radius:8px; padding:8px 10px;">
+              <span style="font-size:14px;">✓</span>
+              <span style="font-size:12px; color:var(--dark);">멤버십 미가입 상태</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px; background:var(--tbd-bg); border-radius:8px; padding:8px 10px;">
+              <span style="font-size:14px; color:var(--tbd);">!</span>
+              <span style="font-size:12px; color:var(--tbd);">구매확정 완료 + 30만원 이상 건 기준 <strong>3회 이상</strong></span>
+            </div>
+          </div>
+
+          <div style="font-size:11px; font-weight:700; color:var(--gray-4); margin-bottom:6px;">결과 화면 — 미확정</div>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <div style="background:var(--tbd-bg); border-radius:8px; padding:10px 12px; border:1.5px dashed var(--tbd);">
+              <div style="font-size:12px; font-weight:700; color:var(--tbd); margin-bottom:2px;">방안 A — 후킹 완전 미노출</div>
+              <div style="font-size:11px; color:var(--tbd);">멤버십 가입 기회 자체를 제공하지 않음</div>
+            </div>
+            <div style="background:var(--tbd-bg); border-radius:8px; padding:10px 12px; border:1.5px dashed var(--tbd);">
+              <div style="font-size:12px; font-weight:700; color:var(--tbd); margin-bottom:2px;">방안 B — 상이한 추가금액 노출</div>
+              <div style="font-size:11px; color:var(--tbd);">3회 이상 구간의 별도 매트릭스 금액으로 후킹 노출</div>
+            </div>
+          </div>
+          <div style="margin-top:10px; font-size:11px; font-weight:700; color:var(--tbd); text-align:center;">→ 정책 확정 후 화면 확정 가능</div>
+        </div>
+      </div>
+
+      <!-- C3 -->
+      <div class="cond-panel" id="panel-c3" style="display:none;">
+        <div style="background:white; border-radius:16px; padding:20px; border:2px solid var(--green);">
+          <div style="font-size:11px; font-weight:700; color:#00A854; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:10px;">케이스 3 · 무료 적용</div>
+          <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:14px;">멤버십 유효기간 내 이용중</div>
+
+          <div style="font-size:11px; font-weight:700; color:var(--gray-4); margin-bottom:6px;">적용 조건 (모두 충족 시)</div>
+          <div style="display:flex; flex-direction:column; gap:6px; margin-bottom:16px;">
+            <div style="display:flex; align-items:center; gap:8px; background:#E8FFF4; border-radius:8px; padding:8px 10px;">
+              <span style="font-size:14px;">✓</span>
+              <span style="font-size:12px; color:var(--dark);">멤버십 가입 상태</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px; background:#E8FFF4; border-radius:8px; padding:8px 10px;">
+              <span style="font-size:14px;">✓</span>
+              <span style="font-size:12px; color:var(--dark);">결제 완료일 기준 <strong>365일 이내</strong> (유효기간 내)</span>
+            </div>
+          </div>
+
+          <div style="font-size:11px; font-weight:700; color:var(--gray-4); margin-bottom:6px;">결과 화면</div>
+          <div style="background:#E8FFF4; border-radius:8px; padding:10px 12px; margin-bottom:8px;">
+            <div style="font-size:12px; font-weight:700; color:#00A854; margin-bottom:2px;">→ 정품PASS 0원 처리</div>
+            <div style="font-size:11px; color:var(--text-sub);">"멤버십 혜택 적용 · 무료" 뱃지 노출, 이용료 0원 표시, 후킹 UI 미노출</div>
+          </div>
+          <div style="background:#E8FFF4; border-radius:8px; padding:10px 12px;">
+            <div style="font-size:12px; font-weight:700; color:#00A854; margin-bottom:2px;">→ UV 케어 멤버십 할인 적용</div>
+            <div style="font-size:11px; color:var(--tbd);">75% 할인 또는 1회 무료 [TBD]</div>
+          </div>
+
+          <div style="margin-top:12px; background:var(--gray-1); border-radius:8px; padding:8px 10px;">
+            <div style="font-size:11px; color:var(--text-sub);">중복 제거 기준: 회원 ID + 전화번호<br>회원 ID가 달라도 동일 전화번호 → 동일 고객 처리</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- C4 -->
+      <div class="cond-panel" id="panel-c4" style="display:none;">
+        <div style="background:white; border-radius:16px; padding:20px; border:2px dashed var(--tbd);">
+          <div style="font-size:11px; font-weight:700; color:var(--tbd); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:10px;">케이스 4 · TBD</div>
+          <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:14px;">멤버십 만료 후</div>
+
+          <div style="font-size:11px; font-weight:700; color:var(--gray-4); margin-bottom:6px;">적용 조건</div>
+          <div style="display:flex; flex-direction:column; gap:6px; margin-bottom:16px;">
+            <div style="display:flex; align-items:center; gap:8px; background:var(--gray-2); border-radius:8px; padding:8px 10px;">
+              <span style="font-size:14px; color:var(--gray-4);">!</span>
+              <span style="font-size:12px; color:var(--dark);">멤버십 결제 완료일 기준 <strong>365일 초과</strong></span>
+            </div>
+          </div>
+
+          <div style="font-size:11px; font-weight:700; color:var(--gray-4); margin-bottom:6px;">처리 방향 — 미확정</div>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <div style="background:var(--tbd-bg); border-radius:8px; padding:10px 12px; border:1.5px dashed var(--tbd);">
+              <div style="font-size:12px; font-weight:700; color:var(--tbd); margin-bottom:2px;">방안 A — 재가입 할인 후킹 노출</div>
+              <div style="font-size:11px; color:var(--tbd);">컬리처럼 만료 후 재가입 유도 (할인 제공 여부 미확정)</div>
+            </div>
+            <div style="background:var(--tbd-bg); border-radius:8px; padding:10px 12px; border:1.5px dashed var(--tbd);">
+              <div style="font-size:12px; font-weight:700; color:var(--tbd); margin-bottom:2px;">방안 B — 구매 횟수 재체크</div>
+              <div style="font-size:11px; color:var(--tbd);">만료 후 구매 횟수 3회 이상이면 이용권 기회 박탈</div>
+            </div>
+          </div>
+          <div style="margin-top:10px; font-size:11px; font-weight:700; color:var(--tbd); text-align:center;">→ 정책 확정 필요</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 폰 뷰 -->
+    <div class="phone-wrap" style="gap:20px; flex:1;">
+
+      <!-- C1 폰 -->
+      <div class="cond-panel" id="phone-c1">
+        <div class="phone-box">
+          <div class="phone-label">후킹 노출 상태</div>
+          <div class="phone"><div class="phone-inner">
+            <div class="ph-header"><div class="ph-back">‹</div><div class="ph-title">주문/결제</div><div style="width:28px"></div></div>
+            <div class="step-bar">
+              <div class="step"><div class="step-num active">1</div><div class="step-text active">주문</div></div>
+              <div class="step-line"></div>
+              <div class="step"><div class="step-num inactive">2</div><div class="step-text inactive">배송</div></div>
+              <div class="step-line"></div>
+              <div class="step"><div class="step-num inactive">3</div><div class="step-text inactive">결제</div></div>
+            </div>
+            <div style="background:white; margin:8px; border-radius:14px; padding:14px 16px; display:flex; gap:12px; align-items:center;">
+              <div style="width:64px; height:64px; background:var(--gray-2); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:28px; flex-shrink:0;">👜</div>
+              <div><div style="font-size:11px; color:var(--gray-4);">루이비통</div><div style="font-size:13px; font-weight:600; color:var(--dark);">니스 뷰티 여성 파우치백</div><div style="font-size:11px; color:var(--gray-4);">옵션 : 단품</div><div style="font-size:15px; font-weight:700; color:var(--dark); margin-top:3px;">1,466,000원</div></div>
+            </div>
+            <div style="margin:0 8px 8px; border-radius:14px; overflow:hidden; border:1.5px solid var(--border);">
+              <div style="display:flex;"><div style="flex:1; padding:12px; text-align:center; font-size:13px; font-weight:600; background:var(--purple); color:white;">트렌비 정품PASS ✓</div><div style="flex:1; padding:12px; text-align:center; font-size:13px; font-weight:600; background:var(--gray-1); color:var(--gray-4);">일반</div></div>
+              <div style="background:white; padding:14px 16px;">
+                <div style="display:flex; gap:8px; margin-bottom:10px;"><div style="width:22px; height:22px; background:var(--purple); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; color:white; flex-shrink:0; margin-top:1px;">✓</div><div><div style="font-size:13px; font-weight:700; color:var(--dark); margin-bottom:2px;">한국정품감정센터 정품 감정 후 배송</div><div style="font-size:11px; color:var(--text-sub);">전문 감정사가 최대 30개 항목 정밀 감정</div></div></div>
+                <div style="display:flex; gap:8px; margin-bottom:10px;"><div style="width:22px; height:22px; background:var(--purple); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; color:white; flex-shrink:0; margin-top:1px;">✓</div><div><div style="font-size:13px; font-weight:700; color:var(--dark); margin-bottom:2px;">한국정품감정센터 보증서 발급</div><div style="font-size:11px; color:var(--text-sub);">정품 인증 고유 번호 발급</div></div></div>
+                <div style="font-size:11px; color:var(--gray-4); margin-bottom:8px;">※ 영업일 기준 2-3일 추가 소요</div>
+                <div style="display:flex; justify-content:space-between; padding-top:10px; border-top:1px solid var(--gray-2); align-items:center;"><span style="font-size:13px; color:var(--text-sub);">이용료</span><div><span style="font-size:12px; color:var(--gray-3); text-decoration:line-through; margin-right:4px;">60,000원</span><span style="font-size:15px; font-weight:700; color:var(--dark);">30,000원</span></div></div>
+                <!-- 후킹 -->
+                <div style="margin-top:12px; background:var(--purple-light); border:1.5px dashed var(--tbd); border-radius:10px; padding:12px; position:relative;">
+                  <div style="position:absolute; top:-9px; right:10px; background:var(--tbd); color:white; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">TBD 문구</div>
+                  <div style="font-size:11px; font-weight:700; color:var(--purple); margin-bottom:4px;">🎉 정품PASS 멤버십</div>
+                  <div style="font-size:13px; font-weight:700; color:var(--dark); margin-bottom:8px;"><span style="color:var(--purple);">1만원</span> 더 내면 1년 내내 정품PASS 무료!</div>
+                  <div style="display:flex; gap:8px;">
+                    <button style="flex:1; background:var(--purple); color:white; border:none; border-radius:8px; padding:9px; font-size:12px; font-weight:700; font-family:'Noto Sans KR',sans-serif; cursor:pointer;">멤버십 가입하기</button>
+                    <button style="background:white; color:var(--purple); border:1.5px solid var(--purple); border-radius:8px; padding:9px 12px; font-size:12px; font-weight:600; font-family:'Noto Sans KR',sans-serif; cursor:pointer;">자세히 보기</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bottom-btn"><button class="btn-primary">다음</button></div>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- C2 폰 -->
+      <div class="cond-panel" id="phone-c2" style="display:none;">
+        <div class="phone-box">
+          <div class="phone-label">후킹 미노출 상태 (TBD)</div>
+          <div class="phone"><div class="phone-inner">
+            <div class="ph-header"><div class="ph-back">‹</div><div class="ph-title">주문/결제</div><div style="width:28px"></div></div>
+            <div class="step-bar">
+              <div class="step"><div class="step-num active">1</div><div class="step-text active">주문</div></div>
+              <div class="step-line"></div>
+              <div class="step"><div class="step-num inactive">2</div><div class="step-text inactive">배송</div></div>
+              <div class="step-line"></div>
+              <div class="step"><div class="step-num inactive">3</div><div class="step-text inactive">결제</div></div>
+            </div>
+            <div style="background:white; margin:8px; border-radius:14px; padding:14px 16px; display:flex; gap:12px; align-items:center;">
+              <div style="width:64px; height:64px; background:var(--gray-2); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:28px; flex-shrink:0;">👜</div>
+              <div><div style="font-size:11px; color:var(--gray-4);">루이비통</div><div style="font-size:13px; font-weight:600; color:var(--dark);">니스 뷰티 여성 파우치백</div><div style="font-size:11px; color:var(--gray-4);">옵션 : 단품</div><div style="font-size:15px; font-weight:700; color:var(--dark); margin-top:3px;">1,466,000원</div></div>
+            </div>
+            <div style="margin:0 8px 8px; border-radius:14px; overflow:hidden; border:1.5px solid var(--border);">
+              <div style="display:flex;"><div style="flex:1; padding:12px; text-align:center; font-size:13px; font-weight:600; background:var(--purple); color:white;">트렌비 정품PASS ✓</div><div style="flex:1; padding:12px; text-align:center; font-size:13px; font-weight:600; background:var(--gray-1); color:var(--gray-4);">일반</div></div>
+              <div style="background:white; padding:14px 16px;">
+                <div style="display:flex; gap:8px; margin-bottom:10px;"><div style="width:22px; height:22px; background:var(--purple); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; color:white; flex-shrink:0; margin-top:1px;">✓</div><div><div style="font-size:13px; font-weight:700; color:var(--dark); margin-bottom:2px;">한국정품감정센터 정품 감정 후 배송</div><div style="font-size:11px; color:var(--text-sub);">전문 감정사가 최대 30개 항목 정밀 감정</div></div></div>
+                <div style="display:flex; gap:8px; margin-bottom:10px;"><div style="width:22px; height:22px; background:var(--purple); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; color:white; flex-shrink:0; margin-top:1px;">✓</div><div><div style="font-size:13px; font-weight:700; color:var(--dark); margin-bottom:2px;">한국정품감정센터 보증서 발급</div><div style="font-size:11px; color:var(--text-sub);">정품 인증 고유 번호 발급</div></div></div>
+                <div style="font-size:11px; color:var(--gray-4); margin-bottom:8px;">※ 영업일 기준 2-3일 추가 소요</div>
+                <div style="display:flex; justify-content:space-between; padding-top:10px; border-top:1px solid var(--gray-2); align-items:center;"><span style="font-size:13px; color:var(--text-sub);">이용료</span><div><span style="font-size:12px; color:var(--gray-3); text-decoration:line-through; margin-right:4px;">60,000원</span><span style="font-size:15px; font-weight:700; color:var(--dark);">30,000원</span></div></div>
+                <!-- 후킹 없음 -->
+                <div style="margin-top:12px; background:var(--tbd-bg); border:2px dashed var(--tbd); border-radius:10px; padding:12px; text-align:center;">
+                  <div style="font-size:12px; font-weight:700; color:var(--tbd); margin-bottom:2px;">🔴 TBD — 이 구간 처리 미확정</div>
+                  <div style="font-size:11px; color:var(--tbd);">후킹 미노출 vs 상이한 금액 노출 결정 필요</div>
+                </div>
+              </div>
+            </div>
+            <div class="bottom-btn"><button class="btn-primary">다음</button></div>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- C3 폰 -->
+      <div class="cond-panel" id="phone-c3" style="display:none;">
+        <div class="phone-box">
+          <div class="phone-label">멤버십 혜택 적용 · 무료</div>
+          <div class="phone"><div class="phone-inner">
+            <div class="ph-header"><div class="ph-back">‹</div><div class="ph-title">주문/결제</div><div style="width:28px"></div></div>
+            <div class="step-bar">
+              <div class="step"><div class="step-num active">1</div><div class="step-text active">주문</div></div>
+              <div class="step-line"></div>
+              <div class="step"><div class="step-num inactive">2</div><div class="step-text inactive">배송</div></div>
+              <div class="step-line"></div>
+              <div class="step"><div class="step-num inactive">3</div><div class="step-text inactive">결제</div></div>
+            </div>
+            <div style="background:white; margin:8px; border-radius:14px; padding:14px 16px; display:flex; gap:12px; align-items:center;">
+              <div style="width:64px; height:64px; background:var(--gray-2); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:28px; flex-shrink:0;">👜</div>
+              <div><div style="font-size:11px; color:var(--gray-4);">루이비통</div><div style="font-size:13px; font-weight:600; color:var(--dark);">니스 뷰티 여성 파우치백</div><div style="font-size:11px; color:var(--gray-4);">옵션 : 단품</div><div style="font-size:15px; font-weight:700; color:var(--dark); margin-top:3px;">1,466,000원</div></div>
+            </div>
+            <div style="margin:0 8px 8px; border-radius:14px; overflow:hidden; border:1.5px solid var(--border);">
+              <div style="display:flex;"><div style="flex:1; padding:12px; text-align:center; font-size:13px; font-weight:600; background:var(--purple); color:white;">트렌비 정품PASS ✓</div><div style="flex:1; padding:12px; text-align:center; font-size:13px; font-weight:600; background:var(--gray-1); color:var(--gray-4);">일반</div></div>
+              <div style="background:white; padding:14px 16px;">
+                <div style="display:flex; gap:8px; margin-bottom:10px;"><div style="width:22px; height:22px; background:var(--purple); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; color:white; flex-shrink:0; margin-top:1px;">✓</div><div><div style="font-size:13px; font-weight:700; color:var(--dark); margin-bottom:2px;">한국정품감정센터 정품 감정 후 배송</div><div style="font-size:11px; color:var(--text-sub);">전문 감정사가 최대 30개 항목 정밀 감정</div></div></div>
+                <div style="display:flex; gap:8px; margin-bottom:10px;"><div style="width:22px; height:22px; background:var(--purple); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; color:white; flex-shrink:0; margin-top:1px;">✓</div><div><div style="font-size:13px; font-weight:700; color:var(--dark); margin-bottom:2px;">한국정품감정센터 보증서 발급</div><div style="font-size:11px; color:var(--text-sub);">정품 인증 고유 번호 발급</div></div></div>
+                <div style="font-size:11px; color:var(--gray-4); margin-bottom:8px;">※ 영업일 기준 2-3일 추가 소요</div>
+                <div style="display:flex; justify-content:space-between; padding-top:10px; border-top:1px solid var(--gray-2); align-items:center;">
+                  <span style="font-size:13px; color:var(--text-sub);">이용료</span>
+                  <div style="display:flex; align-items:center; gap:5px;">
+                    <span style="background:var(--purple); color:white; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">멤버십 혜택 적용 · 무료</span>
+                    <span style="font-size:12px; color:var(--gray-3); text-decoration:line-through;">30,000원</span>
+                    <span style="font-size:15px; font-weight:700; color:var(--purple);">0원</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="margin:0 8px 8px; background:var(--tbd-bg); border-radius:12px; border:2px dashed var(--tbd); padding:12px 14px; position:relative;">
+              <div style="position:absolute; top:-9px; right:10px; background:var(--tbd); color:white; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">TBD</div>
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                <div style="width:18px; height:18px; background:var(--purple); border-radius:4px; display:flex; align-items:center; justify-content:center; color:white; font-size:10px; flex-shrink:0;">✓</div>
+                <div style="font-size:13px; font-weight:700; color:var(--dark); flex:1;">UV 살균 케어</div>
+              </div>
+              <div style="background:var(--purple-light); border-radius:6px; padding:5px 10px; margin-left:26px; font-size:11px; color:var(--purple); font-weight:600;">🎉 멤버십 혜택 — 75% 할인 또는 1회 무료 [TBD]</div>
+              <div style="display:flex; justify-content:space-between; margin-top:8px; padding-top:8px; border-top:1px solid rgba(255,59,48,0.2); padding-left:26px;">
+                <span style="font-size:13px; color:var(--text-sub);">이용료</span>
+                <span style="font-size:13px; font-weight:700; color:var(--tbd);">?원 [TBD]</span>
+              </div>
+            </div>
+            <div class="bottom-btn"><button class="btn-primary">다음</button></div>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- C4 폰 -->
+      <div class="cond-panel" id="phone-c4" style="display:none;">
+        <div class="phone-box">
+          <div class="phone-label">만료 후 처리 (TBD)</div>
+          <div class="phone"><div class="phone-inner">
+            <div class="ph-header"><div class="ph-back">‹</div><div class="ph-title">주문/결제</div><div style="width:28px"></div></div>
+            <div class="step-bar">
+              <div class="step"><div class="step-num active">1</div><div class="step-text active">주문</div></div>
+              <div class="step-line"></div>
+              <div class="step"><div class="step-num inactive">2</div><div class="step-text inactive">배송</div></div>
+              <div class="step-line"></div>
+              <div class="step"><div class="step-num inactive">3</div><div class="step-text inactive">결제</div></div>
+            </div>
+            <div style="background:white; margin:8px; border-radius:14px; padding:14px 16px; display:flex; gap:12px; align-items:center;">
+              <div style="width:64px; height:64px; background:var(--gray-2); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:28px; flex-shrink:0;">👜</div>
+              <div><div style="font-size:11px; color:var(--gray-4);">루이비통</div><div style="font-size:13px; font-weight:600; color:var(--dark);">니스 뷰티 여성 파우치백</div><div style="font-size:15px; font-weight:700; color:var(--dark); margin-top:3px;">1,466,000원</div></div>
+            </div>
+            <!-- 만료 알림 -->
+            <div style="margin:0 8px 8px; background:#FFF8E6; border:1px solid #FFD166; border-radius:10px; padding:10px 14px; font-size:12px; color:#996600; display:flex; align-items:center; gap:6px;">⚠️ 멤버십이 만료되었습니다.</div>
+            <div style="margin:0 8px 8px; background:var(--tbd-bg); border:2px dashed var(--tbd); border-radius:14px; padding:20px; text-align:center;">
+              <div style="font-size:13px; font-weight:700; color:var(--tbd); margin-bottom:8px;">🔴 만료 후 처리 방식 TBD</div>
+              <div style="font-size:11px; color:var(--tbd); line-height:1.7;">재가입 할인 후킹 노출 (방안 A)<br>vs<br>구매 횟수 재체크 후 기회 박탈 (방안 B)<br><br>→ 정책 확정 후 화면 확정</div>
+            </div>
+            <div class="bottom-btn"><button class="btn-primary">다음</button></div>
+          </div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- (기존 체크아웃 미가입/가입 섹션 제거됨 — 로직 탭으로 통합) -->
+  <div style="display:none">
+    <div class="phone-box">
+      <div class="phone-label">PASS 선택 + 멤버십 후킹 노출</div>
+      <div class="phone"><div class="phone-inner">
+        <div class="ph-header">
+          <div class="ph-back">‹</div><div class="ph-title">주문/결제</div><div style="width:28px"></div>
+        </div>
+        <div class="step-bar">
+          <div class="step"><div class="step-num active">1</div><div class="step-text active">주문</div></div>
+          <div class="step-line"></div>
+          <div class="step"><div class="step-num inactive">2</div><div class="step-text inactive">배송</div></div>
+          <div class="step-line"></div>
+          <div class="step"><div class="step-num inactive">3</div><div class="step-text inactive">결제</div></div>
+        </div>
+
+        <!-- 상품 카드 -->
+        <div style="background:white; margin:8px; border-radius:14px; padding:14px 16px; display:flex; gap:12px; align-items:center;">
+          <div style="width:64px; height:64px; background:var(--gray-2); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:28px; flex-shrink:0;">👜</div>
+          <div>
+            <div style="font-size:11px; color:var(--gray-4);">루이비통</div>
+            <div style="font-size:13px; font-weight:600; color:var(--dark);">니스 뷰티 여성 파우치백</div>
+            <div style="font-size:11px; color:var(--gray-4);">옵션 : 단품</div>
+            <div style="font-size:15px; font-weight:700; color:var(--dark); margin-top:3px;">1,466,000원</div>
+          </div>
+        </div>
+
+        <!-- PASS 탭 -->
+        <div style="margin:0 8px 8px; border-radius:14px; overflow:hidden; border:1.5px solid var(--border);">
+          <div style="display:flex;">
+            <div style="flex:1; padding:12px; text-align:center; font-size:13px; font-weight:600; background:var(--purple); color:white;">트렌비 정품PASS ✓</div>
+            <div style="flex:1; padding:12px; text-align:center; font-size:13px; font-weight:600; background:var(--gray-1); color:var(--gray-4);">일반</div>
+          </div>
+          <div style="background:white; padding:14px 16px;">
+            <div style="display:flex; gap:8px; margin-bottom:12px;">
+              <div style="width:22px; height:22px; background:var(--purple); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; color:white; flex-shrink:0; margin-top:1px;">✓</div>
+              <div>
+                <div style="font-size:13px; font-weight:700; color:var(--dark); margin-bottom:3px;">한국정품감정센터 정품 감정 후 배송</div>
+                <div style="font-size:11px; color:var(--text-sub); line-height:1.5;">전문 감정사가 최대 30개 항목 정밀 감정<br>가품 판명 시 판매가 200% 보상</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:8px; margin-bottom:10px;">
+              <div style="width:22px; height:22px; background:var(--purple); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; color:white; flex-shrink:0; margin-top:1px;">✓</div>
+              <div>
+                <div style="font-size:13px; font-weight:700; color:var(--dark); margin-bottom:3px;">한국정품감정센터 보증서 발급</div>
+                <div style="font-size:11px; color:var(--text-sub); line-height:1.5;">정품 인증 고유 번호 발급, 재판매시 가치 30% 증가</div>
+              </div>
+            </div>
+            <div style="font-size:11px; color:var(--gray-4); margin-bottom:8px;">※ 상품 수령까지 영업일 기준 2-3일 추가 소요됩니다. <span style="color:var(--purple); text-decoration:underline; cursor:pointer;">자주 묻는 질문</span></div>
+            <div style="display:flex; justify-content:space-between; align-items:center; padding-top:10px; border-top:1px solid var(--gray-2);">
+              <span style="font-size:13px; color:var(--text-sub);">이용료</span>
+              <div>
+                <span style="font-size:12px; color:var(--gray-3); text-decoration:line-through; margin-right:4px;">60,000원</span>
+                <span style="font-size:15px; font-weight:700; color:var(--dark);">30,000원</span>
+              </div>
+            </div>
+
+            <!-- 멤버십 후킹 — PASS 카드 하단에 붙음 -->
+            <div style="margin-top:12px; background:var(--purple-light); border:1.5px dashed var(--tbd); border-radius:10px; padding:12px; position:relative;">
+              <div style="position:absolute; top:-9px; right:10px; background:var(--tbd); color:white; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">TBD — 문구 확정</div>
+              <div style="font-size:11px; font-weight:700; color:var(--purple); margin-bottom:4px;">🎉 정품PASS 멤버십</div>
+              <div style="font-size:13px; font-weight:700; color:var(--dark); margin-bottom:8px;"><span style="color:var(--purple);">1만원</span> 더 내면 1년 내내 정품PASS 무료!</div>
+              <div style="display:flex; gap:8px; align-items:center;">
+                <button style="flex:1; background:var(--purple); color:white; border:none; border-radius:8px; padding:9px; font-size:12px; font-weight:700; font-family:'Noto Sans KR',sans-serif; cursor:pointer;">멤버십 가입하기</button>
+                <button style="background:white; color:var(--purple); border:1.5px solid var(--purple); border-radius:8px; padding:9px 12px; font-size:12px; font-weight:600; font-family:'Noto Sans KR',sans-serif; cursor:pointer; white-space:nowrap;">자세히 보기</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- UV 케어 -->
+        <div style="margin:0 8px 8px; background:white; border-radius:12px; border:1.5px solid var(--border); padding:12px 14px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+            <div style="width:18px; height:18px; background:var(--purple); border-radius:4px; display:flex; align-items:center; justify-content:center; color:white; font-size:10px; flex-shrink:0;">✓</div>
+            <div style="font-size:13px; font-weight:700; color:var(--dark); flex:1;">UV 살균 케어</div>
+            <div style="font-size:11px; color:var(--purple); text-decoration:underline; cursor:pointer;">어떻게 진행되나요?</div>
+          </div>
+          <div style="font-size:11px; color:var(--text-sub); line-height:1.6; padding-left:26px;">• 명품에 적합한 전문 장비로 99.9% 유해균 제거<br>• 눈에 보이지 않는 찝찝함 해소</div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px; padding-top:8px; border-top:1px solid var(--gray-2); padding-left:26px;">
+            <span style="font-size:13px; color:var(--text-sub);">이용료</span>
+            <div>
+              <span style="font-size:12px; color:var(--gray-3); text-decoration:line-through; margin-right:4px;">40,000원</span>
+              <span style="font-size:13px; font-weight:700; color:var(--dark);">10,000원</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bottom-btn"><button class="btn-primary">다음</button></div>
+      </div></div>
+    </div>
+
+    <!-- 멤버십 가입하기 클릭 후 -->
+    <div class="phone-box">
+      <div class="phone-label">멤버십 가입하기 클릭 후</div>
+      <div class="phone"><div class="phone-inner">
+        <div class="ph-header">
+          <div class="ph-back">‹</div><div class="ph-title">주문/결제</div><div style="width:28px"></div>
+        </div>
+        <div class="step-bar">
+          <div class="step"><div class="step-num active">1</div><div class="step-text active">주문</div></div>
+          <div class="step-line"></div>
+          <div class="step"><div class="step-num inactive">2</div><div class="step-text inactive">배송</div></div>
+          <div class="step-line"></div>
+          <div class="step"><div class="step-num inactive">3</div><div class="step-text inactive">결제</div></div>
+        </div>
+
+        <div style="background:white; margin:8px; border-radius:14px; padding:14px 16px; display:flex; gap:12px; align-items:center;">
+          <div style="width:64px; height:64px; background:var(--gray-2); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:28px; flex-shrink:0;">👜</div>
+          <div>
+            <div style="font-size:11px; color:var(--gray-4);">루이비통</div>
+            <div style="font-size:13px; font-weight:600; color:var(--dark);">니스 뷰티 여성 파우치백</div>
+            <div style="font-size:11px; color:var(--gray-4);">옵션 : 단품</div>
+            <div style="font-size:15px; font-weight:700; color:var(--dark); margin-top:3px;">1,466,000원</div>
+          </div>
+        </div>
+
+        <div style="margin:0 8px 8px; border-radius:14px; overflow:hidden; border:1.5px solid var(--border);">
+          <div style="display:flex;">
+            <div style="flex:1; padding:12px; text-align:center; font-size:13px; font-weight:600; background:var(--purple); color:white;">트렌비 정품PASS ✓</div>
+            <div style="flex:1; padding:12px; text-align:center; font-size:13px; font-weight:600; background:var(--gray-1); color:var(--gray-4);">일반</div>
+          </div>
+          <div style="background:white; padding:14px 16px;">
+            <div style="display:flex; gap:8px; margin-bottom:12px;">
+              <div style="width:22px; height:22px; background:var(--purple); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; color:white; flex-shrink:0; margin-top:1px;">✓</div>
+              <div>
+                <div style="font-size:13px; font-weight:700; color:var(--dark); margin-bottom:3px;">한국정품감정센터 정품 감정 후 배송</div>
+                <div style="font-size:11px; color:var(--text-sub); line-height:1.5;">전문 감정사가 최대 30개 항목 정밀 감정<br>가품 판명 시 판매가 200% 보상</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:8px; margin-bottom:10px;">
+              <div style="width:22px; height:22px; background:var(--purple); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; color:white; flex-shrink:0; margin-top:1px;">✓</div>
+              <div>
+                <div style="font-size:13px; font-weight:700; color:var(--dark); margin-bottom:3px;">한국정품감정센터 보증서 발급</div>
+                <div style="font-size:11px; color:var(--text-sub); line-height:1.5;">정품 인증 고유 번호 발급, 재판매시 가치 30% 증가</div>
+              </div>
+            </div>
+            <div style="font-size:11px; color:var(--gray-4); margin-bottom:8px;">※ 상품 수령까지 영업일 기준 2-3일 추가 소요됩니다.</div>
+            <div style="display:flex; justify-content:space-between; align-items:center; padding-top:10px; border-top:1px solid var(--gray-2);">
+              <span style="font-size:13px; color:var(--text-sub);">이용료</span>
+              <div>
+                <span style="font-size:12px; color:var(--gray-3); text-decoration:line-through; margin-right:4px;">60,000원</span>
+                <span style="font-size:15px; font-weight:700; color:var(--dark);">30,000원</span>
+              </div>
+            </div>
+
+            <!-- 멤버십 선택됨 상태 -->
+            <div style="margin-top:10px; background:#E8FFF4; border:1.5px solid #00C46A; border-radius:10px; padding:10px 12px; display:flex; align-items:center; justify-content:space-between;">
+              <div>
+                <div style="font-size:11px; font-weight:700; color:#00A854; margin-bottom:2px;">✓ 정품PASS 멤버십 1년 가입됨</div>
+                <div style="font-size:11px; color:var(--text-sub);">추가금액 <strong style="color:#00A854;">{추가금액}원</strong> 결제금액에 반영</div>
+              </div>
+              <button style="background:none; border:none; font-size:11px; color:var(--gray-4); font-family:'Noto Sans KR',sans-serif; cursor:pointer; text-decoration:underline;">취소</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- UV 케어 — 멤버십 할인 변경 -->
+        <div style="margin:0 8px 8px; background:var(--tbd-bg); border-radius:12px; border:2px dashed var(--tbd); padding:12px 14px; position:relative;">
+          <div style="position:absolute; top:-9px; right:10px; background:var(--tbd); color:white; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">TBD</div>
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+            <div style="width:18px; height:18px; background:var(--purple); border-radius:4px; display:flex; align-items:center; justify-content:center; color:white; font-size:10px; flex-shrink:0;">✓</div>
+            <div style="font-size:13px; font-weight:700; color:var(--dark); flex:1;">UV 살균 케어</div>
+            <div style="font-size:11px; color:var(--purple); text-decoration:underline; cursor:pointer;">어떻게 진행되나요?</div>
+          </div>
+          <div style="font-size:11px; color:var(--text-sub); line-height:1.6; padding-left:26px;">• 명품에 적합한 전문 장비로 99.9% 유해균 제거<br>• 눈에 보이지 않는 찝찝함 해소</div>
+          <div style="background:var(--purple-light); border-radius:6px; padding:5px 10px; margin:6px 0 0 26px; font-size:11px; color:var(--purple); font-weight:600;">🎉 멤버십 혜택 — 75% 할인 또는 1회 무료 [TBD]</div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px; padding-top:8px; border-top:1px solid rgba(255,59,48,0.2); padding-left:26px;">
+            <span style="font-size:13px; color:var(--text-sub);">이용료</span>
+            <span style="font-size:13px; font-weight:700; color:var(--tbd);">?원 [TBD]</span>
+          </div>
+        </div>
+
+        <div class="bottom-btn"><button class="btn-primary">다음</button></div>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ③ 결제 Summary (step 3) -->
+<div class="content" id="checkout-pay">
+  <div class="section-title">결제 <span>주문 Summary — Step 3</span></div>
+  <div class="phone-wrap">
+    <div class="phone-box">
+      <div class="phone-label">멤버십 가입 선택 포함</div>
+      <div class="phone"><div class="phone-inner">
+        <div class="ph-header">
+          <div class="ph-back">‹</div><div class="ph-title">주문/결제</div><div style="width:28px"></div>
+        </div>
+        <div class="step-bar">
+          <div class="step"><div class="step-num done">✓</div><div class="step-text" style="color:var(--purple);">주문</div></div>
+          <div class="step-line done"></div>
+          <div class="step"><div class="step-num done">✓</div><div class="step-text" style="color:var(--purple);">배송</div></div>
+          <div class="step-line done"></div>
+          <div class="step"><div class="step-num active">3</div><div class="step-text active">결제</div></div>
+        </div>
+
+        <!-- 주문 상품 Summary -->
+        <div class="pay-summary">
+          <div class="pay-summary-title">주문 상품</div>
+          <div style="display:flex; gap:10px; align-items:center; padding-bottom:12px; border-bottom:1px solid var(--border);">
+            <div style="width:52px; height:52px; background:var(--gray-2); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:24px; flex-shrink:0;">👜</div>
+            <div>
+              <div style="font-size:12px; font-weight:700; color:var(--dark);">총 1건</div>
+              <div style="font-size:11px; color:var(--text-sub);">맨하탄 크로커다일 엠보스 사이니 레더 블...</div>
+            </div>
+            <div style="margin-left:auto; font-size:18px; color:var(--gray-3);">∧</div>
+          </div>
+        </div>
+
+        <!-- 결제 금액 상세 -->
+        <div class="pay-summary">
+          <div class="pay-summary-title">결제 금액</div>
+          <div class="pay-row">
+            <span class="pay-label">주문 금액</span>
+            <span class="pay-value">1,619,800원</span>
+          </div>
+          <div class="pay-row">
+            <span class="pay-label">쿠폰 할인</span>
+            <span class="pay-value" style="color:var(--red);">-0원</span>
+          </div>
+          <div class="pay-divider"></div>
+          <div class="pay-row">
+            <span class="pay-label">트렌비 정품PASS</span>
+            <span class="pay-value">30,000원</span>
+          </div>
+          <div class="pay-row" style="background:var(--purple-light); margin:0 -2px; padding:6px 2px; border-radius:6px;">
+            <span class="pay-label" style="color:var(--purple); font-weight:700;">정품PASS 멤버십 1년</span>
+            <span class="pay-value purple">+{추가금액}원</span>
+          </div>
+          <div class="pay-row">
+            <span class="pay-label">UV 살균 케어</span>
+            <span class="pay-value">{TBD}원</span>
+          </div>
+          <div class="pay-row">
+            <span class="pay-label">프리미엄 배송</span>
+            <span class="pay-value">30,000원</span>
+          </div>
+          <div class="pay-divider"></div>
+          <div class="pay-total-row">
+            <span class="pay-total-label">총 결제금액</span>
+            <span class="pay-total-value">1,679,800원 + {추가금액}원</span>
+          </div>
+        </div>
+
+        <div class="bottom-btn">
+          <button class="btn-primary">1,679,800원 + {추가금액}원 결제하기</button>
+        </div>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ④ 주문완료 -->
+<div class="content" id="checkout-complete">
+  <div class="section-title">주문완료 <span>멤버십 첫 가입</span></div>
+  <div class="phone-wrap">
+    <div class="phone-box">
+      <div class="phone-label">멤버십 가입 완료</div>
+      <div class="phone"><div class="phone-inner">
+        <div class="ph-header">
+          <div class="ph-back" style="font-size:16px;">✕</div>
+          <div class="ph-title">주문완료</div>
+          <div style="width:28px"></div>
+        </div>
+        <div class="order-complete-wrap">
+          <div class="order-complete-header">
+            <div class="order-complete-icon">🎉</div>
+            <div class="order-complete-title">주문이 완료되었습니다!</div>
+            <div class="order-complete-sub">주문번호 #2024031500001</div>
+          </div>
+          <!-- 멤버십 축하 카드 -->
+          <div class="membership-congrats">
+            <div class="congrats-icon">✓</div>
+            <div class="congrats-title">정품PASS 멤버십 가입을 축하합니다!</div>
+            <div class="congrats-sub">지금부터 1년간 정품PASS를 무제한 무료로 이용하실 수 있습니다.</div>
+            <div class="congrats-period">
+              <div>
+                <div class="congrats-period-label">멤버십 혜택기간</div>
+                <div class="congrats-period-value">2024.03.15 ~ 2025.03.15</div>
+              </div>
+              <div style="font-size:22px;">🏆</div>
+            </div>
+          </div>
+        </div>
+        <div class="bottom-btn">
+          <button class="btn-primary">확인</button>
+        </div>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ⑤ 마이페이지 -->
+<div class="content" id="mypage">
+  <div class="section-title">마이페이지 <span>트렌비 실제 뷰 기반</span></div>
+  <div class="phone-wrap">
+
+    <!-- 이용중 -->
+    <div class="phone-box">
+      <div class="phone-label">멤버십 이용중</div>
+      <div class="phone"><div class="phone-inner">
+        <div class="mypage-topbar">
+          <div style="font-size:20px; position:relative;">🔔<span style="position:absolute;top:-4px;right:-8px;background:var(--purple);color:white;font-size:9px;font-weight:700;border-radius:10px;padding:1px 4px;">99+</span></div>
+          <div class="mypage-topbar-title">마이페이지</div>
+          <div style="font-size:20px; position:relative;">🛍<span style="position:absolute;top:-4px;right:-8px;background:var(--purple);color:white;font-size:9px;font-weight:700;border-radius:10px;padding:1px 4px;">24</span></div>
+        </div>
+
+        <div class="mypage-profile">
+          <div class="profile-avatar">
+            <div class="profile-avatar-inner">🙂</div>
+            <div class="profile-edit">✏</div>
+          </div>
+          <div>
+            <div class="profile-name">Brooklyn99님</div>
+            <div class="profile-grade">✓ 반가운 사이 등급 혜택 ›</div>
+          </div>
+        </div>
+
+        <div class="mypage-wallet">
+          <div class="wallet-item"><div class="wallet-label">B머니</div><div class="wallet-value">419,000 원</div></div>
+          <div class="wallet-item"><div class="wallet-label">쿠폰</div><div class="wallet-value">5 장</div></div>
+          <div class="wallet-item"><div class="wallet-label">셔플</div><div class="wallet-value">0 원</div></div>
+        </div>
+
+        <!-- 멤버십 배너 (신규 추가) -->
+        <div class="mypage-membership-banner">
+          <div class="membership-banner-active">
+            <div class="mem-status-badge"><div class="mem-status-dot"></div>이용중</div>
+            <div class="mem-banner-title">정품PASS 멤버십</div>
+            <div class="mem-banner-period">2024.03.15 ~ 2025.03.15</div>
+            <div class="mem-banner-bottom">
+              <div class="mem-remain">만료까지 282일 남음</div>
+              <button class="mem-history-btn">이용 내역 보기</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 이용 히스토리 -->
+        <div style="background:white; margin:0 8px 8px; border-radius:14px; padding:14px 16px;">
+          <div class="history-sheet-title">멤버십 이용 내역 <span class="history-count">총 3회</span></div>
+          <div class="history-item">
+            <div class="history-icon">👜</div>
+            <div class="history-info">
+              <div class="history-name">구찌 재키 1961 미니 호보백</div>
+              <div class="history-date">2024.03.20</div>
+            </div>
+            <div class="history-badge">PASS 무료</div>
+          </div>
+          <div class="history-item">
+            <div class="history-icon">👛</div>
+            <div class="history-info">
+              <div class="history-name">프라다 사피아노 카드 홀더</div>
+              <div class="history-date">2024.04.02</div>
+            </div>
+            <div class="history-badge">PASS 무료</div>
+          </div>
+          <div class="history-item">
+            <div class="history-icon">💼</div>
+            <div class="history-info">
+              <div class="history-name">버버리 체크 숄더백</div>
+              <div class="history-date">2024.04.18</div>
+            </div>
+            <div class="history-badge">PASS 무료</div>
+          </div>
+        </div>
+
+        <div style="background:white; margin:0 0 0;">
+          <div style="background:#222; padding:8px 16px; font-size:12px; font-weight:700; color:#FFD166; display:flex; align-items:center; gap:8px;">
+            <span>📝</span> 남은 리뷰 작성하고 최대 123,500원 적립금 받기 <span style="margin-left:auto;">⬆</span>
+          </div>
+          <div class="mypage-menu-item"><span class="mypage-menu-label">주문/배송 내역</span><span class="mypage-menu-arrow">›</span></div>
+          <div class="mypage-menu-item"><span class="mypage-menu-label">판매 내역</span><span class="mypage-menu-arrow">›</span></div>
+          <div class="mypage-menu-item"><span class="mypage-menu-label">셔플 내역</span><span class="mypage-menu-arrow">›</span></div>
+          <div class="mypage-menu-item"><span class="mypage-menu-label">경매 내역</span><span class="mypage-menu-arrow">›</span></div>
+          <div class="mypage-menu-divider"></div>
+          <div class="mypage-menu-item"><span class="mypage-menu-label">내 정보 관리</span><span class="mypage-menu-arrow">›</span></div>
+          <div class="mypage-menu-item"><span class="mypage-menu-label">리뷰</span><span class="mypage-menu-arrow">›</span></div>
+          <div class="mypage-menu-item"><span class="mypage-menu-label">문의 내역</span><span class="mypage-menu-arrow">›</span></div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- 만료됨 -->
+    <div class="phone-box">
+      <div class="phone-label">멤버십 만료됨</div>
+      <div class="phone"><div class="phone-inner">
+        <div class="mypage-topbar">
+          <div style="font-size:20px;">🔔</div>
+          <div class="mypage-topbar-title">마이페이지</div>
+          <div style="font-size:20px;">🛍</div>
+        </div>
+
+        <div class="mypage-profile">
+          <div class="profile-avatar">
+            <div class="profile-avatar-inner">🙂</div>
+            <div class="profile-edit">✏</div>
+          </div>
+          <div>
+            <div class="profile-name">Brooklyn99님</div>
+            <div class="profile-grade">✓ 반가운 사이 등급 혜택 ›</div>
+          </div>
+        </div>
+
+        <div class="mypage-wallet">
+          <div class="wallet-item"><div class="wallet-label">B머니</div><div class="wallet-value">419,000 원</div></div>
+          <div class="wallet-item"><div class="wallet-label">쿠폰</div><div class="wallet-value">5 장</div></div>
+          <div class="wallet-item"><div class="wallet-label">셔플</div><div class="wallet-value">0 원</div></div>
+        </div>
+
+        <!-- 만료 배너 -->
+        <div class="mypage-membership-banner">
+          <div style="background:var(--gray-2); border-radius:14px; padding:16px; position:relative;">
+            <div style="display:inline-flex; align-items:center; gap:4px; background:rgba(0,0,0,0.1); border-radius:20px; padding:3px 10px; font-size:11px; font-weight:600; color:var(--gray-4); margin-bottom:8px;">
+              <span style="width:6px;height:6px;border-radius:50%;background:var(--gray-4);display:inline-block;"></span> 만료
+            </div>
+            <div style="font-size:15px; font-weight:700; color:var(--gray-4); margin-bottom:2px;">정품PASS 멤버십</div>
+            <div style="font-size:12px; color:var(--gray-4); margin-bottom:10px;">2023.03.15 ~ 2024.03.15 (만료됨)</div>
+            <div style="background:var(--tbd-bg); border:1.5px dashed var(--tbd); border-radius:8px; padding:8px 10px;">
+              <div style="font-size:10px; font-weight:700; color:var(--tbd); margin-bottom:2px;">🔴 TBD — 만료 후 처리</div>
+              <div style="font-size:10px; color:var(--tbd);">재가입 할인 제공 vs 구매 횟수 3회 이상 시 기회 박탈 여부 확정 필요</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:white;">
+          <div class="mypage-menu-item"><span class="mypage-menu-label">주문/배송 내역</span><span class="mypage-menu-arrow">›</span></div>
+          <div class="mypage-menu-item"><span class="mypage-menu-label">판매 내역</span><span class="mypage-menu-arrow">›</span></div>
+          <div class="mypage-menu-divider"></div>
+          <div class="mypage-menu-item"><span class="mypage-menu-label">내 정보 관리</span><span class="mypage-menu-arrow">›</span></div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ⑥ 어드민 방안1 -->
+<div class="content" id="admin1">
+  <div class="section-title">어드민 방안1 <span>독립 멤버십 관리 페이지</span></div>
+  <div class="desktop-wrap">
+    <div class="admin-topbar">
+      <div class="admin-logo">Garden <span>Admin</span></div>
+      <div style="flex:1"></div>
+      <div class="admin-nav-item">상품관리</div>
+      <div class="admin-nav-item">주문관리</div>
+      <div class="admin-nav-item active">멤버십관리</div>
+      <div class="admin-nav-item">회원관리</div>
+    </div>
+    <div class="admin-body">
+      <div class="admin-sidebar">
+        <div class="admin-menu-group">멤버십</div>
+        <div class="admin-menu-item active">가입 현황</div>
+        <div class="admin-menu-item">가격 매트릭스</div>
+        <div class="admin-menu-item">만료 예정자</div>
+      </div>
+      <div class="admin-main">
+        <div class="admin-tabs">
+          <div class="admin-tab active" onclick="switchTab(this,'t1-list')">가입 현황</div>
+          <div class="admin-tab" onclick="switchTab(this,'t1-matrix')">가격 매트릭스</div>
+          <div class="admin-tab" onclick="switchTab(this,'t1-expiry')">만료 예정자</div>
+        </div>
+
+        <div id="t1-list">
+          <div class="stats-row">
+            <div class="stat-card highlight"><div class="stat-value">1,284</div><div class="stat-label">전체 가입자</div></div>
+            <div class="stat-card"><div class="stat-value">1,102</div><div class="stat-label">이용중</div></div>
+            <div class="stat-card"><div class="stat-value">158</div><div class="stat-label">만료</div></div>
+            <div class="stat-card"><div class="stat-value">24</div><div class="stat-label">취소</div></div>
+          </div>
+          <div class="filter-bar">
+            <input class="filter-input" placeholder="회원 ID" />
+            <input class="filter-input" placeholder="회원명" />
+            <input class="filter-input" placeholder="연락처" />
+            <select class="filter-select"><option>상태 전체</option><option>이용중</option><option>만료</option><option>취소</option></select>
+            <button class="filter-btn">검색</button>
+            <button class="excel-btn">📊 엑셀 다운로드</button>
+          </div>
+          <div style="overflow-x:auto">
+            <table class="admin-table">
+              <thead><tr><th>회원 ID</th><th>회원명</th><th>연락처</th><th>가입일</th><th>만료일</th><th>상태</th><th>가입경로</th><th>취소 이력</th><th>관리</th></tr></thead>
+              <tbody>
+                <tr><td>user_001</td><td>김지수</td><td>010-1234-5678</td><td>2024.03.15</td><td>2025.03.15</td><td><span class="status-badge active">● 이용중</span></td><td>결제</td><td>—</td><td><button class="cancel-btn">취소</button></td></tr>
+                <tr><td>user_042</td><td>이수진</td><td>010-9876-5432</td><td>2024.01.08</td><td>2025.01.08</td><td><span class="status-badge active">● 이용중</span></td><td>수동부여</td><td>—</td><td><button class="cancel-btn">취소</button></td></tr>
+                <tr><td>user_108</td><td>박민정</td><td>010-5555-1234</td><td>2023.02.20</td><td>2024.02.20</td><td><span class="status-badge expired">만료</span></td><td>결제</td><td>—</td><td style="color:var(--gray-3)">—</td></tr>
+                <tr><td>user_215</td><td>최유리</td><td>010-7777-8888</td><td>2024.02.10</td><td>2025.02.10</td><td><span class="status-badge cancelled">취소</span></td><td>결제</td><td>admin_02 · 24.03.01</td><td style="color:var(--gray-3)">—</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="t1-matrix" style="display:none">
+          <div class="admin-page-title">가격 매트릭스 설정</div>
+          <div style="font-size:12px; color:var(--text-sub); margin-bottom:10px;">정품PASS 단건 가격 구간 × 구매 횟수 구간별 멤버십 추가 결제 금액을 설정합니다. 저장 즉시 체크아웃에 반영됩니다.</div>
+          <table class="matrix-table" style="margin-bottom:10px">
+            <thead><tr><th style="text-align:left">상품가격 구간</th><th>PASS 단건가 (sale)</th><th>3회 미만 추가금액</th><th>3회 이상 추가금액 <span style="font-size:9px; color:var(--tbd);">[TBD]</span></th></tr></thead>
+            <tbody>
+              <tr><td>20만원 미만</td><td>10,000원</td><td><input class="matrix-input tbd-input" value="TBD"/></td><td><input class="matrix-input tbd-input" value="TBD"/></td></tr>
+              <tr><td>20만원 ~ 40만원 미만</td><td>15,000원</td><td><input class="matrix-input tbd-input" value="TBD"/></td><td><input class="matrix-input tbd-input" value="TBD"/></td></tr>
+              <tr><td>40만원 ~ 100만원 미만</td><td>20,000원</td><td><input class="matrix-input tbd-input" value="TBD"/></td><td><input class="matrix-input tbd-input" value="TBD"/></td></tr>
+              <tr><td>100만원 ~ 200만원 미만</td><td>30,000원</td><td><input class="matrix-input tbd-input" value="TBD"/></td><td><input class="matrix-input tbd-input" value="TBD"/></td></tr>
+              <tr><td>200만원 ~ 300만원 미만</td><td>30,000원</td><td><input class="matrix-input tbd-input" value="TBD"/></td><td><input class="matrix-input tbd-input" value="TBD"/></td></tr>
+              <tr><td>300만원 ~ 500만원 미만</td><td>40,000원</td><td><input class="matrix-input tbd-input" value="TBD"/></td><td><input class="matrix-input tbd-input" value="TBD"/></td></tr>
+              <tr><td>500만원 ~ 1000만원 미만</td><td>60,000원</td><td><input class="matrix-input tbd-input" value="TBD"/></td><td><input class="matrix-input tbd-input" value="TBD"/></td></tr>
+              <tr><td>1000만원 이상</td><td>120,000원</td><td><input class="matrix-input tbd-input" value="TBD"/></td><td><input class="matrix-input tbd-input" value="TBD"/></td></tr>
+            </tbody>
+          </table>
+          <button class="filter-btn">저장 (즉시 반영)</button>
+          <div class="tbd-notice" style="margin-top:10px"><div class="tbd-notice-title">🔴 TBD — 3회 이상 정책 미결</div><div class="tbd-notice-body">추가 금액 노출 vs 멤버십 옵션 자체 미노출 방식 확정 후 반영 필요</div></div>
+        </div>
+
+        <div id="t1-expiry" style="display:none">
+          <div class="filter-bar">
+            <select class="filter-select"><option>만료 7일 이내</option><option>만료 14일 이내</option><option>만료 30일 이내</option></select>
+            <button class="filter-btn">조회</button>
+            <div style="margin-left:auto; display:flex; gap:6px">
+              <span style="font-size:10px; color:var(--tbd); border:1px dashed var(--tbd); border-radius:4px; padding:3px 7px; font-weight:700;">🔴 TBD N값 설정</span>
+              <span style="font-size:10px; color:var(--tbd); border:1px dashed var(--tbd); border-radius:4px; padding:3px 7px; font-weight:700;">🔴 TBD 알림 채널/시점</span>
+            </div>
+          </div>
+          <div class="expiry-item"><div class="expiry-days urgent"><span>3</span><span>일</span></div><div class="expiry-info"><div class="expiry-name">김지수 (user_001)</div><div class="expiry-date">만료일: 2024.04.10 · 010-1234-5678</div></div><button class="notify-btn">알림 발송</button></div>
+          <div class="expiry-item"><div class="expiry-days urgent"><span>5</span><span>일</span></div><div class="expiry-info"><div class="expiry-name">이수진 (user_042)</div><div class="expiry-date">만료일: 2024.04.12 · 010-9876-5432</div></div><button class="notify-btn">알림 발송</button></div>
+          <div class="expiry-item"><div class="expiry-days"><span>12</span><span>일</span></div><div class="expiry-info"><div class="expiry-name">박민정 (user_108)</div><div class="expiry-date">만료일: 2024.04.19 · 010-5555-1234</div></div><button class="notify-btn">알림 발송</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ⑦ 어드민 방안2 -->
+<div class="content" id="admin2">
+  <div class="section-title">어드민 방안2 <span>현 회원관리 페이지에 멤버십 컬럼 추가</span></div>
+  <div class="desktop-wrap">
+    <div class="admin-topbar">
+      <div class="admin-logo">Garden <span>Admin</span></div>
+      <div style="flex:1"></div>
+      <div class="admin-nav-item active">회원관리</div>
+    </div>
+    <div class="admin-body">
+      <div class="admin-sidebar">
+        <div class="admin-menu-group">회원</div>
+        <div class="admin-menu-item active">회원관리</div>
+        <div class="admin-menu-item">탈퇴회원</div>
+      </div>
+      <div class="admin-main">
+        <div class="admin-page-title">회원관리</div>
+        <div class="filter-bar">
+          <input class="filter-input" placeholder="회원 ID / 이메일" />
+          <input class="filter-input" placeholder="회원명" />
+          <select class="filter-select"><option>멤버십 전체</option><option>이용중</option><option>없음</option></select>
+          <button class="filter-btn">검색</button>
+        </div>
+        <div style="overflow-x:auto; margin-bottom:20px">
+          <table class="admin-table">
+            <thead><tr><th>회원번호</th><th>이메일</th><th>회원명</th><th>연락처</th><th>성별</th><th>혜택</th><th>핸드폰인증</th><th>총주문금액</th><th>적립금</th><th style="color:#FFD166; background:#2D1B69">멤버십 가입</th><th>가입일</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>from@email.net</td><td>김○자</td><td>010-****-1234</td><td>여</td><td>할인</td><td>통과</td><td>722,000</td><td>10,312</td><td><span class="status-badge active">● 이용중</span></td><td>2019.06.16</td></tr>
+              <tr><td>2</td><td>skfai@gmail.com</td><td>김○구</td><td>010-****-5678</td><td>여</td><td>-</td><td>미완료</td><td>0</td><td>0</td><td><span style="font-size:10px; color:var(--gray-4)">—</span></td><td>2019.08.16</td></tr>
+              <tr><td>3</td><td>228bun@naver.net</td><td>김○재</td><td>010-****-3</td><td>-</td><td>-</td><td>통과</td><td>6,434,200</td><td>6,000</td><td><span class="status-badge expired">만료</span></td><td>2019.08.15</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="font-size:13px; font-weight:700; color:var(--dark); margin-bottom:12px; padding-top:16px; border-top:2px solid var(--border);">회원 상세 — 멤버십 영역 추가</div>
+        <div style="display:flex; gap:14px; flex-wrap:wrap">
+          <div style="flex:1; min-width:240px">
+            <div class="detail-section"><div class="detail-section-title">기본 정보</div><div class="detail-row"><span class="detail-label">회원번호</span><span class="detail-value">1</span></div><div class="detail-row"><span class="detail-label">이메일</span><span class="detail-value">from@email.net</span></div><div class="detail-row"><span class="detail-label">연락처</span><span class="detail-value">010-1234-5678</span></div></div>
+          </div>
+          <div style="flex:1; min-width:240px">
+            <div class="detail-section" style="border:2px solid var(--purple); background:var(--purple-light);">
+              <div class="detail-section-title" style="color:var(--purple)">멤버십 정보 (신규 추가)</div>
+              <div class="detail-row"><span class="detail-label">멤버십 상태</span><span class="status-badge active">● 이용중</span></div>
+              <div class="detail-row"><span class="detail-label">가입일</span><span class="detail-value">2024.03.15</span></div>
+              <div class="detail-row"><span class="detail-label">만료일</span><span class="detail-value">2025.03.15</span></div>
+              <div class="detail-row"><span class="detail-label">가입경로</span><span class="detail-value">결제</span></div>
+              <div style="margin-top:8px; display:flex; gap:6px"><button class="cancel-btn">취소</button><button style="background:var(--purple);color:white;border:none;border-radius:4px;padding:3px 10px;font-size:10px;font-weight:600;font-family:'Noto Sans KR',sans-serif;cursor:pointer">수동 부여</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ⑧ 멤버십 소개 모달 -->
+<div class="content" id="modal">
+  <div class="section-title">멤버십 소개 모달 <span>자세히 보기 클릭 시</span></div>
+  <div class="phone-wrap">
+    <div class="phone-box">
+      <div class="phone-label">체크아웃 → 자세히 보기</div>
+      <div class="phone">
+        <div class="modal-phone-inner">
+          <!-- 배경 dim -->
+          <div style="padding:16px; opacity:0.3; pointer-events:none; background:var(--gray-1);">
+            <div style="background:white; border-radius:12px; padding:14px; font-size:13px; color:var(--dark);">체크아웃 화면...</div>
+          </div>
+          <div class="modal-dim"></div>
+          <!-- 모달 -->
+          <div class="modal-sheet">
+            <div class="modal-handle"></div>
+
+            <!-- 히어로 -->
+            <div class="modal-hero">
+              <div class="modal-hero-eyebrow">정품PASS 멤버십</div>
+              <div class="modal-hero-title">정품PASS, 이제<br>1년 내내 무제한으로</div>
+              <div class="modal-hero-sub">구매할 때마다 내던 정품PASS 비용,<br>한 번의 가입으로 1년 동안 해결하세요.</div>
+            </div>
+
+            <!-- 다크 혜택 섹션 -->
+            <div class="modal-dark-section">
+              <div class="modal-dark-title">정품PASS 멤버십 혜택</div>
+              <div class="modal-benefit-item">
+                <div class="modal-benefit-icon-wrap">✓</div>
+                <div class="modal-benefit-text">
+                  <h4>정품PASS 1년 무제한 무료</h4>
+                  <p>가입 후 1년간 구매하는 모든 상품의 정품PASS를 추가 결제 없이 이용 가능</p>
+                </div>
+              </div>
+              <div class="modal-benefit-item">
+                <div class="modal-benefit-icon-wrap">💰</div>
+                <div class="modal-benefit-text">
+                  <h4>단건 대비 최대 {절약금액}원 절약</h4>
+                  <p>지금 {추가금액}원만 더 내면 앞으로 1년간 정품PASS 비용 전액 무료</p>
+                </div>
+              </div>
+              <div class="modal-benefit-item tbd-item">
+                <div class="modal-benefit-icon-wrap" style="background:rgba(255,59,48,0.15)">🧴</div>
+                <div class="modal-benefit-text">
+                  <h4>UV 케어 멤버십 혜택 [TBD]</h4>
+                  <p>75% 할인 또는 1회 무료 제공 — 확정 필요</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- How to -->
+            <div class="modal-how-section">
+              <div class="modal-how-title">어떻게 진행되나요?</div>
+              <div class="modal-how-item">
+                <div class="modal-how-num">01</div>
+                <div class="modal-how-text"><h4>멤버십 가입하기</h4><p>체크아웃 시 멤버십 가입하기 버튼 클릭</p></div>
+              </div>
+              <div class="modal-how-item">
+                <div class="modal-how-num">02</div>
+                <div class="modal-how-text"><h4>결제 완료 즉시 활성화</h4><p>결제 완료 시점부터 365일 유효</p></div>
+              </div>
+              <div class="modal-how-item">
+                <div class="modal-how-num">03</div>
+                <div class="modal-how-text"><h4>다음 구매부터 무료</h4><p>정품PASS 선택 시 자동으로 0원 처리</p></div>
+              </div>
+            </div>
+
+            <!-- FAQ -->
+            <div class="modal-faq-section">
+              <div class="modal-faq-title">자주 묻는 질문</div>
+              <div class="faq-item"><div class="faq-q">멤버십 유효기간은 언제부터 시작되나요?</div><div class="faq-a">결제 완료 시점부터 365일간 유효합니다.</div></div>
+              <div class="faq-item"><div class="faq-q">정품PASS 이용 횟수 제한이 있나요?</div><div class="faq-a">유효기간 내 이용 횟수 제한이 없습니다.</div></div>
+              <div class="faq-item"><div class="faq-q">멤버십 만료 후 자동 갱신이 되나요?</div><div class="faq-a">자동 갱신 없이 1년 단발 결제입니다.</div></div>
+            </div>
+
+            <div class="modal-cta">
+              <button class="btn-primary">멤버십 가입하기</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ⑨ SDP -->
+<div class="content" id="sdp">
+  <div class="section-title">SDP <span>고정 배너 방식 (Good to Add)</span></div>
+  <div style="background:var(--tbd-bg); border:1.5px dashed var(--tbd); border-radius:10px; padding:12px 16px; margin-bottom:20px; font-size:13px; color:var(--tbd);">
+    <strong>🔴 방향 제안</strong> — SDP는 개인화 금액 계산 없이 고정 배너로 인지/관심 유발만 담당. 실제 개인화 후킹은 체크아웃에서만 진행. 이 방향 동의 여부 확인 필요.
+  </div>
+  <div class="phone-wrap">
+    <div class="phone-box">
+      <div class="phone-label">멤버십 가입자</div>
+      <div class="phone"><div class="phone-inner">
+        <div class="ph-header"><div class="ph-back">‹</div><div></div><div style="display:flex;gap:10px;font-size:18px">🔍 🤍 🛍</div></div>
+        <div class="sdp-hero">👜</div>
+        <div class="sdp-info">
+          <div class="sdp-pass-chip">트렌비 정품PASS</div>
+          <div style="font-size:10px;color:var(--gray-4);float:right;margin-top:-20px;">한국정품감정센터 인증서 동봉</div>
+          <div class="sdp-brand">프라다</div>
+          <div class="sdp-name">사피아노 트라이앵글 로고 반지갑 블랙</div>
+          <div class="sdp-price-row">
+            <div class="sdp-discount">54%</div>
+            <div class="sdp-original">1,528,000</div>
+            <div class="sdp-price">702,000원</div>
+          </div>
+        </div>
+        <div class="sdp-member-banner">
+          <p>멤버십 혜택 적용중</p>
+          <strong>정품PASS 0원, 혜택을 받았어요! 🎉</strong>
+        </div>
+        <div class="sdp-btns">
+          <button class="sdp-btn-cart">장바구니</button>
+          <button class="sdp-btn-buy">구매하기</button>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="phone-box">
+      <div class="phone-label">미가입자 — 고정 배너</div>
+      <div class="phone"><div class="phone-inner">
+        <div class="ph-header"><div class="ph-back">‹</div><div></div><div style="display:flex;gap:10px;font-size:18px">🔍 🤍 🛍</div></div>
+        <div class="sdp-hero">👜</div>
+        <div class="sdp-info">
+          <div class="sdp-pass-chip">트렌비 정품PASS</div>
+          <div class="sdp-brand">프라다</div>
+          <div class="sdp-name">사피아노 트라이앵글 로고 반지갑 블랙</div>
+          <div class="sdp-price-row">
+            <div class="sdp-discount">54%</div>
+            <div class="sdp-original">1,528,000</div>
+            <div class="sdp-price">702,000원</div>
+          </div>
+        </div>
+        <!-- 고정 배너 (개인화 금액 없음) -->
+        <div class="sdp-nonmember-banner">
+          <p>정품PASS 멤버십</p>
+          <strong>정품PASS, 1년 무제한으로 이용하세요 →</strong>
+        </div>
+        <div class="sdp-btns">
+          <button class="sdp-btn-cart">장바구니</button>
+          <button class="sdp-btn-buy">구매하기</button>
+        </div>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+function switchTab(btn, tabId) {
+  const parent = btn.closest('.admin-main');
+  parent.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  ['t1-list','t1-matrix','t1-expiry'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.style.display = el.id === tabId ? 'block' : 'none';
+  });
+}
+function switchCond(btn, caseId) {
+  // 버튼 스타일
+  document.querySelectorAll('.cond-btn').forEach(b => {
+    b.style.background = 'white';
+    b.style.color = 'var(--text-sub)';
+    b.style.border = '1.5px solid var(--border)';
+  });
+  btn.style.background = 'var(--purple)';
+  btn.style.color = 'white';
+  btn.style.border = 'none';
+
+  // 패널 + 폰 전환
+  ['c1','c2','c3','c4'].forEach(c => {
+    const panel = document.getElementById('panel-' + c);
+    const phone = document.getElementById('phone-' + c);
+    if(panel) panel.style.display = c === caseId ? 'block' : 'none';
+    if(phone) phone.style.display = c === caseId ? 'block' : 'none';
+  });
+}
+</script>
+</body>
+</html>
