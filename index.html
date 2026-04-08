@@ -393,7 +393,7 @@ body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(
             </div>
             <div style="display:flex; align-items:center; gap:8px; background:var(--gray-1); border-radius:8px; padding:8px 10px;">
               <span style="font-size:14px;">✓</span>
-              <span style="font-size:12px; color:var(--dark);">구매확정 완료 + 주문금액 30만원 이상 건 기준 <strong>3회 미만</strong></span>
+              <span style="font-size:12px; color:var(--dark);">최근 6개월 이내 구매확정 완료 + 주문금액 30만원 이상 건 기준 <strong>3회 미만</strong></span>
             </div>
             <div style="display:flex; align-items:center; gap:8px; background:var(--gray-1); border-radius:8px; padding:8px 10px;">
               <span style="font-size:14px;">✓</span>
@@ -412,7 +412,7 @@ body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(
             <div style="background:var(--gray-1); border-radius:6px; padding:7px 10px; font-size:11px; color:var(--dark);">단위: <strong>order_item_id</strong></div>
             <div style="background:var(--gray-1); border-radius:6px; padding:7px 10px; font-size:11px; color:var(--dark);">조건: 구매확정 완료 <strong>AND</strong> 주문금액 <strong>30만원 이상</strong></div>
             <div style="background:var(--gray-1); border-radius:6px; padding:7px 10px; font-size:11px; color:var(--dark);">중복 제거: 회원 ID + 전화번호 기준 동일 고객 통합</div>
-            <div style="background:var(--tbd-bg); border:1px dashed var(--tbd); border-radius:6px; padding:7px 10px; font-size:11px; color:var(--tbd);">🔴 주문 기간 범위 (전체 이력 vs 최근 N개월) TBD</div>
+            <div style="background:#E8FFF4; border:1px solid #00C46A; border-radius:6px; padding:7px 10px; font-size:11px; color:#006633; font-weight:600;">✓ 기간 기준: 최근 6개월 이내</div>
           </div>
 
           <div style="font-size:11px; font-weight:700; color:var(--gray-4); margin-bottom:6px;">가격 매트릭스 (3회 미만 기준)</div>
@@ -491,7 +491,7 @@ body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(
             </div>
             <div style="display:flex; align-items:center; gap:8px; background:var(--tbd-bg); border-radius:8px; padding:8px 10px;">
               <span style="font-size:14px; color:var(--tbd);">!</span>
-              <span style="font-size:12px; color:var(--tbd);">구매확정 완료 + 30만원 이상 건 기준 <strong>3회 이상</strong></span>
+              <span style="font-size:12px; color:var(--tbd);">최근 6개월 이내 구매확정 완료 + 30만원 이상 건 기준 <strong>3회 이상</strong></span>
             </div>
           </div>
 
@@ -1536,7 +1536,6 @@ function switchTab(btn, tabId) {
   });
 }
 function switchCond(btn, caseId) {
-  // 버튼 스타일
   document.querySelectorAll('.cond-btn').forEach(b => {
     b.style.background = 'white';
     b.style.color = 'var(--text-sub)';
@@ -1545,15 +1544,150 @@ function switchCond(btn, caseId) {
   btn.style.background = 'var(--purple)';
   btn.style.color = 'white';
   btn.style.border = 'none';
-
-  // 패널 + 폰 전환
   ['c1','c2','c3','c4'].forEach(c => {
     const panel = document.getElementById('panel-' + c);
     const phone = document.getElementById('phone-' + c);
     if(panel) panel.style.display = c === caseId ? 'block' : 'none';
-    if(phone) phone.style.display = c === caseId ? 'block' : 'none';
+    if(phone) phone.style.display = c === caseId ? (c==='c1'?'flex':'block') : 'none';
   });
 }
+
+// ── 플로팅 메모 ──────────────────────────────────────
+const TAB_LABELS = {
+  'checkout-logic': '체크아웃 — 조건 로직',
+  'checkout-pay': '결제 Summary',
+  'checkout-complete': '주문완료',
+  'mypage': '마이페이지',
+  'admin1': '어드민 방안1',
+  'admin2': '어드민 방안2',
+  'modal': '멤버십 소개 모달',
+  'sdp': 'SDP'
+};
+
+let currentTab = 'checkout-logic';
+let memoOpen = true;
+const memos = {}; // { tabId: [{time, text}] }
+
+function getMemoKey() { return currentTab; }
+
+function renderMemos() {
+  const key = getMemoKey();
+  const list = memos[key] || [];
+  const el = document.getElementById('memo-list');
+  if (!list.length) {
+    el.innerHTML = '<div style="font-size:11px; color:#888; text-align:center; padding:16px 0;">아직 메모가 없어요</div>';
+    return;
+  }
+  el.innerHTML = list.map((m, i) => `
+    <div style="background:#F8F7FC; border-radius:8px; padding:9px 10px; margin-bottom:6px; position:relative; group">
+      <div style="font-size:10px; color:#999; margin-bottom:3px;">${m.time}</div>
+      <div style="font-size:12px; color:#2D2640; line-height:1.5; white-space:pre-wrap;">${m.text}</div>
+      <button onclick="deleteMemo(${i})" style="position:absolute; top:6px; right:8px; background:none; border:none; font-size:12px; color:#ccc; cursor:pointer; line-height:1;">✕</button>
+    </div>
+  `).join('');
+}
+
+function addMemo() {
+  const input = document.getElementById('memo-input');
+  const text = input.value.replace(/\n$/, '').trim();
+  if (!text) { input.value = ''; return; }
+  const key = getMemoKey();
+  if (!memos[key]) memos[key] = [];
+  const now = new Date();
+  const time = now.toLocaleTimeString('ko-KR', {hour:'2-digit', minute:'2-digit'});
+  memos[key].unshift({ time, text });
+  input.value = '';
+  renderMemos();
+  updateBadge();
+}
+
+function deleteMemo(idx) {
+  const key = getMemoKey();
+  memos[key].splice(idx, 1);
+  renderMemos();
+  updateBadge();
+}
+
+function updateBadge() {
+  const total = Object.values(memos).reduce((a, b) => a + b.length, 0);
+  const badge = document.getElementById('memo-badge');
+  badge.textContent = total;
+  badge.style.display = total > 0 ? 'flex' : 'none';
+}
+
+function toggleMemo() {
+  memoOpen = !memoOpen;
+  document.getElementById('memo-panel').style.display = memoOpen ? 'flex' : 'none';
+  document.getElementById('memo-fab').style.display = memoOpen ? 'none' : 'flex';
+}
+
+function copyAll() {
+  const lines = [];
+  Object.entries(memos).forEach(([key, items]) => {
+    if (!items.length) return;
+    lines.push(`## ${TAB_LABELS[key] || key}`);
+    items.slice().reverse().forEach(m => lines.push(`- [${m.time}] ${m.text}`));
+    lines.push('');
+  });
+  if (!lines.length) { alert('메모가 없어요!'); return; }
+  navigator.clipboard.writeText(lines.join('\n')).then(() => {
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = '복사됨 ✓';
+    btn.style.background = '#00A854';
+    setTimeout(() => { btn.textContent = '전체 복사'; btn.style.background = 'var(--purple)'; }, 1500);
+  });
+}
+
+// 탭 전환 시 메모 화면 탭 이름 업데이트
+function showTab(id, btn) {
+  currentTab = id;
+  document.querySelectorAll('.content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  document.getElementById('memo-tab-label').textContent = TAB_LABELS[id] || id;
+  renderMemos();
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('memo-input').addEventListener('keyup', e => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); addMemo(); }
+  });
+  renderMemos();
+});
 </script>
+
+<!-- 플로팅 메모 패널 -->
+<div id="memo-panel" style="position:fixed; bottom:24px; right:24px; width:300px; background:white; border-radius:16px; box-shadow:0 8px 32px rgba(26,16,37,0.18); border:1px solid #E8E4F5; z-index:999; display:flex; flex-direction:column; max-height:480px;">
+  <!-- 헤더 -->
+  <div style="padding:12px 14px 10px; border-bottom:1px solid #F0EDF8; display:flex; align-items:center; justify-content:space-between; flex-shrink:0;">
+    <div>
+      <div style="font-size:12px; font-weight:700; color:#1A1025;">📝 회의 메모</div>
+      <div id="memo-tab-label" style="font-size:10px; color:#8B85A8; margin-top:1px;">체크아웃 — 조건 로직</div>
+    </div>
+    <div style="display:flex; gap:6px; align-items:center;">
+      <button id="copy-btn" onclick="copyAll()" style="background:#6C47FF; color:white; border:none; border-radius:6px; padding:4px 10px; font-size:10px; font-weight:700; font-family:'Noto Sans KR',sans-serif; cursor:pointer;">전체 복사</button>
+      <button onclick="toggleMemo()" style="background:none; border:none; font-size:16px; color:#8B85A8; cursor:pointer; line-height:1; padding:2px;">—</button>
+    </div>
+  </div>
+  <!-- 메모 목록 -->
+  <div id="memo-list" style="flex:1; overflow-y:auto; padding:10px 12px; min-height:80px; max-height:280px;">
+    <div style="font-size:11px; color:#888; text-align:center; padding:16px 0;">아직 메모가 없어요</div>
+  </div>
+  <!-- 입력 -->
+  <div style="padding:10px 12px; border-top:1px solid #F0EDF8; flex-shrink:0;">
+    <div style="display:flex; gap:6px; align-items:flex-end;">
+      <textarea id="memo-input" placeholder="수정/추가 내용 입력 (Enter로 저장, Shift+Enter 줄바꿈)" style="flex:1; border:1.5px solid #E8E4F5; border-radius:8px; padding:7px 10px; font-size:11px; font-family:'Noto Sans KR',sans-serif; color:#2D2640; resize:none; outline:none; min-height:52px; line-height:1.5;"></textarea>
+      <button onclick="addMemo()" style="background:#6C47FF; color:white; border:none; border-radius:8px; padding:8px 10px; font-size:13px; cursor:pointer; flex-shrink:0; height:52px;">↑</button>
+    </div>
+  </div>
+</div>
+
+<!-- 최소화 시 FAB -->
+<div id="memo-fab" onclick="toggleMemo()" style="display:none; position:fixed; bottom:24px; right:24px; width:52px; height:52px; background:#6C47FF; border-radius:50%; box-shadow:0 4px 16px rgba(108,71,255,0.35); z-index:999; align-items:center; justify-content:center; cursor:pointer; font-size:22px;">
+  📝
+  <div id="memo-badge" style="display:none; position:absolute; top:-2px; right:-2px; background:#FF3B30; color:white; font-size:9px; font-weight:700; border-radius:10px; min-width:16px; height:16px; align-items:center; justify-content:center; padding:0 4px;">0</div>
+</div>
+
 </body>
 </html>
