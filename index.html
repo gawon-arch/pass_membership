@@ -1552,7 +1552,9 @@ function switchCond(btn, caseId) {
   });
 }
 
-// ── 플로팅 메모 ──────────────────────────────────────
+// ── Firebase Realtime Database 메모 ──────────────────
+const FB_URL = 'https://passmembership-default-rtdb.asia-southeast1.firebasedatabase.app/memos.json';
+
 const TAB_LABELS = {
   'checkout-logic': '체크아웃 — 조건 로직',
   'checkout-pay': '결제 Summary',
@@ -1570,10 +1572,9 @@ let memos = {};
 
 async function loadMemos() {
   try {
-    const result = await window.storage.get('pass-membership-memos');
-    if (result && result.value) {
-      memos = JSON.parse(result.value);
-    }
+    const res = await fetch(FB_URL);
+    const data = await res.json();
+    memos = data || {};
   } catch (e) {
     memos = {};
   }
@@ -1583,16 +1584,18 @@ async function loadMemos() {
 
 async function saveMemos() {
   try {
-    await window.storage.set('pass-membership-memos', JSON.stringify(memos));
+    await fetch(FB_URL, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(memos)
+    });
   } catch (e) {
     console.error('저장 실패:', e);
   }
 }
 
-function getMemoKey() { return currentTab; }
-
 function renderMemos() {
-  const key = getMemoKey();
+  const key = currentTab;
   const list = memos[key] || [];
   const el = document.getElementById('memo-list');
   if (!list.length) {
@@ -1612,10 +1615,10 @@ async function addMemo() {
   const input = document.getElementById('memo-input');
   const text = input.value.replace(/\n$/, '').trim();
   if (!text) { input.value = ''; return; }
-  const key = getMemoKey();
+  const key = currentTab;
   if (!memos[key]) memos[key] = [];
   const now = new Date();
-  const time = now.toLocaleTimeString('ko-KR', {hour:'2-digit', minute:'2-digit'});
+  const time = now.toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' });
   memos[key].unshift({ time, text });
   input.value = '';
   renderMemos();
@@ -1624,7 +1627,7 @@ async function addMemo() {
 }
 
 async function deleteMemo(idx) {
-  const key = getMemoKey();
+  const key = currentTab;
   memos[key].splice(idx, 1);
   renderMemos();
   updateBadge();
@@ -1661,7 +1664,6 @@ function copyAll() {
   });
 }
 
-// 탭 전환 시 메모 화면 탭 이름 업데이트
 function showTab(id, btn) {
   currentTab = id;
   document.querySelectorAll('.content').forEach(el => el.classList.remove('active'));
