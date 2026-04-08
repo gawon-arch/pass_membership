@@ -1566,7 +1566,28 @@ const TAB_LABELS = {
 
 let currentTab = 'checkout-logic';
 let memoOpen = true;
-const memos = {}; // { tabId: [{time, text}] }
+let memos = {};
+
+async function loadMemos() {
+  try {
+    const result = await window.storage.get('pass-membership-memos');
+    if (result && result.value) {
+      memos = JSON.parse(result.value);
+    }
+  } catch (e) {
+    memos = {};
+  }
+  renderMemos();
+  updateBadge();
+}
+
+async function saveMemos() {
+  try {
+    await window.storage.set('pass-membership-memos', JSON.stringify(memos));
+  } catch (e) {
+    console.error('저장 실패:', e);
+  }
+}
 
 function getMemoKey() { return currentTab; }
 
@@ -1579,7 +1600,7 @@ function renderMemos() {
     return;
   }
   el.innerHTML = list.map((m, i) => `
-    <div style="background:#F8F7FC; border-radius:8px; padding:9px 10px; margin-bottom:6px; position:relative; group">
+    <div style="background:#F8F7FC; border-radius:8px; padding:9px 10px; margin-bottom:6px; position:relative;">
       <div style="font-size:10px; color:#999; margin-bottom:3px;">${m.time}</div>
       <div style="font-size:12px; color:#2D2640; line-height:1.5; white-space:pre-wrap;">${m.text}</div>
       <button onclick="deleteMemo(${i})" style="position:absolute; top:6px; right:8px; background:none; border:none; font-size:12px; color:#ccc; cursor:pointer; line-height:1;">✕</button>
@@ -1587,7 +1608,7 @@ function renderMemos() {
   `).join('');
 }
 
-function addMemo() {
+async function addMemo() {
   const input = document.getElementById('memo-input');
   const text = input.value.replace(/\n$/, '').trim();
   if (!text) { input.value = ''; return; }
@@ -1599,13 +1620,15 @@ function addMemo() {
   input.value = '';
   renderMemos();
   updateBadge();
+  await saveMemos();
 }
 
-function deleteMemo(idx) {
+async function deleteMemo(idx) {
   const key = getMemoKey();
   memos[key].splice(idx, 1);
   renderMemos();
   updateBadge();
+  await saveMemos();
 }
 
 function updateBadge() {
@@ -1653,7 +1676,7 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('memo-input').addEventListener('keyup', e => {
     if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); addMemo(); }
   });
-  renderMemos();
+  loadMemos();
 });
 </script>
 
