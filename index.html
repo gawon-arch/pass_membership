@@ -377,7 +377,7 @@ body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(
   <div style="display:flex; gap:28px; align-items:flex-start; flex-wrap:nowrap;">
 
     <!-- 로직 설명 패널 -->
-    <div style="width:420px; flex-shrink:0;">
+    <div style="width:360px; flex-shrink:0;">
 
       <!-- C1 -->
       <div class="cond-panel" id="panel-c1">
@@ -620,8 +620,9 @@ body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(
                 <!-- 새상품 후킹 -->
                 <div id="hook-new" style="margin-top:12px; background:var(--purple-light); border:1.5px solid var(--purple-mid); border-radius:10px; padding:12px;">
                   <div style="font-size:11px; font-weight:700; color:var(--purple); margin-bottom:4px;">🎉 정품PASS 멤버십</div>
-                  <div style="font-size:13px; font-weight:700; color:var(--dark); margin-bottom:2px;"><span style="color:var(--purple);">4,900원</span>만 더 내면 1년 내내 정품PASS 무료!</div>
-                  <div style="font-size:11px; color:var(--text-sub); margin-bottom:8px;">오늘 30,000원 낼 거, 4,900원만 보태면 내년 오늘까지 무제한</div>
+                  <div style="font-size:13px; font-weight:700; color:var(--dark); margin-bottom:3px;"><span style="color:var(--purple);">4,900원</span>만 더 내면 1년 내내 정품PASS 무료!</div>
+                  <div style="font-size:11px; color:var(--text-sub); margin-bottom:6px;">☕ 커피 한 잔 가격으로 정품PASS를 무제한으로 이용해보세요</div>
+                  <div style="background:var(--tbd-bg); border:1px dashed var(--tbd); border-radius:6px; padding:6px 10px; margin-bottom:8px; font-size:10px; color:var(--tbd); font-weight:600;">🔴 가격별 후킹 문구 필요 — 9,900원 / 19,000원 / 29,000원 구간별 별도 문구 확정 필요</div>
                   <div style="display:flex; gap:8px;">
                     <button style="flex:1; background:var(--purple); color:white; border:none; border-radius:8px; padding:9px; font-size:12px; font-weight:700; font-family:'Noto Sans KR',sans-serif; cursor:pointer;">멤버십 가입하기</button>
                     <button style="background:white; color:var(--purple); border:1.5px solid var(--purple); border-radius:8px; padding:9px 12px; font-size:12px; font-weight:600; font-family:'Noto Sans KR',sans-serif; cursor:pointer;">자세히 보기</button>
@@ -630,15 +631,9 @@ body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(
 
                 <!-- 중고 후킹 -->
                 <div id="hook-used" style="display:none; margin-top:12px; background:#E8FFF4; border:1.5px solid #00C46A; border-radius:10px; padding:12px;">
-                  <div style="font-size:11px; font-weight:700; color:#00A854; margin-bottom:4px;">🎁 정품PASS 멤버십</div>
-                  <div style="font-size:13px; font-weight:700; color:var(--dark); margin-bottom:2px;">UV 케어 한 번 받을 돈으로 <span style="color:#00A854;">멤버십까지!</span></div>
-                  <div style="font-size:11px; color:var(--text-sub); margin-bottom:6px;">멤버십 가입 시 UV 케어 무료 — 사실상 멤버십 가입비 0원</div>
-                  <div style="background:white; border-radius:6px; padding:6px 10px; margin-bottom:8px; font-size:11px; color:var(--text-sub);">
-                    정품PASS 멤버십 <strong style="color:var(--dark);">+4,900원</strong><br>
-                    UV 케어 혜택 <strong style="color:#00A854;">-10,000원~20,000원</strong><br>
-                    <span style="font-size:10px; color:#00A854; font-weight:700;">→ 체감 가입비 거의 0원!</span>
-                  </div>
-                  <div style="display:flex; gap:8px;">
+                  <div style="font-size:11px; font-weight:700; color:#00A854; margin-bottom:4px;">🎁 정품PASS 멤버십, 단돈 <span style="font-size:13px;">4,900원</span></div>
+                  <div style="font-size:13px; font-weight:700; color:var(--dark); margin-bottom:3px;">멤버십 가입하면 <span style="color:#00A854;">1만원 상당 UV 케어 무료!</span></div>
+                  <div style="display:flex; gap:8px; margin-top:8px;">
                     <button style="flex:1; background:#00A854; color:white; border:none; border-radius:8px; padding:9px; font-size:12px; font-weight:700; font-family:'Noto Sans KR',sans-serif; cursor:pointer;">멤버십 가입하기</button>
                     <button style="background:white; color:#00A854; border:1.5px solid #00A854; border-radius:8px; padding:9px 12px; font-size:12px; font-weight:600; font-family:'Noto Sans KR',sans-serif; cursor:pointer;">자세히 보기</button>
                   </div>
@@ -682,18 +677,8 @@ body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(
                   </div>
                   <button style="background:none; border:none; font-size:11px; color:var(--gray-4); font-family:'Noto Sans KR',sans-serif; cursor:pointer; text-decoration:underline;">취소</button>
                 </div>
-              </div>
-            </div>
-            <div id="uv-after-new" style="margin:0 8px 8px; background:var(--tbd-bg); border-radius:12px; border:2px dashed var(--tbd); padding:12px 14px; position:relative;">
-              <div style="position:absolute; top:-9px; right:10px; background:var(--tbd); color:white; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">TBD</div>
-              <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
-                <div style="width:18px; height:18px; background:var(--purple); border-radius:4px; display:flex; align-items:center; justify-content:center; color:white; font-size:10px; flex-shrink:0;">✓</div>
-                <div style="font-size:13px; font-weight:700; color:var(--dark);">UV 살균 케어</div>
-              </div>
-              <div style="background:var(--purple-light); border-radius:6px; padding:5px 10px; margin-left:26px; font-size:11px; color:var(--purple); font-weight:600;">🎉 멤버십 혜택 — 75% 할인 또는 1회 무료 [TBD]</div>
-              <div style="display:flex; justify-content:space-between; margin-top:8px; padding-top:8px; border-top:1px solid rgba(255,59,48,0.2); padding-left:26px;">
-                <span style="font-size:13px; color:var(--text-sub);">이용료</span>
-                <span style="font-size:13px; font-weight:700; color:var(--tbd);">?원 [TBD]</span>
+                <!-- 새상품: 가입 후 추가 문구 없음 -->
+                <div id="uv-after-new" style="display:none;"></div>
               </div>
             </div>
             <div id="uv-after-used" style="display:none; margin:0 8px 8px; background:#E8FFF4; border-radius:12px; border:1.5px solid #00C46A; padding:12px 14px;">
@@ -1609,7 +1594,6 @@ function switchProductType(type) {
   const isNew = type === 'new';
   document.getElementById('hook-new').style.display = isNew ? 'block' : 'none';
   document.getElementById('hook-used').style.display = isNew ? 'none' : 'block';
-  document.getElementById('uv-after-new').style.display = isNew ? 'block' : 'none';
   document.getElementById('uv-after-used').style.display = isNew ? 'none' : 'block';
   document.getElementById('toggle-new').style.background = isNew ? 'var(--purple)' : 'white';
   document.getElementById('toggle-new').style.color = isNew ? 'white' : 'var(--text-sub)';
@@ -1617,7 +1601,7 @@ function switchProductType(type) {
   document.getElementById('toggle-used').style.background = isNew ? 'white' : '#00A854';
   document.getElementById('toggle-used').style.color = isNew ? 'var(--text-sub)' : 'white';
   document.getElementById('toggle-used').style.border = isNew ? '1.5px solid var(--border)' : 'none';
-  document.getElementById('phone-label-1').textContent = isNew ? '① 후킹 노출 상태 — 새상품' : '① 후킹 노출 상태 — 중고';
+  document.getElementById('phone-label-1').textContent = isNew ? '① 후킹 노출 상태 — 새상품PASS' : '① 후킹 노출 상태 — 중고PASS';
 }
 
 function switchCond(btn, caseId) {
