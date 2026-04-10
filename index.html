@@ -368,9 +368,9 @@ body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(
   <!-- 조건 토글 -->
   <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px;">
     <button class="cond-btn active" onclick="switchCond(this,'c1')" style="background:var(--purple); color:white; border:none; border-radius:20px; padding:8px 16px; font-size:12px; font-weight:700; font-family:'Noto Sans KR',sans-serif; cursor:pointer; white-space:nowrap;">케이스 1 — 구매 3회 미만 · 미가입</button>
-    <button class="cond-btn" onclick="switchCond(this,'c2')" style="background:white; color:var(--text-sub); border:1.5px solid var(--border); border-radius:20px; padding:8px 16px; font-size:12px; font-weight:700; font-family:'Noto Sans KR',sans-serif; cursor:pointer; white-space:nowrap;">케이스 2 — 구매 3회 이상 · 미가입 [TBD]</button>
+    <button class="cond-btn" onclick="switchCond(this,'c2')" style="background:white; color:var(--text-sub); border:1.5px solid var(--border); border-radius:20px; padding:8px 16px; font-size:12px; font-weight:700; font-family:'Noto Sans KR',sans-serif; cursor:pointer; white-space:nowrap;">케이스 2 — 구매 3회 이상 · 미가입</button>
     <button class="cond-btn" onclick="switchCond(this,'c3')" style="background:white; color:var(--text-sub); border:1.5px solid var(--border); border-radius:20px; padding:8px 16px; font-size:12px; font-weight:700; font-family:'Noto Sans KR',sans-serif; cursor:pointer; white-space:nowrap;">케이스 3 — 멤버십 이용중</button>
-    <button class="cond-btn" onclick="switchCond(this,'c4')" style="background:white; color:var(--text-sub); border:1.5px solid var(--border); border-radius:20px; padding:8px 16px; font-size:12px; font-weight:700; font-family:'Noto Sans KR',sans-serif; cursor:pointer; white-space:nowrap;">케이스 4 — 멤버십 만료 [TBD]</button>
+    <button class="cond-btn" onclick="switchCond(this,'c4')" style="background:white; color:var(--text-sub); border:1.5px solid var(--border); border-radius:20px; padding:8px 16px; font-size:12px; font-weight:700; font-family:'Noto Sans KR',sans-serif; cursor:pointer; white-space:nowrap;">케이스 4 — 멤버십 만료</button>
   </div>
 
   <!-- 케이스별 로직 설명 + 폰 -->
@@ -415,15 +415,21 @@ body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(
             <div style="background:#E8FFF4; border:1px solid #00C46A; border-radius:6px; padding:7px 10px; font-size:11px; color:#006633; font-weight:600;">✓ 기간 기준: 최근 6개월 이내</div>
           </div>
 
-          <div style="font-size:11px; font-weight:700; color:var(--gray-4); margin-bottom:6px;">가격 매트릭스 (3회 미만 기준) <span style="background:#FFF8E6; color:#996600; border:1px solid #FFD166; border-radius:10px; padding:1px 7px; font-size:10px; margin-left:4px;">제안</span></div>
+          <div style="font-size:11px; font-weight:700; color:var(--gray-4); margin-bottom:6px;">가격 매트릭스 <span style="background:#FFF8E6; color:#996600; border:1px solid #FFD166; border-radius:10px; padding:1px 7px; font-size:10px; margin-left:4px;">제안</span></div>
           <div style="border-radius:8px; overflow:hidden; border:1px solid var(--border); margin-bottom:12px;">
             <table style="width:100%; border-collapse:collapse; font-size:10px;">
               <thead>
                 <tr style="background:var(--dark);">
-                  <th style="padding:6px 8px; color:white; font-weight:600; text-align:left;">상품가격 구간</th>
-                  <th style="padding:6px 8px; color:white; font-weight:600; text-align:right;">PASS 단건가 (A)</th>
-                  <th style="padding:6px 8px; color:#FFD166; font-weight:700; text-align:right;">추가금액 (B)</th>
-                  <th style="padding:6px 8px; color:#A8D8FF; font-weight:700; text-align:right;">총 결제 (A+B)</th>
+                  <th style="padding:6px 8px; color:white; font-weight:600; text-align:left;" rowspan="2">상품가격 구간</th>
+                  <th style="padding:6px 8px; color:white; font-weight:600; text-align:right;" rowspan="2">PASS 단건가</th>
+                  <th style="padding:5px 8px; color:#FFD166; font-weight:700; text-align:center;" colspan="2">3회 미만 (sale price)</th>
+                  <th style="padding:5px 8px; color:#A8D8FF; font-weight:700; text-align:center;" colspan="2">3회 이상 (original price)</th>
+                </tr>
+                <tr style="background:#2D2654;">
+                  <th style="padding:4px 8px; color:#FFD166; font-weight:600; text-align:right;">추가금 (B)</th>
+                  <th style="padding:4px 8px; color:#FFD166; font-weight:600; text-align:right;">총 결제</th>
+                  <th style="padding:4px 8px; color:#A8D8FF; font-weight:600; text-align:right;">추가금 (B)</th>
+                  <th style="padding:4px 8px; color:#A8D8FF; font-weight:600; text-align:right;">총 결제</th>
                 </tr>
               </thead>
               <tbody>
@@ -432,59 +438,77 @@ body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(
                   <td style="padding:5px 8px; text-align:right; color:var(--text);">10,000원</td>
                   <td style="padding:5px 8px; text-align:right; color:var(--purple); font-weight:700;">2,900원</td>
                   <td style="padding:5px 8px; text-align:right; color:var(--text);">12,900원</td>
+                  <td style="padding:5px 8px; text-align:right; color:#6699CC; font-weight:700;">5,900원</td>
+                  <td style="padding:5px 8px; text-align:right; color:var(--text);">15,900원</td>
                 </tr>
                 <tr style="border-bottom:1px solid var(--border); background:var(--gray-1);">
                   <td style="padding:5px 8px; color:var(--text);">20~40만원 미만</td>
                   <td style="padding:5px 8px; text-align:right; color:var(--text);">15,000원</td>
                   <td style="padding:5px 8px; text-align:right; color:var(--purple); font-weight:700;">4,900원</td>
                   <td style="padding:5px 8px; text-align:right; color:var(--text);">19,900원</td>
+                  <td style="padding:5px 8px; text-align:right; color:#6699CC; font-weight:700;">9,900원</td>
+                  <td style="padding:5px 8px; text-align:right; color:var(--text);">24,900원</td>
                 </tr>
                 <tr style="border-bottom:1px solid var(--border); background:#F0EDFF;">
                   <td style="padding:5px 8px; color:var(--dark); font-weight:700;">40~100만원 <span style="background:var(--purple); color:white; font-size:9px; padding:1px 5px; border-radius:8px; margin-left:2px;">1순위</span></td>
                   <td style="padding:5px 8px; text-align:right; color:var(--dark); font-weight:700;">20,000원</td>
                   <td style="padding:5px 8px; text-align:right; color:var(--purple); font-weight:700;">4,900원</td>
                   <td style="padding:5px 8px; text-align:right; color:var(--dark); font-weight:700;">24,900원</td>
+                  <td style="padding:5px 8px; text-align:right; color:#6699CC; font-weight:700;">9,900원</td>
+                  <td style="padding:5px 8px; text-align:right; color:var(--dark); font-weight:700;">29,900원</td>
                 </tr>
                 <tr style="border-bottom:1px solid var(--border); background:#F0EDFF;">
                   <td style="padding:5px 8px; color:var(--dark); font-weight:700;">100~200만원 <span style="background:var(--purple); color:white; font-size:9px; padding:1px 5px; border-radius:8px; margin-left:2px;">2순위</span></td>
                   <td style="padding:5px 8px; text-align:right; color:var(--dark); font-weight:700;">30,000원</td>
                   <td style="padding:5px 8px; text-align:right; color:var(--purple); font-weight:700;">4,900원</td>
                   <td style="padding:5px 8px; text-align:right; color:var(--dark); font-weight:700;">34,900원</td>
+                  <td style="padding:5px 8px; text-align:right; color:#6699CC; font-weight:700;">14,900원</td>
+                  <td style="padding:5px 8px; text-align:right; color:var(--dark); font-weight:700;">44,900원</td>
                 </tr>
                 <tr style="border-bottom:1px solid var(--border);">
                   <td style="padding:5px 8px; color:var(--text);">200~300만원 미만</td>
                   <td style="padding:5px 8px; text-align:right; color:var(--text);">30,000원</td>
                   <td style="padding:5px 8px; text-align:right; color:var(--purple); font-weight:700;">4,900원</td>
                   <td style="padding:5px 8px; text-align:right; color:var(--text);">34,900원</td>
+                  <td style="padding:5px 8px; text-align:right; color:#6699CC; font-weight:700;">14,900원</td>
+                  <td style="padding:5px 8px; text-align:right; color:var(--text);">44,900원</td>
                 </tr>
                 <tr style="border-bottom:1px solid var(--border); background:var(--gray-1);">
                   <td style="padding:5px 8px; color:var(--text);">300~500만원 미만</td>
                   <td style="padding:5px 8px; text-align:right; color:var(--text);">40,000원</td>
                   <td style="padding:5px 8px; text-align:right; color:var(--purple); font-weight:700;">9,900원</td>
                   <td style="padding:5px 8px; text-align:right; color:var(--text);">49,900원</td>
+                  <td style="padding:5px 8px; text-align:right; color:#6699CC; font-weight:700;">19,900원</td>
+                  <td style="padding:5px 8px; text-align:right; color:var(--text);">59,900원</td>
                 </tr>
                 <tr style="border-bottom:1px solid var(--border);">
                   <td style="padding:5px 8px; color:var(--dark); font-weight:700;">500~1000만원 미만</td>
                   <td style="padding:5px 8px; text-align:right; color:var(--dark); font-weight:700;">60,000원</td>
                   <td style="padding:5px 8px; text-align:right; color:var(--purple); font-weight:700;">19,000원</td>
                   <td style="padding:5px 8px; text-align:right; color:var(--dark); font-weight:700;">79,000원</td>
+                  <td style="padding:5px 8px; text-align:right; color:#6699CC; font-weight:700;">39,000원</td>
+                  <td style="padding:5px 8px; text-align:right; color:var(--dark); font-weight:700;">99,000원</td>
                 </tr>
                 <tr style="background:var(--gray-1);">
                   <td style="padding:5px 8px; color:var(--text);">1000만원 이상</td>
                   <td style="padding:5px 8px; text-align:right; color:var(--text);">120,000원</td>
                   <td style="padding:5px 8px; text-align:right; color:var(--purple); font-weight:700;">29,000원</td>
                   <td style="padding:5px 8px; text-align:right; color:var(--text);">149,000원</td>
+                  <td style="padding:5px 8px; text-align:right; color:#6699CC; font-weight:700;">59,000원</td>
+                  <td style="padding:5px 8px; text-align:right; color:var(--text);">179,000원</td>
                 </tr>
               </tbody>
             </table>
           </div>
+          <div style="font-size:10px; color:var(--text-sub); margin-bottom:4px;">※ 3회 이상 original price 기준 추가금은 할인율 50% 가정 (추후 수정 가능하도록 개발 필요)</div>
+          <div style="background:var(--tbd-bg); border:1px dashed var(--tbd); border-radius:6px; padding:6px 10px; font-size:10px; color:var(--tbd); font-weight:600;">🔴 다중 상품 구매 시 — 최고가 상품 기준 vs 추가금 통일 여부 TBD</div>
         </div>
       </div>
 
       <!-- C2 -->
       <div class="cond-panel" id="panel-c2" style="display:none;">
-        <div style="background:white; border-radius:16px; padding:20px; border:2px dashed var(--tbd);">
-          <div style="font-size:11px; font-weight:700; color:var(--tbd); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:10px;">케이스 2 · TBD</div>
+        <div style="background:white; border-radius:16px; padding:20px; border:2px solid var(--purple);">
+          <div style="font-size:11px; font-weight:700; color:var(--purple); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:10px;">케이스 2 · 후킹 노출 (상이한 추가금)</div>
           <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:14px;">구매 3회 이상 + 멤버십 미가입</div>
 
           <div style="font-size:11px; font-weight:700; color:var(--gray-4); margin-bottom:6px;">적용 조건 (모두 충족 시)</div>
@@ -493,24 +517,17 @@ body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(
               <span style="font-size:14px;">✓</span>
               <span style="font-size:12px; color:var(--dark);">멤버십 미가입 상태</span>
             </div>
-            <div style="display:flex; align-items:center; gap:8px; background:var(--tbd-bg); border-radius:8px; padding:8px 10px;">
-              <span style="font-size:14px; color:var(--tbd);">!</span>
-              <span style="font-size:12px; color:var(--tbd);">최근 6개월 이내 구매확정 완료 + 30만원 이상 건 기준 <strong>3회 이상</strong></span>
+            <div style="display:flex; align-items:center; gap:8px; background:var(--gray-1); border-radius:8px; padding:8px 10px;">
+              <span style="font-size:14px;">✓</span>
+              <span style="font-size:12px; color:var(--dark);">최근 6개월 이내 구매확정 완료 + 30만원 이상 건 기준 <strong>3회 이상</strong></span>
             </div>
           </div>
 
-          <div style="font-size:11px; font-weight:700; color:var(--gray-4); margin-bottom:6px;">결과 화면 — 미확정</div>
-          <div style="display:flex; flex-direction:column; gap:6px;">
-            <div style="background:var(--tbd-bg); border-radius:8px; padding:10px 12px; border:1.5px dashed var(--tbd);">
-              <div style="font-size:12px; font-weight:700; color:var(--tbd); margin-bottom:2px;">방안 A — 후킹 완전 미노출</div>
-              <div style="font-size:11px; color:var(--tbd);">멤버십 가입 기회 자체를 제공하지 않음</div>
-            </div>
-            <div style="background:var(--tbd-bg); border-radius:8px; padding:10px 12px; border:1.5px dashed var(--tbd);">
-              <div style="font-size:12px; font-weight:700; color:var(--tbd); margin-bottom:2px;">방안 B — 상이한 추가금액 노출</div>
-              <div style="font-size:11px; color:var(--tbd);">3회 이상 구간의 별도 매트릭스 금액으로 후킹 노출</div>
-            </div>
+          <div style="font-size:11px; font-weight:700; color:var(--gray-4); margin-bottom:6px;">결과 화면 — 확정</div>
+          <div style="background:var(--purple-light); border-radius:8px; padding:10px 12px;">
+            <div style="font-size:12px; font-weight:700; color:var(--purple); margin-bottom:2px;">→ 상이한 추가금액으로 후킹 노출</div>
+            <div style="font-size:11px; color:var(--text-sub);">3회 이상 구간 → original price 기준 추가금 적용. 케이스1보다 높은 추가금으로 멤버십 후킹 노출</div>
           </div>
-          <div style="margin-top:10px; font-size:11px; font-weight:700; color:var(--tbd); text-align:center;">→ 정책 확정 후 화면 확정 가능</div>
         </div>
       </div>
 
@@ -537,9 +554,9 @@ body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(
             <div style="font-size:12px; font-weight:700; color:#00A854; margin-bottom:2px;">→ 정품PASS 0원 처리</div>
             <div style="font-size:11px; color:var(--text-sub);">"멤버십 혜택 적용 · 무료" 뱃지 노출, 이용료 0원 표시, 후킹 UI 미노출</div>
           </div>
-          <div style="background:#E8FFF4; border-radius:8px; padding:10px 12px;">
-            <div style="font-size:12px; font-weight:700; color:#00A854; margin-bottom:2px;">→ UV 케어 멤버십 할인 적용</div>
-            <div style="font-size:11px; color:var(--tbd);">75% 할인 또는 1회 무료 [TBD]</div>
+          <div style="background:var(--gray-2); border-radius:8px; padding:10px 12px;">
+            <div style="font-size:12px; font-weight:700; color:var(--gray-4); margin-bottom:2px;">UV 케어 — 멤버십 혜택 범위 제외 확정</div>
+            <div style="font-size:11px; color:var(--gray-4);">UV 케어는 기존 단건 할인율 그대로 적용</div>
           </div>
 
           <div style="margin-top:12px; background:var(--gray-1); border-radius:8px; padding:8px 10px;">
@@ -550,30 +567,26 @@ body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(
 
       <!-- C4 -->
       <div class="cond-panel" id="panel-c4" style="display:none;">
-        <div style="background:white; border-radius:16px; padding:20px; border:2px dashed var(--tbd);">
-          <div style="font-size:11px; font-weight:700; color:var(--tbd); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:10px;">케이스 4 · TBD</div>
+        <div style="background:white; border-radius:16px; padding:20px; border:2px solid var(--purple);">
+          <div style="font-size:11px; font-weight:700; color:var(--purple); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:10px;">케이스 4 · 멤버십 만료</div>
           <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:14px;">멤버십 만료 후</div>
 
           <div style="font-size:11px; font-weight:700; color:var(--gray-4); margin-bottom:6px;">적용 조건</div>
           <div style="display:flex; flex-direction:column; gap:6px; margin-bottom:16px;">
-            <div style="display:flex; align-items:center; gap:8px; background:var(--gray-2); border-radius:8px; padding:8px 10px;">
-              <span style="font-size:14px; color:var(--gray-4);">!</span>
+            <div style="display:flex; align-items:center; gap:8px; background:var(--gray-1); border-radius:8px; padding:8px 10px;">
+              <span style="font-size:14px;">✓</span>
               <span style="font-size:12px; color:var(--dark);">멤버십 결제 완료일 기준 <strong>365일 초과</strong></span>
             </div>
           </div>
 
-          <div style="font-size:11px; font-weight:700; color:var(--gray-4); margin-bottom:6px;">처리 방향 — 미확정</div>
-          <div style="display:flex; flex-direction:column; gap:6px;">
-            <div style="background:var(--tbd-bg); border-radius:8px; padding:10px 12px; border:1.5px dashed var(--tbd);">
-              <div style="font-size:12px; font-weight:700; color:var(--tbd); margin-bottom:2px;">방안 A — 재가입 할인 후킹 노출</div>
-              <div style="font-size:11px; color:var(--tbd);">컬리처럼 만료 후 재가입 유도 (할인 제공 여부 미확정)</div>
-            </div>
-            <div style="background:var(--tbd-bg); border-radius:8px; padding:10px 12px; border:1.5px dashed var(--tbd);">
-              <div style="font-size:12px; font-weight:700; color:var(--tbd); margin-bottom:2px;">방안 B — 구매 횟수 재체크</div>
-              <div style="font-size:11px; color:var(--tbd);">만료 후 구매 횟수 3회 이상이면 이용권 기회 박탈</div>
+          <div style="font-size:11px; font-weight:700; color:var(--gray-4); margin-bottom:6px;">결과 화면</div>
+          <div style="background:var(--purple-light); border-radius:8px; padding:10px 12px; margin-bottom:8px;">
+            <div style="font-size:12px; font-weight:700; color:var(--purple); margin-bottom:4px;">→ 조건 로직 재체크 후 분기</div>
+            <div style="display:flex; flex-direction:column; gap:6px; margin-top:6px;">
+              <div style="background:white; border-radius:6px; padding:7px 10px; font-size:11px; color:var(--dark);">최근 6개월 구매 3회 미만 → <strong style="color:var(--purple);">케이스 1</strong> (멤버십 후킹 노출)</div>
+              <div style="background:white; border-radius:6px; padding:7px 10px; font-size:11px; color:var(--dark);">최근 6개월 구매 3회 이상 → <strong style="color:var(--purple);">케이스 2</strong> (상이한 추가금 후킹 노출)</div>
             </div>
           </div>
-          <div style="margin-top:10px; font-size:11px; font-weight:700; color:var(--tbd); text-align:center;">→ 정책 확정 필요</div>
         </div>
       </div>
     </div>
@@ -615,30 +628,30 @@ body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(
                 <div style="display:flex; gap:8px; margin-bottom:10px;"><div style="width:22px; height:22px; background:var(--purple); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; color:white; flex-shrink:0; margin-top:1px;">✓</div><div><div style="font-size:13px; font-weight:700; color:var(--dark); margin-bottom:2px;">한국정품감정센터 정품 감정 후 배송</div><div style="font-size:11px; color:var(--text-sub);">전문 감정사가 최대 30개 항목 정밀 감정</div></div></div>
                 <div style="display:flex; gap:8px; margin-bottom:10px;"><div style="width:22px; height:22px; background:var(--purple); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; color:white; flex-shrink:0; margin-top:1px;">✓</div><div><div style="font-size:13px; font-weight:700; color:var(--dark); margin-bottom:2px;">한국정품감정센터 보증서 발급</div><div style="font-size:11px; color:var(--text-sub);">정품 인증 고유 번호 발급</div></div></div>
                 <div style="font-size:11px; color:var(--gray-4); margin-bottom:8px;">※ 영업일 기준 2-3일 추가 소요</div>
-                <div style="display:flex; justify-content:space-between; padding-top:10px; border-top:1px solid var(--gray-2); align-items:center;"><span style="font-size:13px; color:var(--text-sub);">이용료</span><div><span style="font-size:12px; color:var(--gray-3); text-decoration:line-through; margin-right:4px;">30,000원</span><span style="font-size:15px; font-weight:700; color:var(--dark);">30,000원</span></div></div>
+                <div style="display:flex; justify-content:space-between; padding-top:10px; border-top:1px solid var(--gray-2); align-items:center;"><span style="font-size:13px; color:var(--text-sub);">이용료</span><span style="font-size:15px; font-weight:700; color:var(--dark);">30,000원</span></div>
+              </div>
+            </div>
 
-                <!-- 새상품 후킹 -->
-                <div id="hook-new" style="margin-top:12px; background:var(--purple-light); border:1.5px solid var(--purple-mid); border-radius:10px; padding:12px;">
-                  <div style="font-size:11px; font-weight:700; color:var(--purple); margin-bottom:4px;">🎉 정품PASS 멤버십</div>
-                  <div style="font-size:13px; font-weight:700; color:var(--dark); margin-bottom:3px;"><span style="color:var(--purple);">4,900원</span>만 더 내면 1년 내내 정품PASS 무료!</div>
-                  <div style="font-size:11px; color:var(--text-sub); margin-bottom:6px;">☕ 커피 한 잔 가격으로 정품PASS를 무제한으로 이용해보세요</div>
-                  <div style="background:var(--tbd-bg); border:1px dashed var(--tbd); border-radius:6px; padding:6px 10px; margin-bottom:8px; font-size:10px; color:var(--tbd); font-weight:600;">🔴 가격별 후킹 문구 필요 — 9,900원 / 19,000원 / 29,000원 구간별 별도 문구 확정 필요</div>
+            <!-- 멤버십 후킹 — PASS 카드 외부 별도 섹션 -->
+            <div style="margin:0 8px 8px;">
+                <div id="hook-new" style="background:var(--purple-light); border:1.5px solid var(--purple-mid); border-radius:14px; padding:14px 16px;">
+                  <div style="font-size:10px; font-weight:700; color:var(--purple); margin-bottom:5px; letter-spacing:0.05em;">🎯 OOO고객님에게만 드리는 혜택</div>
+                  <div style="font-size:13px; font-weight:700; color:var(--dark); margin-bottom:8px;">당첨! 1년 내내 정품PASS 무제한 무료 이용 기회</div>
+                  <div style="background:var(--tbd-bg); border:1px dashed var(--tbd); border-radius:6px; padding:5px 8px; margin-bottom:8px; font-size:10px; color:var(--tbd);">🔴 최종 후킹 카피 확정 필요</div>
                   <div style="display:flex; gap:8px;">
                     <button style="flex:1; background:var(--purple); color:white; border:none; border-radius:8px; padding:9px; font-size:12px; font-weight:700; font-family:'Noto Sans KR',sans-serif; cursor:pointer;">멤버십 가입하기</button>
                     <button style="background:white; color:var(--purple); border:1.5px solid var(--purple); border-radius:8px; padding:9px 12px; font-size:12px; font-weight:600; font-family:'Noto Sans KR',sans-serif; cursor:pointer;">자세히 보기</button>
                   </div>
                 </div>
-
-                <!-- 중고 후킹 -->
-                <div id="hook-used" style="display:none; margin-top:12px; background:#E8FFF4; border:1.5px solid #00C46A; border-radius:10px; padding:12px;">
-                  <div style="font-size:11px; font-weight:700; color:#00A854; margin-bottom:4px;">🎁 정품PASS 멤버십, 단돈 <span style="font-size:13px;">4,900원</span></div>
-                  <div style="font-size:13px; font-weight:700; color:var(--dark); margin-bottom:3px;">멤버십 가입하면 <span style="color:#00A854;">1만원 상당 UV 케어 무료!</span></div>
-                  <div style="display:flex; gap:8px; margin-top:8px;">
-                    <button style="flex:1; background:#00A854; color:white; border:none; border-radius:8px; padding:9px; font-size:12px; font-weight:700; font-family:'Noto Sans KR',sans-serif; cursor:pointer;">멤버십 가입하기</button>
-                    <button style="background:white; color:#00A854; border:1.5px solid #00A854; border-radius:8px; padding:9px 12px; font-size:12px; font-weight:600; font-family:'Noto Sans KR',sans-serif; cursor:pointer;">자세히 보기</button>
+                <div id="hook-used" style="display:none; background:var(--purple-light); border:1.5px solid var(--purple-mid); border-radius:14px; padding:14px 16px;">
+                  <div style="font-size:10px; font-weight:700; color:var(--purple); margin-bottom:5px; letter-spacing:0.05em;">🎯 OOO고객님에게만 드리는 혜택</div>
+                  <div style="font-size:13px; font-weight:700; color:var(--dark); margin-bottom:8px;">당첨! 1년 내내 정품PASS 무제한 무료 이용 기회</div>
+                  <div style="background:var(--tbd-bg); border:1px dashed var(--tbd); border-radius:6px; padding:5px 8px; margin-bottom:8px; font-size:10px; color:var(--tbd);">🔴 최종 후킹 카피 확정 필요</div>
+                  <div style="display:flex; gap:8px;">
+                    <button style="flex:1; background:var(--purple); color:white; border:none; border-radius:8px; padding:9px; font-size:12px; font-weight:700; font-family:'Noto Sans KR',sans-serif; cursor:pointer;">멤버십 가입하기</button>
+                    <button style="background:white; color:var(--purple); border:1.5px solid var(--purple); border-radius:8px; padding:9px 12px; font-size:12px; font-weight:600; font-family:'Noto Sans KR',sans-serif; cursor:pointer;">자세히 보기</button>
                   </div>
                 </div>
-              </div>
             </div>
             <div class="bottom-btn"><button class="btn-primary">다음</button></div>
           </div></div>
@@ -668,12 +681,11 @@ body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(
                 <div style="font-size:11px; color:var(--gray-4); margin-bottom:8px;">※ 영업일 기준 2-3일 추가 소요</div>
                 <div style="display:flex; justify-content:space-between; padding-top:10px; border-top:1px solid var(--gray-2); align-items:center; margin-bottom:10px;">
                   <span style="font-size:13px; color:var(--text-sub);">이용료</span>
-                  <div><span style="font-size:12px; color:var(--gray-3); text-decoration:line-through; margin-right:4px;">30,000원</span><span style="font-size:15px; font-weight:700; color:var(--dark);">30,000원</span></div>
+                  <span style="font-size:15px; font-weight:700; color:var(--dark);">34,900원</span>
                 </div>
                 <div style="background:#E8FFF4; border:1.5px solid #00C46A; border-radius:10px; padding:10px 12px; display:flex; align-items:center; justify-content:space-between;">
                   <div>
                     <div style="font-size:11px; font-weight:700; color:#00A854; margin-bottom:2px;">✓ 정품PASS 멤버십 1년 가입됨</div>
-                    <div style="font-size:11px; color:var(--text-sub);">추가금액 <strong style="color:#00A854;">4,900원</strong> 결제금액에 반영</div>
                   </div>
                   <button style="background:none; border:none; font-size:11px; color:var(--gray-4); font-family:'Noto Sans KR',sans-serif; cursor:pointer; text-decoration:underline;">취소</button>
                 </div>
@@ -681,20 +693,7 @@ body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(
                 <div id="uv-after-new" style="display:none;"></div>
               </div>
             </div>
-            <div id="uv-after-used" style="display:none; margin:0 8px 8px; background:#E8FFF4; border-radius:12px; border:1.5px solid #00C46A; padding:12px 14px;">
-              <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
-                <div style="width:18px; height:18px; background:#00A854; border-radius:4px; display:flex; align-items:center; justify-content:center; color:white; font-size:10px; flex-shrink:0;">✓</div>
-                <div style="font-size:13px; font-weight:700; color:var(--dark);">UV 살균 케어</div>
-              </div>
-              <div style="background:white; border-radius:6px; padding:5px 10px; margin-left:26px; font-size:11px; color:#00A854; font-weight:600;">🎁 멤버십 혜택 적용 — 1회 무료</div>
-              <div style="display:flex; justify-content:space-between; margin-top:8px; padding-top:8px; border-top:1px solid #C8F0DC; padding-left:26px;">
-                <span style="font-size:13px; color:var(--text-sub);">이용료</span>
-                <div style="display:flex; align-items:center; gap:5px;">
-                  <span style="font-size:12px; color:var(--gray-3); text-decoration:line-through;">10,000원</span>
-                  <span style="font-size:13px; font-weight:700; color:#00A854;">0원</span>
-                </div>
-              </div>
-            </div>
+
             <div class="bottom-btn"><button class="btn-primary">다음</button></div>
           </div></div>
         </div>
@@ -702,9 +701,11 @@ body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(
         </div><!-- 폰 두 개 가로 끝 -->
       </div>
       <!-- C2 폰 -->
-      <div class="cond-panel" id="phone-c2" style="display:none;">
+      <div class="cond-panel" id="phone-c2" style="display:none; flex-direction:row; gap:20px; align-items:flex-start;">
+
+        <!-- 폰1: 후킹 노출 -->
         <div class="phone-box">
-          <div class="phone-label">후킹 미노출 상태 (TBD)</div>
+          <div class="phone-label">① 후킹 노출 상태</div>
           <div class="phone"><div class="phone-inner">
             <div class="ph-header"><div class="ph-back">‹</div><div class="ph-title">주문/결제</div><div style="width:28px"></div></div>
             <div class="step-bar">
@@ -724,17 +725,60 @@ body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(
                 <div style="display:flex; gap:8px; margin-bottom:10px;"><div style="width:22px; height:22px; background:var(--purple); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; color:white; flex-shrink:0; margin-top:1px;">✓</div><div><div style="font-size:13px; font-weight:700; color:var(--dark); margin-bottom:2px;">한국정품감정센터 정품 감정 후 배송</div><div style="font-size:11px; color:var(--text-sub);">전문 감정사가 최대 30개 항목 정밀 감정</div></div></div>
                 <div style="display:flex; gap:8px; margin-bottom:10px;"><div style="width:22px; height:22px; background:var(--purple); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; color:white; flex-shrink:0; margin-top:1px;">✓</div><div><div style="font-size:13px; font-weight:700; color:var(--dark); margin-bottom:2px;">한국정품감정센터 보증서 발급</div><div style="font-size:11px; color:var(--text-sub);">정품 인증 고유 번호 발급</div></div></div>
                 <div style="font-size:11px; color:var(--gray-4); margin-bottom:8px;">※ 영업일 기준 2-3일 추가 소요</div>
-                <div style="display:flex; justify-content:space-between; padding-top:10px; border-top:1px solid var(--gray-2); align-items:center;"><span style="font-size:13px; color:var(--text-sub);">이용료</span><div><span style="font-size:12px; color:var(--gray-3); text-decoration:line-through; margin-right:4px;">60,000원</span><span style="font-size:15px; font-weight:700; color:var(--dark);">30,000원</span></div></div>
-                <!-- 후킹 없음 -->
-                <div style="margin-top:12px; background:var(--tbd-bg); border:2px dashed var(--tbd); border-radius:10px; padding:12px; text-align:center;">
-                  <div style="font-size:12px; font-weight:700; color:var(--tbd); margin-bottom:2px;">🔴 TBD — 이 구간 처리 미확정</div>
-                  <div style="font-size:11px; color:var(--tbd);">후킹 미노출 vs 상이한 금액 노출 결정 필요</div>
-                </div>
+                <div style="display:flex; justify-content:space-between; padding-top:10px; border-top:1px solid var(--gray-2); align-items:center;"><span style="font-size:13px; color:var(--text-sub);">이용료</span><span style="font-size:15px; font-weight:700; color:var(--dark);">30,000원</span></div>
+              </div>
+            </div>
+            <!-- 멤버십 후킹 — 별도 섹션 -->
+            <div style="margin:0 8px 8px; background:var(--purple-light); border:1.5px solid var(--purple-mid); border-radius:14px; padding:14px 16px;">
+              <div style="font-size:10px; font-weight:700; color:var(--purple); margin-bottom:5px; letter-spacing:0.05em;">🎯 OOO고객님에게만 드리는 혜택</div>
+              <div style="font-size:13px; font-weight:700; color:var(--dark); margin-bottom:8px;">당첨! 1년 내내 정품PASS 무제한 무료 이용 기회</div>
+              <div style="background:var(--tbd-bg); border:1px dashed var(--tbd); border-radius:6px; padding:5px 8px; margin-bottom:8px; font-size:10px; color:var(--tbd);">🔴 최종 후킹 카피 확정 필요</div>
+              <div style="display:flex; gap:8px;">
+                <button style="flex:1; background:var(--purple); color:white; border:none; border-radius:8px; padding:9px; font-size:12px; font-weight:700; font-family:'Noto Sans KR',sans-serif; cursor:pointer;">멤버십 가입하기</button>
+                <button style="background:white; color:var(--purple); border:1.5px solid var(--purple); border-radius:8px; padding:9px 12px; font-size:12px; font-weight:600; font-family:'Noto Sans KR',sans-serif; cursor:pointer;">자세히 보기</button>
               </div>
             </div>
             <div class="bottom-btn"><button class="btn-primary">다음</button></div>
           </div></div>
         </div>
+
+        <!-- 폰2: 멤버십 가입하기 클릭 후 -->
+        <div class="phone-box">
+          <div class="phone-label">② 멤버십 가입하기 클릭 후</div>
+          <div class="phone"><div class="phone-inner">
+            <div class="ph-header"><div class="ph-back">‹</div><div class="ph-title">주문/결제</div><div style="width:28px"></div></div>
+            <div class="step-bar">
+              <div class="step"><div class="step-num active">1</div><div class="step-text active">주문</div></div>
+              <div class="step-line"></div>
+              <div class="step"><div class="step-num inactive">2</div><div class="step-text inactive">배송</div></div>
+              <div class="step-line"></div>
+              <div class="step"><div class="step-num inactive">3</div><div class="step-text inactive">결제</div></div>
+            </div>
+            <div style="background:white; margin:8px; border-radius:14px; padding:14px 16px; display:flex; gap:12px; align-items:center;">
+              <div style="width:64px; height:64px; background:var(--gray-2); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:28px; flex-shrink:0;">👜</div>
+              <div><div style="font-size:11px; color:var(--gray-4);">루이비통</div><div style="font-size:13px; font-weight:600; color:var(--dark);">니스 뷰티 여성 파우치백</div><div style="font-size:11px; color:var(--gray-4);">옵션 : 단품</div><div style="font-size:15px; font-weight:700; color:var(--dark); margin-top:3px;">1,466,000원</div></div>
+            </div>
+            <div style="margin:0 8px 8px; border-radius:14px; overflow:hidden; border:1.5px solid var(--border);">
+              <div style="display:flex;"><div style="flex:1; padding:12px; text-align:center; font-size:13px; font-weight:600; background:var(--purple); color:white;">트렌비 정품PASS ✓</div><div style="flex:1; padding:12px; text-align:center; font-size:13px; font-weight:600; background:var(--gray-1); color:var(--gray-4);">일반</div></div>
+              <div style="background:white; padding:14px 16px;">
+                <div style="display:flex; gap:8px; margin-bottom:10px;"><div style="width:22px; height:22px; background:var(--purple); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; color:white; flex-shrink:0; margin-top:1px;">✓</div><div><div style="font-size:13px; font-weight:700; color:var(--dark); margin-bottom:2px;">한국정품감정센터 정품 감정 후 배송</div><div style="font-size:11px; color:var(--text-sub);">전문 감정사가 최대 30개 항목 정밀 감정</div></div></div>
+                <div style="display:flex; gap:8px; margin-bottom:10px;"><div style="width:22px; height:22px; background:var(--purple); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; color:white; flex-shrink:0; margin-top:1px;">✓</div><div><div style="font-size:13px; font-weight:700; color:var(--dark); margin-bottom:2px;">한국정품감정센터 보증서 발급</div><div style="font-size:11px; color:var(--text-sub);">정품 인증 고유 번호 발급</div></div></div>
+                <div style="font-size:11px; color:var(--gray-4); margin-bottom:8px;">※ 영업일 기준 2-3일 추가 소요</div>
+                <div style="display:flex; justify-content:space-between; padding-top:10px; border-top:1px solid var(--gray-2); align-items:center; margin-bottom:10px;">
+                  <span style="font-size:13px; color:var(--text-sub);">이용료</span>
+                  <span style="font-size:15px; font-weight:700; color:var(--dark);">39,900원</span>
+                </div>
+                <div style="background:#E8FFF4; border:1.5px solid #00C46A; border-radius:10px; padding:10px 12px; display:flex; align-items:center; justify-content:space-between;">
+                  <div style="font-size:11px; font-weight:700; color:#00A854;">✓ 정품PASS 멤버십 1년 가입됨</div>
+                  <button style="background:none; border:none; font-size:11px; color:var(--gray-4); font-family:'Noto Sans KR',sans-serif; cursor:pointer; text-decoration:underline;">취소</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="bottom-btn"><button class="btn-primary">다음</button></div>
+          </div></div>
+        </div>
+
       </div>
 
       <!-- C3 폰 -->
@@ -770,18 +814,6 @@ body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(
                 </div>
               </div>
             </div>
-            <div style="margin:0 8px 8px; background:var(--tbd-bg); border-radius:12px; border:2px dashed var(--tbd); padding:12px 14px; position:relative;">
-              <div style="position:absolute; top:-9px; right:10px; background:var(--tbd); color:white; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">TBD</div>
-              <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
-                <div style="width:18px; height:18px; background:var(--purple); border-radius:4px; display:flex; align-items:center; justify-content:center; color:white; font-size:10px; flex-shrink:0;">✓</div>
-                <div style="font-size:13px; font-weight:700; color:var(--dark); flex:1;">UV 살균 케어</div>
-              </div>
-              <div style="background:var(--purple-light); border-radius:6px; padding:5px 10px; margin-left:26px; font-size:11px; color:var(--purple); font-weight:600;">🎉 멤버십 혜택 — 75% 할인 또는 1회 무료 [TBD]</div>
-              <div style="display:flex; justify-content:space-between; margin-top:8px; padding-top:8px; border-top:1px solid rgba(255,59,48,0.2); padding-left:26px;">
-                <span style="font-size:13px; color:var(--text-sub);">이용료</span>
-                <span style="font-size:13px; font-weight:700; color:var(--tbd);">?원 [TBD]</span>
-              </div>
-            </div>
             <div class="bottom-btn"><button class="btn-primary">다음</button></div>
           </div></div>
         </div>
@@ -806,9 +838,19 @@ body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(
             </div>
             <!-- 만료 알림 -->
             <div style="margin:0 8px 8px; background:#FFF8E6; border:1px solid #FFD166; border-radius:10px; padding:10px 14px; font-size:12px; color:#996600; display:flex; align-items:center; gap:6px;">⚠️ 멤버십이 만료되었습니다.</div>
-            <div style="margin:0 8px 8px; background:var(--tbd-bg); border:2px dashed var(--tbd); border-radius:14px; padding:20px; text-align:center;">
-              <div style="font-size:13px; font-weight:700; color:var(--tbd); margin-bottom:8px;">🔴 만료 후 처리 방식 TBD</div>
-              <div style="font-size:11px; color:var(--tbd); line-height:1.7;">재가입 할인 후킹 노출 (방안 A)<br>vs<br>구매 횟수 재체크 후 기회 박탈 (방안 B)<br><br>→ 정책 확정 후 화면 확정</div>
+            <!-- 조건 재체크 후 분기 -->
+            <div style="margin:0 8px 8px; background:var(--purple-light); border-radius:14px; padding:16px;">
+              <div style="font-size:12px; font-weight:700; color:var(--purple); margin-bottom:10px;">→ 조건 로직 재체크 후 분기</div>
+              <div style="display:flex; flex-direction:column; gap:8px;">
+                <div style="background:white; border-radius:8px; padding:8px 12px; font-size:11px; color:var(--dark);">
+                  <div style="font-weight:700; color:var(--purple); margin-bottom:2px;">3회 미만이면 → 케이스 1</div>
+                  <div style="color:var(--text-sub);">멤버십 후킹 UI 노출</div>
+                </div>
+                <div style="background:white; border-radius:8px; padding:8px 12px; font-size:11px; color:var(--dark);">
+                  <div style="font-weight:700; color:var(--purple); margin-bottom:2px;">3회 이상이면 → 케이스 2</div>
+                  <div style="color:var(--text-sub);">상이한 추가금으로 후킹 노출</div>
+                </div>
+              </div>
             </div>
             <div class="bottom-btn"><button class="btn-primary">다음</button></div>
           </div></div>
@@ -876,16 +918,17 @@ body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(
               </div>
             </div>
 
-            <!-- 멤버십 후킹 — PASS 카드 하단에 붙음 -->
-            <div style="margin-top:12px; background:var(--purple-light); border:1.5px dashed var(--tbd); border-radius:10px; padding:12px; position:relative;">
-              <div style="position:absolute; top:-9px; right:10px; background:var(--tbd); color:white; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">TBD — 문구 확정</div>
-              <div style="font-size:11px; font-weight:700; color:var(--purple); margin-bottom:4px;">🎉 정품PASS 멤버십</div>
-              <div style="font-size:13px; font-weight:700; color:var(--dark); margin-bottom:8px;"><span style="color:var(--purple);">1만원</span> 더 내면 1년 내내 정품PASS 무료!</div>
-              <div style="display:flex; gap:8px; align-items:center;">
-                <button style="flex:1; background:var(--purple); color:white; border:none; border-radius:8px; padding:9px; font-size:12px; font-weight:700; font-family:'Noto Sans KR',sans-serif; cursor:pointer;">멤버십 가입하기</button>
-                <button style="background:white; color:var(--purple); border:1.5px solid var(--purple); border-radius:8px; padding:9px 12px; font-size:12px; font-weight:600; font-family:'Noto Sans KR',sans-serif; cursor:pointer; white-space:nowrap;">자세히 보기</button>
-              </div>
-            </div>
+          </div>
+        </div>
+
+        <!-- 멤버십 선택 — PASS 카드와 별도 섹션 -->
+        <div style="margin:0 8px 8px; background:var(--purple-light); border:1.5px solid var(--purple-mid); border-radius:14px; padding:14px 16px; position:relative;">
+          <div style="position:absolute; top:-9px; right:10px; background:var(--tbd); color:white; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">TBD — 문구 확정</div>
+          <div style="font-size:10px; font-weight:700; color:var(--purple); margin-bottom:4px; letter-spacing:0.05em;">🎯 OOO고객님에게만 드리는 혜택</div>
+          <div style="font-size:13px; font-weight:700; color:var(--dark); margin-bottom:10px;">당첨! 1년 내내 정품PASS 무제한 무료 이용 기회</div>
+          <div style="display:flex; gap:8px;">
+            <button style="flex:1; background:var(--purple); color:white; border:none; border-radius:8px; padding:9px; font-size:12px; font-weight:700; font-family:'Noto Sans KR',sans-serif; cursor:pointer;">멤버십 가입하기</button>
+            <button style="background:white; color:var(--purple); border:1.5px solid var(--purple); border-radius:8px; padding:9px 12px; font-size:12px; font-weight:600; font-family:'Noto Sans KR',sans-serif; cursor:pointer; white-space:nowrap;">자세히 보기</button>
           </div>
         </div>
 
@@ -975,22 +1018,6 @@ body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(
           </div>
         </div>
 
-        <!-- UV 케어 — 멤버십 할인 변경 -->
-        <div style="margin:0 8px 8px; background:var(--tbd-bg); border-radius:12px; border:2px dashed var(--tbd); padding:12px 14px; position:relative;">
-          <div style="position:absolute; top:-9px; right:10px; background:var(--tbd); color:white; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">TBD</div>
-          <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
-            <div style="width:18px; height:18px; background:var(--purple); border-radius:4px; display:flex; align-items:center; justify-content:center; color:white; font-size:10px; flex-shrink:0;">✓</div>
-            <div style="font-size:13px; font-weight:700; color:var(--dark); flex:1;">UV 살균 케어</div>
-            <div style="font-size:11px; color:var(--purple); text-decoration:underline; cursor:pointer;">어떻게 진행되나요?</div>
-          </div>
-          <div style="font-size:11px; color:var(--text-sub); line-height:1.6; padding-left:26px;">• 명품에 적합한 전문 장비로 99.9% 유해균 제거<br>• 눈에 보이지 않는 찝찝함 해소</div>
-          <div style="background:var(--purple-light); border-radius:6px; padding:5px 10px; margin:6px 0 0 26px; font-size:11px; color:var(--purple); font-weight:600;">🎉 멤버십 혜택 — 75% 할인 또는 1회 무료 [TBD]</div>
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px; padding-top:8px; border-top:1px solid rgba(255,59,48,0.2); padding-left:26px;">
-            <span style="font-size:13px; color:var(--text-sub);">이용료</span>
-            <span style="font-size:13px; font-weight:700; color:var(--tbd);">?원 [TBD]</span>
-          </div>
-        </div>
-
         <div class="bottom-btn"><button class="btn-primary">다음</button></div>
       </div></div>
     </div>
@@ -1037,6 +1064,31 @@ body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(
             <span class="pay-total-label">총 결제금액</span>
             <span class="pay-total-value">1,500,900원</span>
           </div>
+
+        <!-- 약관 동의 -->
+        <div style="background:white; margin:0 8px 8px; border-radius:14px; padding:14px 16px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
+            <div style="width:18px; height:18px; border:1.5px solid var(--purple); border-radius:4px; display:flex; align-items:center; justify-content:center; color:var(--purple); font-size:11px; flex-shrink:0;">✓</div>
+            <span style="font-size:13px; font-weight:700; color:var(--dark);">주문 정보를 확인하였으며, 약관 전체에 동의합니다.</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px; padding-left:4px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <div style="width:16px; height:16px; border:1.5px solid var(--border); border-radius:3px; flex-shrink:0;"></div>
+              <span style="font-size:12px; color:var(--dark);">[필수] 구매 전 필수 동의사항</span>
+              <span style="margin-left:auto; font-size:14px; color:var(--gray-3);">›</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <div style="width:16px; height:16px; border:1.5px solid var(--border); border-radius:3px; flex-shrink:0;"></div>
+              <span style="font-size:12px; color:var(--dark);">[필수] 정품PASS 구매자 약관</span>
+              <span style="margin-left:auto; font-size:14px; color:var(--gray-3);">›</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px; background:var(--purple-light); border-radius:8px; padding:6px 8px; margin-top:2px;">
+              <div style="width:16px; height:16px; border:1.5px solid var(--purple); border-radius:3px; flex-shrink:0;"></div>
+              <span style="font-size:12px; color:var(--purple); font-weight:600;">[필수] 정품PASS 멤버십 이용 약관</span>
+              <span style="margin-left:auto; font-size:14px; color:var(--purple);">›</span>
+            </div>
+            <div style="font-size:10px; color:var(--text-sub); padding-left:24px; line-height:1.5;">멤버십 가입 후 멤버십 금액(PASS 단건가 + 추가금)은 환불 대상에서 제외됩니다.</div>
+          </div>
         </div>
         <div class="bottom-btn"><button class="btn-primary">1,500,900원 결제하기</button></div>
       </div></div>
@@ -1072,23 +1124,36 @@ body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(
             <span class="pay-label" style="color:var(--purple); font-weight:700;">정품PASS 멤버십 1년</span>
             <span class="pay-value purple">+4,900원</span>
           </div>
-          <!-- UV 케어 멤버십 혜택 강조 -->
-          <div class="pay-row" style="background:#E8FFF4; margin:4px -2px; padding:6px 2px; border-radius:6px;">
-            <div>
-              <span class="pay-label" style="color:#00A854; font-weight:700;">UV 살균 케어</span>
-              <div style="font-size:10px; color:#00A854; font-weight:600; margin-top:1px;">🎁 멤버십 혜택 적용 — 1회 무료</div>
-            </div>
-            <div style="display:flex; align-items:center; gap:4px;">
-              <span style="font-size:11px; color:var(--gray-3); text-decoration:line-through;">10,000원</span>
-              <span class="pay-value" style="color:#00A854; font-weight:700;">0원</span>
-            </div>
-          </div>
           <div class="pay-divider"></div>
           <div class="pay-total-row">
             <span class="pay-total-label">총 결제금액</span>
             <span class="pay-total-value">1,500,900원</span>
           </div>
-          <div style="font-size:10px; color:#00A854; text-align:right; margin-top:4px;">UV 케어 10,000원 절약!</div>
+
+        <!-- 약관 동의 -->
+        <div style="background:white; margin:0 8px 8px; border-radius:14px; padding:14px 16px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
+            <div style="width:18px; height:18px; border:1.5px solid var(--purple); border-radius:4px; display:flex; align-items:center; justify-content:center; color:var(--purple); font-size:11px; flex-shrink:0;">✓</div>
+            <span style="font-size:13px; font-weight:700; color:var(--dark);">주문 정보를 확인하였으며, 약관 전체에 동의합니다.</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px; padding-left:4px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <div style="width:16px; height:16px; border:1.5px solid var(--border); border-radius:3px; flex-shrink:0;"></div>
+              <span style="font-size:12px; color:var(--dark);">[필수] 구매 전 필수 동의사항</span>
+              <span style="margin-left:auto; font-size:14px; color:var(--gray-3);">›</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <div style="width:16px; height:16px; border:1.5px solid var(--border); border-radius:3px; flex-shrink:0;"></div>
+              <span style="font-size:12px; color:var(--dark);">[필수] 정품PASS 구매자 약관</span>
+              <span style="margin-left:auto; font-size:14px; color:var(--gray-3);">›</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px; background:var(--purple-light); border-radius:8px; padding:6px 8px; margin-top:2px;">
+              <div style="width:16px; height:16px; border:1.5px solid var(--purple); border-radius:3px; flex-shrink:0;"></div>
+              <span style="font-size:12px; color:var(--purple); font-weight:600;">[필수] 정품PASS 멤버십 이용 약관</span>
+              <span style="margin-left:auto; font-size:14px; color:var(--purple);">›</span>
+            </div>
+            <div style="font-size:10px; color:var(--text-sub); padding-left:24px; line-height:1.5;">멤버십 가입 후 멤버십 금액(PASS 단건가 + 추가금)은 환불 대상에서 제외됩니다.</div>
+          </div>
         </div>
         <div class="bottom-btn"><button class="btn-primary">1,500,900원 결제하기</button></div>
       </div></div>
@@ -1177,41 +1242,55 @@ body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(
             <div class="mem-banner-period">2024.03.15 ~ 2025.03.15</div>
             <div class="mem-banner-bottom">
               <div class="mem-remain">만료까지 282일 남음</div>
-              <button class="mem-history-btn">이용 내역 보기</button>
             </div>
           </div>
         </div>
 
-        <!-- 이용 히스토리 -->
-        <div style="background:white; margin:0 8px 8px; border-radius:14px; padding:14px 16px;">
-          <div class="history-sheet-title">멤버십 이용 내역 <span class="history-count">총 3회</span></div>
-          <div class="history-item">
-            <div class="history-icon">👜</div>
-            <div class="history-info">
-              <div class="history-name">구찌 재키 1961 미니 호보백</div>
-              <div class="history-date">2024.03.20</div>
-            </div>
-            <div class="history-badge">PASS 무료</div>
+        <!-- 누적 혜택 금액 전면 노출 -->
+        <div style="background:white; margin:0 8px 8px; border-radius:14px; padding:16px;">
+          <div style="font-size:11px; color:var(--gray-4); margin-bottom:4px;">멤버십으로 아낀 금액</div>
+          <div style="font-size:26px; font-weight:900; color:var(--purple);">90,000원</div>
+          <div style="font-size:11px; color:var(--text-sub); margin-top:2px;">정품PASS 정가 기준 누적 혜택 (3회 이용)</div>
+        </div>
+
+        <!-- 이용 히스토리 토글 -->
+        <div style="background:white; margin:0 8px 8px; border-radius:14px; overflow:hidden;">
+          <div onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display==='none' ? 'block' : 'none'; this.querySelector('.toggle-arrow').textContent = this.nextElementSibling.style.display==='none' ? '›' : '∨';" style="padding:14px 16px; display:flex; justify-content:space-between; align-items:center; cursor:pointer;">
+            <div style="font-size:14px; font-weight:700; color:var(--dark);">멤버십 이용 내역 <span style="font-size:12px; font-weight:400; color:var(--gray-4);">총 3회</span></div>
+            <span class="toggle-arrow" style="font-size:16px; color:var(--gray-3);">›</span>
           </div>
-          <div class="history-item">
-            <div class="history-icon">👛</div>
-            <div class="history-info">
-              <div class="history-name">프라다 사피아노 카드 홀더</div>
-              <div class="history-date">2024.04.02</div>
+          <div style="display:none; border-top:1px solid var(--gray-2);">
+            <div class="history-item">
+              <div class="history-icon">👜</div>
+              <div class="history-info">
+                <div class="history-name">구찌 재키 1961 미니 호보백</div>
+                <div class="history-date">2024.03.20 · 정가 30,000원</div>
+              </div>
+              <div class="history-badge">PASS 무료</div>
             </div>
-            <div class="history-badge">PASS 무료</div>
-          </div>
-          <div class="history-item">
-            <div class="history-icon">💼</div>
-            <div class="history-info">
-              <div class="history-name">버버리 체크 숄더백</div>
-              <div class="history-date">2024.04.18</div>
+            <div class="history-item">
+              <div class="history-icon">👛</div>
+              <div class="history-info">
+                <div class="history-name">프라다 사피아노 카드 홀더</div>
+                <div class="history-date">2024.04.02 · 정가 30,000원</div>
+              </div>
+              <div class="history-badge">PASS 무료</div>
             </div>
-            <div class="history-badge">PASS 무료</div>
+            <div class="history-item">
+              <div class="history-icon">💼</div>
+              <div class="history-info">
+                <div class="history-name">버버리 체크 숄더백</div>
+                <div class="history-date">2024.04.18 · 정가 30,000원</div>
+              </div>
+              <div class="history-badge">PASS 무료</div>
+            </div>
           </div>
         </div>
 
-        <div style="background:white; margin:0 0 0;">
+        <!-- 구독 해지 -->
+        <div style="text-align:center; padding:6px 0 4px;">
+          <button style="background:none; border:none; font-size:11px; color:var(--gray-3); font-family:'Noto Sans KR',sans-serif; cursor:pointer; text-decoration:underline;">구독 해지 [노출 여부 TBD]</button>
+        </div>
           <div style="background:#222; padding:8px 16px; font-size:12px; font-weight:700; color:#FFD166; display:flex; align-items:center; gap:8px;">
             <span>📝</span> 남은 리뷰 작성하고 최대 123,500원 적립금 받기 <span style="margin-left:auto;">⬆</span>
           </div>
@@ -1282,7 +1361,8 @@ body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(
 
 <!-- ⑥ 어드민 방안1 -->
 <div class="content" id="admin1">
-  <div class="section-title">어드민 방안1 <span>독립 멤버십 관리 페이지</span></div>
+  <div class="section-title">어드민 방안1 <span>참고용 — 방안2(회원관리 컬럼 추가)로 확정</span></div>
+  <div style="background:var(--tbd-bg); border:1.5px solid var(--tbd); border-radius:10px; padding:10px 16px; margin-bottom:16px; font-size:12px; color:var(--tbd); font-weight:600;">🔴 어드민은 방안2(기존 회원관리 페이지에 멤버십 컬럼 추가)로 확정. 이 화면은 참고용입니다.</div>
   <div class="desktop-wrap">
     <div class="admin-topbar">
       <div class="admin-logo">Garden <span>Admin</span></div>
@@ -1374,7 +1454,8 @@ body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(
 
 <!-- ⑦ 어드민 방안2 -->
 <div class="content" id="admin2">
-  <div class="section-title">어드민 방안2 <span>현 회원관리 페이지에 멤버십 컬럼 추가</span></div>
+  <div class="section-title">어드민 방안2 <span style="background:#E8FFF4; color:#00A854; border:none;">✓ 확정 — 현 회원관리 페이지에 멤버십 컬럼 추가</span></div>
+  <div style="background:#FFF8E6; border:1.5px solid #FFD166; border-radius:10px; padding:10px 16px; margin-bottom:16px; font-size:12px; color:#996600; font-weight:600;">📣 알림톡 작업 필요 — 멤버십 가입 완료 / 만료 예정 / 만료 후 알림톡 발송 시나리오 별도 기획 필요</div>
   <div class="desktop-wrap">
     <div class="admin-topbar">
       <div class="admin-logo">Garden <span>Admin</span></div>
@@ -1399,16 +1480,16 @@ body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(
           <table class="admin-table">
             <thead><tr><th>회원번호</th><th>이메일</th><th>회원명</th><th>연락처</th><th>성별</th><th>혜택</th><th>핸드폰인증</th><th>총주문금액</th><th>적립금</th><th style="color:#FFD166; background:#2D1B69">멤버십 가입</th><th>가입일</th></tr></thead>
             <tbody>
-              <tr><td>1</td><td>from@email.net</td><td>김○자</td><td>010-****-1234</td><td>여</td><td>할인</td><td>통과</td><td>722,000</td><td>10,312</td><td><span class="status-badge active">● 이용중</span></td><td>2019.06.16</td></tr>
-              <tr><td>2</td><td>skfai@gmail.com</td><td>김○구</td><td>010-****-5678</td><td>여</td><td>-</td><td>미완료</td><td>0</td><td>0</td><td><span style="font-size:10px; color:var(--gray-4)">—</span></td><td>2019.08.16</td></tr>
-              <tr><td>3</td><td>228bun@naver.net</td><td>김○재</td><td>010-****-3</td><td>-</td><td>-</td><td>통과</td><td>6,434,200</td><td>6,000</td><td><span class="status-badge expired">만료</span></td><td>2019.08.15</td></tr>
+              <tr><td>1</td><td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4a2c3825270a2f272b232664242f3e">[email&#160;protected]</a></td><td>김○자</td><td>010-****-1234</td><td>여</td><td>할인</td><td>통과</td><td>722,000</td><td>10,312</td><td><span class="status-badge active">● 이용중</span></td><td>2019.06.16</td></tr>
+              <tr><td>2</td><td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="93e0f8f5f2fad3f4fef2faffbdf0fcfe">[email&#160;protected]</a></td><td>김○구</td><td>010-****-5678</td><td>여</td><td>-</td><td>미완료</td><td>0</td><td>0</td><td><span style="font-size:10px; color:var(--gray-4)">—</span></td><td>2019.08.16</td></tr>
+              <tr><td>3</td><td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4a787872283f240a242b3c2f3864242f3e">[email&#160;protected]</a></td><td>김○재</td><td>010-****-3</td><td>-</td><td>-</td><td>통과</td><td>6,434,200</td><td>6,000</td><td><span class="status-badge expired">만료</span></td><td>2019.08.15</td></tr>
             </tbody>
           </table>
         </div>
         <div style="font-size:13px; font-weight:700; color:var(--dark); margin-bottom:12px; padding-top:16px; border-top:2px solid var(--border);">회원 상세 — 멤버십 영역 추가</div>
         <div style="display:flex; gap:14px; flex-wrap:wrap">
           <div style="flex:1; min-width:240px">
-            <div class="detail-section"><div class="detail-section-title">기본 정보</div><div class="detail-row"><span class="detail-label">회원번호</span><span class="detail-value">1</span></div><div class="detail-row"><span class="detail-label">이메일</span><span class="detail-value">from@email.net</span></div><div class="detail-row"><span class="detail-label">연락처</span><span class="detail-value">010-1234-5678</span></div></div>
+            <div class="detail-section"><div class="detail-section-title">기본 정보</div><div class="detail-row"><span class="detail-label">회원번호</span><span class="detail-value">1</span></div><div class="detail-row"><span class="detail-label">이메일</span><span class="detail-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="98feeaf7f5d8fdf5f9f1f4b6f6fdec">[email&#160;protected]</a></span></div><div class="detail-row"><span class="detail-label">연락처</span><span class="detail-value">010-1234-5678</span></div></div>
           </div>
           <div style="flex:1; min-width:240px">
             <div class="detail-section" style="border:2px solid var(--purple); background:var(--purple-light);">
@@ -1467,13 +1548,6 @@ body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(
                   <p>지금 {추가금액}원만 더 내면 앞으로 1년간 정품PASS 비용 전액 무료</p>
                 </div>
               </div>
-              <div class="modal-benefit-item tbd-item">
-                <div class="modal-benefit-icon-wrap" style="background:rgba(255,59,48,0.15)">🧴</div>
-                <div class="modal-benefit-text">
-                  <h4>UV 케어 멤버십 혜택 [TBD]</h4>
-                  <p>75% 할인 또는 1회 무료 제공 — 확정 필요</p>
-                </div>
-              </div>
             </div>
 
             <!-- How to -->
@@ -1513,9 +1587,9 @@ body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(
 
 <!-- ⑨ SDP -->
 <div class="content" id="sdp">
-  <div class="section-title">SDP <span>고정 배너 방식 (Good to Add)</span></div>
+  <div class="section-title">SDP <span>멤버십 혜택 내용 노출 [TBD]</span></div>
   <div style="background:var(--tbd-bg); border:1.5px dashed var(--tbd); border-radius:10px; padding:12px 16px; margin-bottom:20px; font-size:13px; color:var(--tbd);">
-    <strong>🔴 방향 제안</strong> — SDP는 개인화 금액 계산 없이 고정 배너로 인지/관심 유발만 담당. 실제 개인화 후킹은 체크아웃에서만 진행. 이 방향 동의 여부 확인 필요.
+    <strong>🔴 TBD — 킥오프 확정</strong> — SDP 멤버십 혜택 내용 노출 여부 미확정. 고정 배너 방식(개인화 없이 인지/관심 유발)을 제안하나 방향 확정 필요.
   </div>
   <div class="phone-wrap">
     <div class="phone-box">
@@ -1574,7 +1648,7 @@ body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 function showTab(id, btn) {
   document.querySelectorAll('.content').forEach(el => el.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
@@ -1594,11 +1668,10 @@ function switchProductType(type) {
   const isNew = type === 'new';
   document.getElementById('hook-new').style.display = isNew ? 'block' : 'none';
   document.getElementById('hook-used').style.display = isNew ? 'none' : 'block';
-  document.getElementById('uv-after-used').style.display = isNew ? 'none' : 'block';
   document.getElementById('toggle-new').style.background = isNew ? 'var(--purple)' : 'white';
   document.getElementById('toggle-new').style.color = isNew ? 'white' : 'var(--text-sub)';
   document.getElementById('toggle-new').style.border = isNew ? 'none' : '1.5px solid var(--border)';
-  document.getElementById('toggle-used').style.background = isNew ? 'white' : '#00A854';
+  document.getElementById('toggle-used').style.background = isNew ? 'white' : 'var(--purple)';
   document.getElementById('toggle-used').style.color = isNew ? 'var(--text-sub)' : 'white';
   document.getElementById('toggle-used').style.border = isNew ? '1.5px solid var(--border)' : 'none';
   document.getElementById('phone-label-1').textContent = isNew ? '① 후킹 노출 상태 — 새상품PASS' : '① 후킹 노출 상태 — 중고PASS';
@@ -1617,7 +1690,7 @@ function switchCond(btn, caseId) {
     const panel = document.getElementById('panel-' + c);
     const phone = document.getElementById('phone-' + c);
     if(panel) panel.style.display = c === caseId ? 'block' : 'none';
-    if(phone) phone.style.display = c === caseId ? (c==='c1'?'flex':'block') : 'none';
+    if(phone) phone.style.display = c === caseId ? 'flex' : 'none';
   });
 }
 
@@ -1778,10 +1851,4 @@ window.addEventListener('DOMContentLoaded', () => {
 </div>
 
 <!-- 최소화 시 FAB -->
-<div id="memo-fab" onclick="toggleMemo()" style="display:none; position:fixed; bottom:24px; right:24px; width:52px; height:52px; background:#6C47FF; border-radius:50%; box-shadow:0 4px 16px rgba(108,71,255,0.35); z-index:999; align-items:center; justify-content:center; cursor:pointer; font-size:22px;">
-  📝
-  <div id="memo-badge" style="display:none; position:absolute; top:-2px; right:-2px; background:#FF3B30; color:white; font-size:9px; font-weight:700; border-radius:10px; min-width:16px; height:16px; align-items:center; justify-content:center; padding:0 4px;">0</div>
-</div>
-
-</body>
-</html>
+<div id="memo-fab" oncl
