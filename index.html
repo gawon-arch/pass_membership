@@ -784,6 +784,67 @@ body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(
 
     </div>
   </div>
+
+  <!-- 가격 매트릭스 — 전체 너비 -->
+  <div style="margin-top:28px;">
+    <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:4px;">가격 매트릭스 <span style="background:#FFF8E6; color:#996600; border:1px solid #FFD166; border-radius:10px; padding:1px 8px; font-size:11px; margin-left:6px;">제안</span></div>
+    <div style="font-size:11px; color:var(--text-sub); margin-bottom:16px;">추가 결제 금액 — Sale Price 기준 / 확정된 금액 아님</div>
+
+    <!-- 3회 미만 -->
+    <div style="font-size:12px; font-weight:700; color:var(--purple); margin-bottom:8px;">■ 구매 횟수 3회 미만 기준 (추가 결제 금액 — Sale Price)</div>
+    <div style="border-radius:10px; overflow:hidden; border:1px solid var(--border); margin-bottom:20px;">
+      <table style="width:100%; border-collapse:collapse; font-size:12px;">
+        <thead>
+          <tr style="background:var(--dark);">
+            <th style="padding:10px 12px; color:white; font-weight:600; text-align:left;">상품가격</th>
+            <th style="padding:10px 12px; color:white; font-weight:600; text-align:right;">정품PASS<br><span style="font-weight:400; font-size:10px;">(sale price)</span></th>
+            <th style="padding:10px 12px; color:#FFC8C8; font-weight:600; text-align:right;">멤버십 추가금<br><span style="font-weight:400; font-size:10px;">(Original)</span></th>
+            <th style="padding:10px 12px; color:#FFD166; font-weight:700; text-align:right;">멤버십 추가금<br><span style="font-weight:400; font-size:10px;">(Sale, 60% 할인)</span></th>
+            <th style="padding:10px 12px; color:#A8D8FF; font-weight:700; text-align:right;">멤버십 가격<br><span style="font-weight:400; font-size:10px;">(PASS+추가금_sale)</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 12px;">20만원 미만</td><td style="padding:8px 12px; text-align:right;">10,000원</td><td style="padding:8px 12px; text-align:right; color:#CC5555;">15,000원</td><td style="padding:8px 12px; text-align:right; color:var(--purple); font-weight:600;">6,000원</td><td style="padding:8px 12px; text-align:right; font-weight:600;">16,000원</td></tr>
+          <tr style="border-bottom:1px solid var(--border); background:var(--gray-1);"><td style="padding:8px 12px;">20~40만원 미만</td><td style="padding:8px 12px; text-align:right;">15,000원</td><td style="padding:8px 12px; text-align:right; color:#CC5555;">17,000원</td><td style="padding:8px 12px; text-align:right; color:var(--purple); font-weight:600;">6,800원</td><td style="padding:8px 12px; text-align:right; font-weight:600;">21,800원</td></tr>
+          <tr style="border-bottom:1px solid var(--border); background:#F0EDFF;"><td style="padding:8px 12px; font-weight:700;">40~100만원 <span style="background:var(--purple); color:white; font-size:9px; padding:1px 5px; border-radius:6px;">1순위</span></td><td style="padding:8px 12px; text-align:right; font-weight:700;">20,000원</td><td style="padding:8px 12px; text-align:right; color:#CC5555;">22,000원</td><td style="padding:8px 12px; text-align:right; color:var(--purple); font-weight:700;">8,800원</td><td style="padding:8px 12px; text-align:right; font-weight:700;">28,800원</td></tr>
+          <tr style="border-bottom:1px solid var(--border); background:#F0EDFF;"><td style="padding:8px 12px; font-weight:700;">100~200만원 <span style="background:var(--purple); color:white; font-size:9px; padding:1px 5px; border-radius:6px;">2순위</span></td><td style="padding:8px 12px; text-align:right; font-weight:700;">30,000원</td><td style="padding:8px 12px; text-align:right; color:#CC5555;">22,000원</td><td style="padding:8px 12px; text-align:right; color:var(--purple); font-weight:700;">8,800원</td><td style="padding:8px 12px; text-align:right; font-weight:700;">38,800원</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 12px;">200~300만원 미만</td><td style="padding:8px 12px; text-align:right;">30,000원</td><td style="padding:8px 12px; text-align:right; color:#CC5555;">25,000원</td><td style="padding:8px 12px; text-align:right; color:var(--purple); font-weight:600;">10,000원</td><td style="padding:8px 12px; text-align:right; font-weight:600;">40,000원</td></tr>
+          <tr style="border-bottom:1px solid var(--border); background:var(--gray-1);"><td style="padding:8px 12px;">300~500만원 미만</td><td style="padding:8px 12px; text-align:right;">40,000원</td><td style="padding:8px 12px; text-align:right; color:#CC5555;">27,000원</td><td style="padding:8px 12px; text-align:right; color:var(--purple); font-weight:600;">10,800원</td><td style="padding:8px 12px; text-align:right; font-weight:600;">50,800원</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 12px;">500~1000만원 미만</td><td style="padding:8px 12px; text-align:right;">60,000원</td><td style="padding:8px 12px; text-align:right; color:#CC5555;">30,000원</td><td style="padding:8px 12px; text-align:right; color:var(--purple); font-weight:600;">12,000원</td><td style="padding:8px 12px; text-align:right; font-weight:600;">72,000원</td></tr>
+          <tr style="background:var(--gray-1);"><td style="padding:8px 12px;">1000만원 이상</td><td style="padding:8px 12px; text-align:right;">120,000원</td><td style="padding:8px 12px; text-align:right; color:#CC5555;">32,000원</td><td style="padding:8px 12px; text-align:right; color:var(--purple); font-weight:600;">12,800원</td><td style="padding:8px 12px; text-align:right; font-weight:600;">132,800원</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 3회 이상 -->
+    <div style="font-size:12px; font-weight:700; color:#4A90D9; margin-bottom:8px;">■ 구매 횟수 3회 이상 기준</div>
+    <div style="border-radius:10px; overflow:hidden; border:1px solid var(--border); margin-bottom:12px;">
+      <table style="width:100%; border-collapse:collapse; font-size:12px;">
+        <thead>
+          <tr style="background:#2D4A70;">
+            <th style="padding:10px 12px; color:white; font-weight:600; text-align:left;">상품가격</th>
+            <th style="padding:10px 12px; color:white; font-weight:600; text-align:right;">정품PASS<br><span style="font-weight:400; font-size:10px;">(sale price)</span></th>
+            <th style="padding:10px 12px; color:#FFC8C8; font-weight:600; text-align:right;">멤버십 추가금<br><span style="font-weight:400; font-size:10px;">(Original)</span></th>
+            <th style="padding:10px 12px; color:#FFD166; font-weight:700; text-align:right;">멤버십 추가금<br><span style="font-weight:400; font-size:10px;">(Sale, 30% 할인)</span></th>
+            <th style="padding:10px 12px; color:#A8D8FF; font-weight:700; text-align:right;">멤버십 가격<br><span style="font-weight:400; font-size:10px;">(PASS+추가금_sale)</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 12px;">20만원 미만</td><td style="padding:8px 12px; text-align:right;">10,000원</td><td style="padding:8px 12px; text-align:right; color:#CC5555;">15,000원</td><td style="padding:8px 12px; text-align:right; color:#4A90D9; font-weight:600;">10,500원</td><td style="padding:8px 12px; text-align:right; font-weight:600;">20,500원</td></tr>
+          <tr style="border-bottom:1px solid var(--border); background:var(--gray-1);"><td style="padding:8px 12px;">20~40만원 미만</td><td style="padding:8px 12px; text-align:right;">15,000원</td><td style="padding:8px 12px; text-align:right; color:#CC5555;">17,000원</td><td style="padding:8px 12px; text-align:right; color:#4A90D9; font-weight:600;">11,900원</td><td style="padding:8px 12px; text-align:right; font-weight:600;">26,900원</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 12px;">40~100만원 미만</td><td style="padding:8px 12px; text-align:right;">20,000원</td><td style="padding:8px 12px; text-align:right; color:#CC5555;">22,000원</td><td style="padding:8px 12px; text-align:right; color:#4A90D9; font-weight:600;">15,400원</td><td style="padding:8px 12px; text-align:right; font-weight:600;">35,400원</td></tr>
+          <tr style="border-bottom:1px solid var(--border); background:var(--gray-1);"><td style="padding:8px 12px;">100~200만원 미만</td><td style="padding:8px 12px; text-align:right;">30,000원</td><td style="padding:8px 12px; text-align:right; color:#CC5555;">22,000원</td><td style="padding:8px 12px; text-align:right; color:#4A90D9; font-weight:600;">15,400원</td><td style="padding:8px 12px; text-align:right; font-weight:600;">45,400원</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 12px;">200~300만원 미만</td><td style="padding:8px 12px; text-align:right;">30,000원</td><td style="padding:8px 12px; text-align:right; color:#CC5555;">25,000원</td><td style="padding:8px 12px; text-align:right; color:#4A90D9; font-weight:600;">17,500원</td><td style="padding:8px 12px; text-align:right; font-weight:600;">47,500원</td></tr>
+          <tr style="border-bottom:1px solid var(--border); background:var(--gray-1);"><td style="padding:8px 12px;">300~500만원 미만</td><td style="padding:8px 12px; text-align:right;">40,000원</td><td style="padding:8px 12px; text-align:right; color:#CC5555;">27,000원</td><td style="padding:8px 12px; text-align:right; color:#4A90D9; font-weight:600;">18,900원</td><td style="padding:8px 12px; text-align:right; font-weight:600;">58,900원</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 12px;">500~1000만원 미만</td><td style="padding:8px 12px; text-align:right;">60,000원</td><td style="padding:8px 12px; text-align:right; color:#CC5555;">30,000원</td><td style="padding:8px 12px; text-align:right; color:#4A90D9; font-weight:600;">21,000원</td><td style="padding:8px 12px; text-align:right; font-weight:600;">81,000원</td></tr>
+          <tr style="background:var(--gray-1);"><td style="padding:8px 12px;">1000만원 이상</td><td style="padding:8px 12px; text-align:right;">120,000원</td><td style="padding:8px 12px; text-align:right; color:#CC5555;">32,000원</td><td style="padding:8px 12px; text-align:right; color:#4A90D9; font-weight:600;">22,400원</td><td style="padding:8px 12px; text-align:right; font-weight:600;">142,400원</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="font-size:11px; color:var(--text-sub); background:var(--tbd-bg); border:1px dashed var(--tbd); border-radius:8px; padding:8px 12px;">
+      🔴 멤버십 추가금 Original Price 및 할인율(3회 미만 60%, 3회 이상 30%) 미확정 — 확정 후 반영 필요
+    </div>
+  </div>
 </div>
 
 <!-- (기존 체크아웃 미가입/가입 섹션 제거됨 — 로직 탭으로 통합) -->
@@ -948,67 +1009,6 @@ body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(
     </div>
   </div>
 
-  <!-- 가격 매트릭스 — 전체 너비 -->
-  <div style="margin-top:28px;">
-    <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:4px;">가격 매트릭스 <span style="background:#FFF8E6; color:#996600; border:1px solid #FFD166; border-radius:10px; padding:1px 8px; font-size:11px; margin-left:6px;">제안</span></div>
-    <div style="font-size:11px; color:var(--text-sub); margin-bottom:16px;">추가 결제 금액 — Sale Price 기준 / 확정된 금액 아님</div>
-
-    <!-- 3회 미만 -->
-    <div style="font-size:12px; font-weight:700; color:var(--purple); margin-bottom:8px;">■ 구매 횟수 3회 미만 기준 (추가 결제 금액 — Sale Price)</div>
-    <div style="border-radius:10px; overflow:hidden; border:1px solid var(--border); margin-bottom:20px;">
-      <table style="width:100%; border-collapse:collapse; font-size:12px;">
-        <thead>
-          <tr style="background:var(--dark);">
-            <th style="padding:10px 12px; color:white; font-weight:600; text-align:left;">상품가격</th>
-            <th style="padding:10px 12px; color:white; font-weight:600; text-align:right;">정품PASS<br><span style="font-weight:400; font-size:10px;">(sale price)</span></th>
-            <th style="padding:10px 12px; color:#FFC8C8; font-weight:600; text-align:right;">멤버십 추가금<br><span style="font-weight:400; font-size:10px;">(Original)</span></th>
-            <th style="padding:10px 12px; color:#FFD166; font-weight:700; text-align:right;">멤버십 추가금<br><span style="font-weight:400; font-size:10px;">(Sale, 60% 할인)</span></th>
-            <th style="padding:10px 12px; color:#A8D8FF; font-weight:700; text-align:right;">멤버십 가격<br><span style="font-weight:400; font-size:10px;">(PASS+추가금_sale)</span></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 12px;">20만원 미만</td><td style="padding:8px 12px; text-align:right;">10,000원</td><td style="padding:8px 12px; text-align:right; color:#CC5555;">15,000원</td><td style="padding:8px 12px; text-align:right; color:var(--purple); font-weight:600;">6,000원</td><td style="padding:8px 12px; text-align:right; font-weight:600;">16,000원</td></tr>
-          <tr style="border-bottom:1px solid var(--border); background:var(--gray-1);"><td style="padding:8px 12px;">20~40만원 미만</td><td style="padding:8px 12px; text-align:right;">15,000원</td><td style="padding:8px 12px; text-align:right; color:#CC5555;">17,000원</td><td style="padding:8px 12px; text-align:right; color:var(--purple); font-weight:600;">6,800원</td><td style="padding:8px 12px; text-align:right; font-weight:600;">21,800원</td></tr>
-          <tr style="border-bottom:1px solid var(--border); background:#F0EDFF;"><td style="padding:8px 12px; font-weight:700;">40~100만원 <span style="background:var(--purple); color:white; font-size:9px; padding:1px 5px; border-radius:6px;">1순위</span></td><td style="padding:8px 12px; text-align:right; font-weight:700;">20,000원</td><td style="padding:8px 12px; text-align:right; color:#CC5555;">22,000원</td><td style="padding:8px 12px; text-align:right; color:var(--purple); font-weight:700;">8,800원</td><td style="padding:8px 12px; text-align:right; font-weight:700;">28,800원</td></tr>
-          <tr style="border-bottom:1px solid var(--border); background:#F0EDFF;"><td style="padding:8px 12px; font-weight:700;">100~200만원 <span style="background:var(--purple); color:white; font-size:9px; padding:1px 5px; border-radius:6px;">2순위</span></td><td style="padding:8px 12px; text-align:right; font-weight:700;">30,000원</td><td style="padding:8px 12px; text-align:right; color:#CC5555;">22,000원</td><td style="padding:8px 12px; text-align:right; color:var(--purple); font-weight:700;">8,800원</td><td style="padding:8px 12px; text-align:right; font-weight:700;">38,800원</td></tr>
-          <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 12px;">200~300만원 미만</td><td style="padding:8px 12px; text-align:right;">30,000원</td><td style="padding:8px 12px; text-align:right; color:#CC5555;">25,000원</td><td style="padding:8px 12px; text-align:right; color:var(--purple); font-weight:600;">10,000원</td><td style="padding:8px 12px; text-align:right; font-weight:600;">40,000원</td></tr>
-          <tr style="border-bottom:1px solid var(--border); background:var(--gray-1);"><td style="padding:8px 12px;">300~500만원 미만</td><td style="padding:8px 12px; text-align:right;">40,000원</td><td style="padding:8px 12px; text-align:right; color:#CC5555;">27,000원</td><td style="padding:8px 12px; text-align:right; color:var(--purple); font-weight:600;">10,800원</td><td style="padding:8px 12px; text-align:right; font-weight:600;">50,800원</td></tr>
-          <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 12px;">500~1000만원 미만</td><td style="padding:8px 12px; text-align:right;">60,000원</td><td style="padding:8px 12px; text-align:right; color:#CC5555;">30,000원</td><td style="padding:8px 12px; text-align:right; color:var(--purple); font-weight:600;">12,000원</td><td style="padding:8px 12px; text-align:right; font-weight:600;">72,000원</td></tr>
-          <tr style="background:var(--gray-1);"><td style="padding:8px 12px;">1000만원 이상</td><td style="padding:8px 12px; text-align:right;">120,000원</td><td style="padding:8px 12px; text-align:right; color:#CC5555;">32,000원</td><td style="padding:8px 12px; text-align:right; color:var(--purple); font-weight:600;">12,800원</td><td style="padding:8px 12px; text-align:right; font-weight:600;">132,800원</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- 3회 이상 -->
-    <div style="font-size:12px; font-weight:700; color:#4A90D9; margin-bottom:8px;">■ 구매 횟수 3회 이상 기준</div>
-    <div style="border-radius:10px; overflow:hidden; border:1px solid var(--border); margin-bottom:12px;">
-      <table style="width:100%; border-collapse:collapse; font-size:12px;">
-        <thead>
-          <tr style="background:#2D4A70;">
-            <th style="padding:10px 12px; color:white; font-weight:600; text-align:left;">상품가격</th>
-            <th style="padding:10px 12px; color:white; font-weight:600; text-align:right;">정품PASS<br><span style="font-weight:400; font-size:10px;">(sale price)</span></th>
-            <th style="padding:10px 12px; color:#FFC8C8; font-weight:600; text-align:right;">멤버십 추가금<br><span style="font-weight:400; font-size:10px;">(Original)</span></th>
-            <th style="padding:10px 12px; color:#FFD166; font-weight:700; text-align:right;">멤버십 추가금<br><span style="font-weight:400; font-size:10px;">(Sale, 30% 할인)</span></th>
-            <th style="padding:10px 12px; color:#A8D8FF; font-weight:700; text-align:right;">멤버십 가격<br><span style="font-weight:400; font-size:10px;">(PASS+추가금_sale)</span></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 12px;">20만원 미만</td><td style="padding:8px 12px; text-align:right;">10,000원</td><td style="padding:8px 12px; text-align:right; color:#CC5555;">15,000원</td><td style="padding:8px 12px; text-align:right; color:#4A90D9; font-weight:600;">10,500원</td><td style="padding:8px 12px; text-align:right; font-weight:600;">20,500원</td></tr>
-          <tr style="border-bottom:1px solid var(--border); background:var(--gray-1);"><td style="padding:8px 12px;">20~40만원 미만</td><td style="padding:8px 12px; text-align:right;">15,000원</td><td style="padding:8px 12px; text-align:right; color:#CC5555;">17,000원</td><td style="padding:8px 12px; text-align:right; color:#4A90D9; font-weight:600;">11,900원</td><td style="padding:8px 12px; text-align:right; font-weight:600;">26,900원</td></tr>
-          <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 12px;">40~100만원 미만</td><td style="padding:8px 12px; text-align:right;">20,000원</td><td style="padding:8px 12px; text-align:right; color:#CC5555;">22,000원</td><td style="padding:8px 12px; text-align:right; color:#4A90D9; font-weight:600;">15,400원</td><td style="padding:8px 12px; text-align:right; font-weight:600;">35,400원</td></tr>
-          <tr style="border-bottom:1px solid var(--border); background:var(--gray-1);"><td style="padding:8px 12px;">100~200만원 미만</td><td style="padding:8px 12px; text-align:right;">30,000원</td><td style="padding:8px 12px; text-align:right; color:#CC5555;">22,000원</td><td style="padding:8px 12px; text-align:right; color:#4A90D9; font-weight:600;">15,400원</td><td style="padding:8px 12px; text-align:right; font-weight:600;">45,400원</td></tr>
-          <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 12px;">200~300만원 미만</td><td style="padding:8px 12px; text-align:right;">30,000원</td><td style="padding:8px 12px; text-align:right; color:#CC5555;">25,000원</td><td style="padding:8px 12px; text-align:right; color:#4A90D9; font-weight:600;">17,500원</td><td style="padding:8px 12px; text-align:right; font-weight:600;">47,500원</td></tr>
-          <tr style="border-bottom:1px solid var(--border); background:var(--gray-1);"><td style="padding:8px 12px;">300~500만원 미만</td><td style="padding:8px 12px; text-align:right;">40,000원</td><td style="padding:8px 12px; text-align:right; color:#CC5555;">27,000원</td><td style="padding:8px 12px; text-align:right; color:#4A90D9; font-weight:600;">18,900원</td><td style="padding:8px 12px; text-align:right; font-weight:600;">58,900원</td></tr>
-          <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 12px;">500~1000만원 미만</td><td style="padding:8px 12px; text-align:right;">60,000원</td><td style="padding:8px 12px; text-align:right; color:#CC5555;">30,000원</td><td style="padding:8px 12px; text-align:right; color:#4A90D9; font-weight:600;">21,000원</td><td style="padding:8px 12px; text-align:right; font-weight:600;">81,000원</td></tr>
-          <tr style="background:var(--gray-1);"><td style="padding:8px 12px;">1000만원 이상</td><td style="padding:8px 12px; text-align:right;">120,000원</td><td style="padding:8px 12px; text-align:right; color:#CC5555;">32,000원</td><td style="padding:8px 12px; text-align:right; color:#4A90D9; font-weight:600;">22,400원</td><td style="padding:8px 12px; text-align:right; font-weight:600;">142,400원</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div style="font-size:11px; color:var(--text-sub); background:var(--tbd-bg); border:1px dashed var(--tbd); border-radius:8px; padding:8px 12px;">
-      🔴 멤버십 추가금 Original Price 및 할인율(3회 미만 60%, 3회 이상 30%) 미확정 — 확정 후 반영 필요
-    </div>
-  </div>
-</div>
 
 <!-- ③ 결제 Summary (step 3) -->
 <div class="content" id="checkout-pay">
