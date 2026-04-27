@@ -403,6 +403,36 @@ body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(
       </div>
 
       <!-- C3 -->
+      <div class="cond-panel" id="panel-c3" style="display:none;">
+        <div style="background:white; border-radius:16px; padding:20px; border:2px solid var(--green);">
+          <div style="font-size:11px; font-weight:700; color:#00A854; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:10px;">케이스 3 · 무료 적용</div>
+          <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:14px;">멤버십 유효기간 내 이용중</div>
+          <div style="background:#E8FFF4; border-radius:8px; padding:10px 12px;">
+            <div style="font-size:12px; font-weight:700; color:#00A854; margin-bottom:2px;">→ 정품PASS 0원 처리</div>
+            <div style="font-size:11px; color:var(--text-sub);">"멤버십 혜택 적용 · 무료" 뱃지 노출, 이용료 0원, 후킹 UI 미노출</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- C4 -->
+      <div class="cond-panel" id="panel-c4" style="display:none;">
+        <div style="background:white; border-radius:16px; padding:20px; border:2px solid var(--purple);">
+          <div style="font-size:11px; font-weight:700; color:var(--purple); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:10px;">케이스 4 · 멤버십 만료</div>
+          <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:14px;">멤버십 만료 후</div>
+          <div style="background:var(--purple-light); border-radius:8px; padding:10px 12px;">
+            <div style="font-size:12px; font-weight:700; color:var(--purple); margin-bottom:4px;">→ 조건 로직 재체크 후 분기</div>
+            <div style="display:flex; flex-direction:column; gap:6px; margin-top:6px;">
+              <div style="background:white; border-radius:6px; padding:7px 10px; font-size:11px; color:var(--dark);">3회 미만 → <strong style="color:var(--purple);">케이스 1</strong></div>
+              <div style="background:white; border-radius:6px; padding:7px 10px; font-size:11px; color:var(--dark);">3회 이상 → <strong style="color:var(--purple);">케이스 2</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 케이스3 폰 뷰 -->
+      
+
+      <!-- 케이스4 폰 뷰 -->
       
 
       <!-- C4 -->
@@ -644,122 +674,95 @@ body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(
 
 
       <!-- C3 폰 -->
-      <div class="cond-panel" id="phone-c3" style="display:none; flex-direction:row; gap:20px; align-items:flex-start;">
-        <!-- 로직 패널 -->
-        <div id="panel-c3" style="width:280px; flex-shrink:0; background:white; border-radius:16px; padding:20px; border:2px solid #00A854;">
-          <div style="font-size:11px; font-weight:700; color:#00A854; margin-bottom:6px;">케이스 3 · 멤버십 이용중</div>
-          <div style="font-size:18px; font-weight:800; color:var(--dark); margin-bottom:4px;">멤버십 유효기간 내 이용중</div>
-          <div style="font-size:12px; font-weight:600; color:var(--text-sub); margin-bottom:10px;">결과 화면 — 확정</div>
-          <div style="background:#E8FFF4; border-radius:10px; padding:12px 14px; font-size:12px; color:#00714A; line-height:1.7;">
-            → 정품PASS 0원 처리<br>
-            <span style="font-size:11px; color:var(--text-sub);">"멤버십 혜택 적용" 뱃지 노출<br>이용료 0원 표시<br>후킹 UI 미노출</span>
-          </div>
-        </div>
-        <!-- 폰 뷰 -->
-        <div style="display:flex; gap:20px; flex-wrap:nowrap;">
-          <div class="phone-box">
-            <div class="phone-label">멤버십 이용중 · 정품PASS 0원</div>
-            <div class="phone"><div class="phone-inner">
-              <div class="ph-header"><div class="ph-back">‹</div><div class="ph-title">주문/결제</div><div style="width:28px"></div></div>
-              <div class="step-bar">
-                <div class="step"><div class="step-num active">1</div><div class="step-text active">주문</div></div>
-                <div class="step-line"></div>
-                <div class="step"><div class="step-num inactive">2</div><div class="step-text inactive">배송</div></div>
-                <div class="step-line"></div>
-                <div class="step"><div class="step-num inactive">3</div><div class="step-text inactive">결제</div></div>
-              </div>
-              <div style="background:white; margin:8px; border-radius:14px; padding:14px 16px; display:flex; gap:12px; align-items:center;">
-                <div style="width:64px; height:64px; background:var(--gray-2); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:28px; flex-shrink:0;">👜</div>
-                <div><div style="font-size:11px; color:var(--gray-4);">루이비통</div><div style="font-size:13px; font-weight:600; color:var(--dark);">니스 뷰티 여성 파우치백</div><div style="font-size:11px; color:var(--gray-4);">옵션 : 단품</div><div style="font-size:15px; font-weight:700; color:var(--dark); margin-top:3px;">1,466,000원</div></div>
-              </div>
-              <div style="margin:0 8px 8px; border-radius:14px; overflow:hidden; border:1.5px solid var(--border);">
-                <div style="display:flex;"><div style="flex:1; padding:12px; text-align:center; font-size:13px; font-weight:600; background:var(--purple); color:white;">트렌비 정품PASS ✓</div><div style="flex:1; padding:12px; text-align:center; font-size:13px; font-weight:600; background:var(--gray-1); color:var(--gray-4);">일반</div></div>
-                <div style="background:white; padding:14px 16px;">
-                  <div style="display:flex; gap:8px; margin-bottom:10px;"><div style="width:22px; height:22px; background:var(--purple); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; color:white; flex-shrink:0;">✓</div><div style="font-size:13px; font-weight:700; color:var(--dark);">한국정품감정센터 정품 감정 후 배송</div></div>
-                  <div style="display:flex; gap:8px; margin-bottom:10px;"><div style="width:22px; height:22px; background:var(--purple); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; color:white; flex-shrink:0;">✓</div><div style="font-size:13px; font-weight:700; color:var(--dark);">한국정품감정센터 보증서 발급</div></div>
-                  <div style="font-size:11px; color:var(--gray-4); margin-bottom:8px;">※ 영업일 기준 2-3일 추가 소요</div>
-                  <div style="display:flex; justify-content:space-between; padding-top:10px; border-top:1px solid var(--gray-2); align-items:center;">
-                    <span style="font-size:13px; color:var(--text-sub);">이용료</span>
-                    <div style="display:flex; align-items:center; gap:5px;">
-                      <span style="background:var(--purple); color:white; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">멤버십 혜택 적용</span>
-                      <span style="font-size:12px; color:var(--gray-3); text-decoration:line-through;">30,000원</span>
-                      <span style="font-size:15px; font-weight:700; color:var(--purple);">0원</span>
-                    </div>
+      
+
+      
+</div>
+<div class="cond-panel" id="phone-c3" style="display:none;">
+        <div class="phone-box">
+          <div class="phone-label">멤버십 이용중 · 정품PASS 0원</div>
+          <div class="phone"><div class="phone-inner">
+            <div class="ph-header"><div class="ph-back">‹</div><div class="ph-title">주문/결제</div><div style="width:28px"></div></div>
+            <div class="step-bar">
+              <div class="step"><div class="step-num active">1</div><div class="step-text active">주문</div></div>
+              <div class="step-line"></div>
+              <div class="step"><div class="step-num inactive">2</div><div class="step-text inactive">배송</div></div>
+              <div class="step-line"></div>
+              <div class="step"><div class="step-num inactive">3</div><div class="step-text inactive">결제</div></div>
+            </div>
+            <div style="background:white; margin:8px; border-radius:14px; padding:14px 16px; display:flex; gap:12px; align-items:center;">
+              <div style="width:64px; height:64px; background:var(--gray-2); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:28px; flex-shrink:0;">👜</div>
+              <div><div style="font-size:11px; color:var(--gray-4);">루이비통</div><div style="font-size:13px; font-weight:600; color:var(--dark);">니스 뷰티 여성 파우치백</div><div style="font-size:15px; font-weight:700; color:var(--dark); margin-top:3px;">1,466,000원</div></div>
+            </div>
+            <div style="margin:0 8px 8px; border-radius:14px; overflow:hidden; border:1.5px solid var(--border);">
+              <div style="display:flex;"><div style="flex:1; padding:12px; text-align:center; font-size:13px; font-weight:600; background:var(--purple); color:white;">트렌비 정품PASS ✓</div><div style="flex:1; padding:12px; text-align:center; font-size:13px; font-weight:600; background:var(--gray-1); color:var(--gray-4);">일반</div></div>
+              <div style="background:white; padding:14px 16px;">
+                <div style="display:flex; gap:8px; margin-bottom:10px;"><div style="width:22px; height:22px; background:var(--purple); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; color:white; flex-shrink:0;">✓</div><div style="font-size:13px; font-weight:700; color:var(--dark);">한국정품감정센터 정품 감정 후 배송</div></div>
+                <div style="display:flex; gap:8px; margin-bottom:10px;"><div style="width:22px; height:22px; background:var(--purple); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; color:white; flex-shrink:0;">✓</div><div style="font-size:13px; font-weight:700; color:var(--dark);">한국정품감정센터 보증서 발급</div></div>
+                <div style="font-size:11px; color:var(--gray-4); margin-bottom:8px;">※ 영업일 기준 2-3일 추가 소요</div>
+                <div style="display:flex; justify-content:space-between; padding-top:10px; border-top:1px solid var(--gray-2); align-items:center;">
+                  <span style="font-size:13px; color:var(--text-sub);">이용료</span>
+                  <div style="display:flex; align-items:center; gap:5px;">
+                    <span style="background:var(--purple); color:white; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">멤버십 혜택 적용</span>
+                    <span style="font-size:12px; color:var(--gray-3); text-decoration:line-through;">30,000원</span>
+                    <span style="font-size:15px; font-weight:700; color:var(--purple);">0원</span>
                   </div>
                 </div>
               </div>
-              <div class="bottom-btn"><button class="btn-primary">다음</button></div>
-            </div></div>
-          </div>
+            </div>
+            <div class="bottom-btn"><button class="btn-primary">다음</button></div>
+          </div></div>
         </div>
       </div>
-
-      <!-- C4 폰 -->
-      <div class="cond-panel" id="phone-c4" style="display:none; flex-direction:row; gap:20px; align-items:flex-start;">
-        <!-- 로직 패널 -->
-        <div id="panel-c4" style="width:280px; flex-shrink:0; background:white; border-radius:16px; padding:20px; border:2px solid var(--purple);">
-          <div style="font-size:11px; font-weight:700; color:var(--purple); margin-bottom:6px;">케이스 4 · 멤버십 만료</div>
-          <div style="font-size:18px; font-weight:800; color:var(--dark); margin-bottom:4px;">멤버십 만료</div>
-          <div style="font-size:12px; font-weight:600; color:var(--text-sub); margin-bottom:10px;">결과 화면 — 확정</div>
-          <div style="background:var(--purple-light); border-radius:10px; padding:12px 14px; font-size:12px; color:var(--purple); line-height:1.7; margin-bottom:10px;">
-            → 조건 로직 재체크 후 케이스 1 또는 2로 분기
-          </div>
-          <div style="display:flex; flex-direction:column; gap:8px;">
-            <div style="background:white; border-radius:8px; padding:8px 12px; font-size:11px; border:1px solid var(--border);"><div style="font-weight:700; color:var(--purple); margin-bottom:2px;">3회 미만 → 케이스 1</div><div style="color:var(--text-sub);">37,000원 후킹 노출</div></div>
-            <div style="background:white; border-radius:8px; padding:8px 12px; font-size:11px; border:1px solid var(--border);"><div style="font-weight:700; color:var(--purple); margin-bottom:2px;">3회 이상 → 케이스 2</div><div style="color:var(--text-sub);">39,900원 후킹 노출</div></div>
-          </div>
-        </div>
-        <!-- 폰 뷰 -->
-        <div style="display:flex; gap:20px; flex-wrap:nowrap;">
-          <div class="phone-box">
-            <div class="phone-label">만료 후 → 케이스 1 분기 예시</div>
-            <div class="phone"><div class="phone-inner">
-              <div class="ph-header"><div class="ph-back">‹</div><div class="ph-title">주문/결제</div><div style="width:28px"></div></div>
-              <div class="step-bar">
-                <div class="step"><div class="step-num active">1</div><div class="step-text active">주문</div></div>
-                <div class="step-line"></div>
-                <div class="step"><div class="step-num inactive">2</div><div class="step-text inactive">배송</div></div>
-                <div class="step-line"></div>
-                <div class="step"><div class="step-num inactive">3</div><div class="step-text inactive">결제</div></div>
-              </div>
-              <div style="background:white; margin:8px; border-radius:14px; padding:14px 16px; display:flex; gap:12px; align-items:center;">
-                <div style="width:64px; height:64px; background:var(--gray-2); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:28px; flex-shrink:0;">👜</div>
-                <div><div style="font-size:11px; color:var(--gray-4);">구찌</div><div style="font-size:13px; font-weight:600; color:var(--dark);">오피디아 스몰 토트백</div><div style="font-size:15px; font-weight:700; color:var(--dark); margin-top:3px;">1,836,900원</div></div>
-              </div>
-              <div style="margin:0 8px 8px; border-radius:14px; overflow:hidden; border:1.5px solid var(--border);">
-                <div style="display:flex;"><div style="flex:1; padding:12px; text-align:center; font-size:13px; font-weight:600; background:var(--purple); color:white;">트렌비 정품PASS ✓</div><div style="flex:1; padding:12px; text-align:center; font-size:13px; font-weight:600; background:var(--gray-1); color:var(--gray-4);">일반</div></div>
-                <div style="background:#f5f3ff; padding:14px 16px;">
-                  <div style="background:var(--purple); border-radius:10px; padding:10px 14px; margin-bottom:12px;">
-                    <div style="font-size:10px; color:rgba(255,255,255,0.7); margin-bottom:2px;">멤버십 만료 — 재가입 안내</div>
-                    <div style="font-size:13px; font-weight:800; color:white;">정품PASS 멤버십 재가입 혜택 ↑</div>
-                  </div>
-                  <div id="c4-opt-single" onclick="c4SelectOpt(1)" style="cursor:pointer; background:#faf9ff; border-radius:10px; padding:12px 13px; margin-bottom:7px; border:2px solid var(--purple); display:flex; align-items:center; gap:9px;">
-                    <div style="width:18px; height:18px; border-radius:50%; border:2px solid var(--purple); display:flex; align-items:center; justify-content:center; flex-shrink:0;"><div style="width:9px; height:9px; border-radius:50%; background:var(--purple);"></div></div>
-                    <div><div style="font-size:12px; font-weight:700; color:var(--dark); margin-bottom:2px;">정품PASS (단건)</div><div style="font-size:14px; font-weight:800; color:var(--dark);">30,000원</div></div>
-                  </div>
-                  <div id="c4-opt-mem" onclick="c4SelectOpt(2)" style="cursor:pointer; background:#fff; border-radius:10px; padding:12px 13px; border:2px solid transparent; display:flex; align-items:center; gap:9px;">
-                    <div style="width:18px; height:18px; border-radius:50%; border:2px solid #d0d0d0; flex-shrink:0; position:relative;"><div class="rdot" style="display:none; width:9px; height:9px; border-radius:50%; background:var(--purple); position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);"></div></div>
-                    <div>
-                      <div style="font-size:10px; background:var(--purple-light); color:var(--purple); font-weight:700; padding:1px 6px; border-radius:20px; display:inline-block; margin-bottom:3px;">✦ 1년 무제한</div>
-                      <div style="font-size:12px; font-weight:700; color:var(--dark); margin-bottom:2px;">정품PASS 멤버십</div>
-                      <div style="display:flex; align-items:center; gap:5px;"><span style="font-size:12px; font-weight:800; color:var(--red);">70%</span><span style="font-size:14px; font-weight:800; color:var(--dark);">37,000원</span><span style="font-size:11px; color:#bbb; text-decoration:line-through;">120,000원</span></div>
-                    </div>
-                  </div>
-                  <div style="display:flex; justify-content:space-between; padding-top:10px; margin-top:8px; border-top:1px solid #e0daf5; align-items:center;">
-                    <span style="font-size:13px; color:var(--text-sub);">이용료</span>
-                    <span id="c4p1-fee" style="font-size:15px; font-weight:800; color:var(--dark);">30,000원</span>
+<div class="cond-panel" id="phone-c4" style="display:none;">
+        <div class="phone-box">
+          <div class="phone-label">만료 후 → 케이스 1 분기 예시</div>
+          <div class="phone"><div class="phone-inner">
+            <div class="ph-header"><div class="ph-back">‹</div><div class="ph-title">주문/결제</div><div style="width:28px"></div></div>
+            <div class="step-bar">
+              <div class="step"><div class="step-num active">1</div><div class="step-text active">주문</div></div>
+              <div class="step-line"></div>
+              <div class="step"><div class="step-num inactive">2</div><div class="step-text inactive">배송</div></div>
+              <div class="step-line"></div>
+              <div class="step"><div class="step-num inactive">3</div><div class="step-text inactive">결제</div></div>
+            </div>
+            <div style="background:white; margin:8px; border-radius:14px; padding:14px 16px; display:flex; gap:12px; align-items:center;">
+              <div style="width:64px; height:64px; background:var(--gray-2); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:28px; flex-shrink:0;">👜</div>
+              <div><div style="font-size:11px; color:var(--gray-4);">구찌</div><div style="font-size:13px; font-weight:600; color:var(--dark);">오피디아 스몰 토트백</div><div style="font-size:15px; font-weight:700; color:var(--dark); margin-top:3px;">1,836,900원</div></div>
+            </div>
+            <div style="margin:0 8px 8px; border-radius:14px; overflow:hidden; border:1.5px solid var(--border);">
+              <div style="display:flex;"><div style="flex:1; padding:12px; text-align:center; font-size:13px; font-weight:600; background:var(--purple); color:white;">트렌비 정품PASS ✓</div><div style="flex:1; padding:12px; text-align:center; font-size:13px; font-weight:600; background:var(--gray-1); color:var(--gray-4);">일반</div></div>
+              <div style="background:#f5f3ff; padding:14px 16px;">
+                <div style="background:var(--purple); border-radius:10px; padding:10px 14px; margin-bottom:12px;">
+                  <div style="font-size:10px; color:rgba(255,255,255,0.7); margin-bottom:2px;">멤버십 만료 — 재가입 안내</div>
+                  <div style="font-size:13px; font-weight:800; color:white;">정품PASS 멤버십 재가입 혜택 ↑</div>
+                </div>
+                <div onclick="c4SelectOpt(1)" style="cursor:pointer; background:#faf9ff; border-radius:10px; padding:12px 13px; margin-bottom:7px; border:2px solid var(--purple); display:flex; align-items:center; gap:9px;">
+                  <div style="width:18px; height:18px; border-radius:50%; border:2px solid var(--purple); display:flex; align-items:center; justify-content:center; flex-shrink:0;"><div style="width:9px; height:9px; border-radius:50%; background:var(--purple);"></div></div>
+                  <div><div style="font-size:12px; font-weight:700; color:var(--dark); margin-bottom:2px;">정품PASS (단건)</div><div style="font-size:14px; font-weight:800; color:var(--dark);">30,000원</div></div>
+                </div>
+                <div onclick="c4SelectOpt(2)" style="cursor:pointer; background:#fff; border-radius:10px; padding:12px 13px; border:2px solid transparent; display:flex; align-items:center; gap:9px;">
+                  <div style="width:18px; height:18px; border-radius:50%; border:2px solid #d0d0d0; flex-shrink:0;"></div>
+                  <div>
+                    <div style="font-size:10px; background:var(--purple-light); color:var(--purple); font-weight:700; padding:1px 6px; border-radius:20px; display:inline-block; margin-bottom:3px;">✦ 1년 무제한</div>
+                    <div style="font-size:12px; font-weight:700; color:var(--dark); margin-bottom:2px;">정품PASS 멤버십</div>
+                    <div style="display:flex; align-items:center; gap:5px;"><span style="font-size:12px; font-weight:800; color:var(--red);">70%</span><span style="font-size:14px; font-weight:800; color:var(--dark);">37,000원</span><span style="font-size:11px; color:#bbb; text-decoration:line-through;">120,000원</span></div>
                   </div>
                 </div>
+                <div style="display:flex; justify-content:space-between; padding-top:10px; margin-top:8px; border-top:1px solid #e0daf5; align-items:center;">
+                  <span style="font-size:13px; color:var(--text-sub);">이용료</span>
+                  <span id="c4p1-fee" style="font-size:15px; font-weight:800; color:var(--dark);">30,000원</span>
+                </div>
               </div>
-              <div class="bottom-btn"><button class="btn-primary">다음</button></div>
-            </div></div>
-          </div>
+            </div>
+            <div class="bottom-btn"><button class="btn-primary">다음</button></div>
+          </div></div>
         </div>
       </div>
 
     </div>
   </div>
-</div>
+
 </div>
 
 <div id="checkout-matrix-wrap" style="display:none; max-width:1100px; margin:0 auto; padding:0 28px 28px;">
@@ -1026,24 +1029,89 @@ body { font-family: 'Noto Sans KR', sans-serif; background: #F0EDF8; color: var(
     <div class="phone-box">
       <div class="phone-label">품절 취소 · 해지 신청 링크 노출</div>
       <div class="phone">
-        <div class="phone-inner" style="background:#fff; overflow-y:auto;">
-          <div style="display:flex; align-items:center; justify-content:space-between; padding:15px 20px 10px;"><button style="font-size:20px; background:none; border:none; cursor:pointer;">🔔</button><div style="font-size:16px; font-weight:700; color:#111;">마이페이지</div><div style="display:flex; gap:12px;"><button style="font-size:20px; background:none; border:none; cursor:pointer;">⚙️</button></div></div>
-          <div style="padding:14px 20px 18px; display:flex; align-items:center; gap:13px;"><div style="width:50px; height:50px; border-radius:50%; background:#e8e8e8; display:flex; align-items:center; justify-content:center; font-size:24px; flex-shrink:0;">👤</div><div><div style="font-size:15px; font-weight:700; color:#111;">트렌비님</div><div style="font-size:12px; color:#6C47FF; font-weight:600;">✅ 반가운 사이</div></div></div>
-          <div style="margin:0 20px 18px; background:#f0edff; border-radius:16px; padding:17px 17px 14px; border:1.5px solid #e0d9ff;">
-            <div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:4px;">
-              <div><div style="display:flex; align-items:center; gap:5px; font-size:11px; color:#6C47FF; font-weight:600; margin-bottom:5px;"><span style="width:6px; height:6px; border-radius:50%; background:#6C47FF; display:inline-block;"></span>이용중</div><div style="font-size:19px; font-weight:800; color:#6C47FF; margin-bottom:2px;">정품PASS 멤버십</div><div style="font-size:12px; color:#888;">2026.04.16 ~ 2027.04.16</div></div>
-              <div style="width:42px; height:42px; background:#6C47FF; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:900; color:#fff; flex-shrink:0;">M</div>
+        <div class="phone-inner" style="background:#fff; position:relative; overflow:hidden;" id="mp2-inner">
+          <div style="height:740px; overflow-y:auto;">
+            <div style="display:flex; align-items:center; justify-content:space-between; padding:15px 20px 10px;">
+              <button style="font-size:20px; background:none; border:none; cursor:pointer;">🔔</button>
+              <div style="font-size:16px; font-weight:700; color:#111;">마이페이지</div>
+              <div style="display:flex; gap:12px;"><button style="font-size:20px; background:none; border:none; cursor:pointer;">⚙️</button><button style="font-size:20px; background:none; border:none; cursor:pointer;">🛍️</button></div>
             </div>
-            <div style="margin:12px 0 10px; display:flex; flex-direction:column; gap:6px;">
-              <div style="background:#fff; border-radius:10px; padding:11px 13px; display:flex; justify-content:space-between; align-items:center;"><span style="font-size:12px; color:#999;">멤버십으로 아낀 금액</span><span style="font-size:14px; font-weight:800; color:#111;">120,000원</span></div>
+            <div style="padding:14px 20px 18px; display:flex; align-items:center; gap:13px;">
+              <div style="width:50px; height:50px; border-radius:50%; background:#e8e8e8; display:flex; align-items:center; justify-content:center; font-size:24px; position:relative; flex-shrink:0;">👤<div style="position:absolute; bottom:0; right:0; width:17px; height:17px; background:#555; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9px; color:#fff;">✎</div></div>
+              <div><div style="font-size:15px; font-weight:700; color:#111;">트렌비님</div><div style="font-size:12px; color:#6C47FF; font-weight:600;">✅ 반가운 사이 <span style="color:#999; font-weight:400;">등급 혜택 ›</span></div></div>
             </div>
-            <div style="font-size:10.5px; color:#a89ee0; line-height:1.5; padding:9px 11px; background:rgba(255,255,255,0.5); border-radius:8px; margin-bottom:10px;">📌 멤버십은 2027.04.16 자동 종료되며, 별도 갱신 및 추가 결제가 없습니다.</div>
-            <!-- 품절취소 케이스: 눈에 안 띄는 회색 텍스트 링크만 -->
-            <button style="display:block; text-align:right; width:100%; font-size:10.5px; color:#c0b8e8; background:none; border:none; cursor:pointer; font-family:inherit; text-decoration:underline; text-decoration-color:#d8d2f5; letter-spacing:-0.1px;">멤버십 취소 신청</button>
+            <div style="margin:0 20px 18px; background:#f7f7f7; border-radius:12px; display:flex;">
+              <div style="flex:1; padding:13px 0; text-align:center; border-right:1px solid #eee;"><div style="font-size:11px; font-weight:700; color:#333; margin-bottom:3px;">B머니</div><div style="font-size:11px; color:#666;">240,800 원</div></div>
+              <div style="flex:1; padding:13px 0; text-align:center; border-right:1px solid #eee;"><div style="font-size:11px; font-weight:700; color:#333; margin-bottom:3px;">쿠폰</div><div style="font-size:11px; color:#666;">0 장</div></div>
+              <div style="flex:1; padding:13px 0; text-align:center;"><div style="font-size:11px; font-weight:700; color:#333; margin-bottom:3px;">셔플</div><div style="font-size:11px; color:#666;">0 원</div></div>
+            </div>
+            <div style="margin:0 20px 18px; background:#f0edff; border-radius:16px; padding:17px 17px 14px; border:1.5px solid #e0d9ff;">
+              <div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:4px;">
+                <div>
+                  <div style="display:flex; align-items:center; gap:5px; font-size:11px; color:#6C47FF; font-weight:600; margin-bottom:5px;"><span style="width:6px; height:6px; border-radius:50%; background:#6C47FF; display:inline-block;"></span>이용중</div>
+                  <div style="font-size:19px; font-weight:800; color:#6C47FF; margin-bottom:2px;">정품PASS 멤버십</div>
+                  <div style="font-size:12px; color:#888;">2026.04.16 ~ 2027.04.16</div>
+                </div>
+                <div style="width:42px; height:42px; background:#6C47FF; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:900; color:#fff; box-shadow:0 2px 10px rgba(91,78,255,0.3); flex-shrink:0;">M</div>
+              </div>
+              <div style="margin:12px 0 10px; display:flex; flex-direction:column; gap:6px;">
+                <div style="background:#fff; border-radius:10px; padding:11px 13px; display:flex; justify-content:space-between; align-items:center;"><span style="font-size:12px; color:#999;">멤버십으로 아낀 금액</span><span style="font-size:14px; font-weight:800; color:#111;">120,000원</span></div>
+                <div style="background:#fff; border-radius:10px; padding:11px 13px; display:flex; justify-content:space-between; align-items:center;"><span style="font-size:12px; color:#999;">멤버십 누적 이용</span><span style="font-size:14px; font-weight:800; color:#111;">총 3회</span></div>
+              </div>
+              <div style="font-size:10.5px; color:#a89ee0; line-height:1.5; padding:9px 11px; background:rgba(255,255,255,0.5); border-radius:8px; margin-bottom:10px;">📌 멤버십은 2027.04.16 자동 종료되며, 별도 갱신 및 추가 결제가 없습니다.</div>
+              <div style="text-align:right; margin-top:8px;">
+                <span style="font-size:12px; color:#aaa; text-decoration:underline; cursor:pointer;">멤버십 취소 신청</span>
+              </div>
+              <!-- 해지 링크: 눈에 안 띄게 -->
+            </div>
+            <div style="margin:0 20px 4px; background:#1a1a1a; border-radius:10px; padding:13px 15px; display:flex; justify-content:space-between; align-items:center; font-size:12px; color:#fff;"><span>안 쓰는 내 명품을 새 명품으로 셔플해보세요!</span><span>⇅</span></div>
+            <div style="margin-top:8px;">
+              <div style="display:flex; align-items:center; justify-content:space-between; padding:16px 20px; border-bottom:1px solid #f5f5f5; font-size:14px; color:#111; font-weight:500;">주문/배송 내역 <span style="color:#ccc; font-size:15px;">›</span></div>
+              <div style="display:flex; align-items:center; justify-content:space-between; padding:16px 20px; border-bottom:1px solid #f5f5f5; font-size:14px; color:#111; font-weight:500;">판매 내역 <span style="color:#ccc; font-size:15px;">›</span></div>
+              <div style="display:flex; align-items:center; justify-content:space-between; padding:16px 20px; border-bottom:1px solid #f5f5f5; font-size:14px; color:#111; font-weight:500;">경매 내역 <span style="color:#ccc; font-size:15px;">›</span></div>
+            </div>
+            <div style="background:#fff; border-top:1px solid #f0f0f0; display:flex; padding:10px 0 16px; margin-top:12px;">
+              <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:3px; font-size:9px; color:#bbb;">🏠<span>홈</span></div>
+              <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:3px; font-size:9px; color:#bbb;">☰<span>카테고리</span></div>
+              <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:3px; font-size:9px; color:#bbb;">Ⓦ<span>내명품판매</span></div>
+              <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:3px; font-size:9px; color:#bbb;">♡<span>찜목록</span></div>
+              <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:3px; font-size:9px; color:#111; font-weight:700; position:relative;">👤<span>마이</span><span style="position:absolute; top:-4px; right:4px; background:#6C47FF; color:#fff; font-size:8px; font-weight:700; padding:1px 4px; border-radius:10px;">멤버십</span></div>
+            </div>
           </div>
-          <div style="margin-top:8px;">
-            <div style="display:flex; align-items:center; justify-content:space-between; padding:16px 20px; border-bottom:1px solid #f5f5f5; font-size:14px; color:#111; font-weight:500;">주문/배송 내역 <span style="color:#ccc; font-size:15px;">›</span></div>
-            <div style="display:flex; align-items:center; justify-content:space-between; padding:16px 20px; border-bottom:1px solid #f5f5f5; font-size:14px; color:#111; font-weight:500;">판매 내역 <span style="color:#ccc; font-size:15px;">›</span></div>
+          <!-- 해지 팝업 오버레이 -->
+          <div id="mp2-overlay" style="display:none; position:absolute; inset:0; background:rgba(0,0,0,0.45); z-index:20; align-items:flex-end; justify-content:center;">
+            <div style="background:#fff; width:100%; border-radius:20px 20px 0 0; padding:12px 20px 36px;">
+              <div id="mp2-step1" class="mp2-step" style="display:block;">
+                <div style="width:34px; height:4px; background:#e0e0e0; border-radius:99px; margin:0 auto 20px;"></div>
+                <div style="font-size:16px; font-weight:800; color:#111; margin-bottom:5px;">정말 해지하시겠어요?</div>
+                <div style="font-size:12px; color:#888; line-height:1.6; margin-bottom:16px;">해지 시 아래 혜택이 즉시 소멸됩니다.</div>
+                <div style="background:#f8f7ff; border-radius:10px; padding:13px 15px; margin-bottom:14px;">
+                  <div style="font-size:12px; color:#6C47FF; line-height:1.9;">✓ 정품PASS 무제한 무료 이용</div>
+                  <div style="font-size:12px; color:#6C47FF; line-height:1.9;">✓ UV 케어 서비스 멤버십 할인</div>
+                  <div style="font-size:12px; color:#6C47FF; line-height:1.9;">✓ 멤버십 전용 프로모션 혜택</div>
+                </div>
+                <div style="font-size:11px; color:#e08080; text-align:center; margin-bottom:18px;">남은 혜택기간 환불은 제공되지 않습니다.</div>
+                <div style="display:flex; gap:8px;">
+                  <button onclick="mp2ClosePopup()" style="flex:1.5; padding:14px; border:none; border-radius:8px; background:#6C47FF; font-size:13px; font-weight:700; color:#fff; cursor:pointer; font-family:inherit;">혜택 계속 받기</button>
+                  <button onclick="mp2GoStep(2)" style="flex:1; padding:14px; border:1px solid #e0e0e0; border-radius:8px; background:#fff; font-size:12px; font-weight:500; color:#bbb; cursor:pointer; font-family:inherit;">해지 진행</button>
+                </div>
+              </div>
+              <div id="mp2-step2" class="mp2-step" style="display:none;">
+                <div style="width:34px; height:4px; background:#e0e0e0; border-radius:99px; margin:0 auto 20px;"></div>
+                <div style="text-align:center; font-size:34px; margin-bottom:10px;">🚪</div>
+                <div style="text-align:center; font-size:15px; font-weight:800; color:#111; margin-bottom:7px;">마지막으로 확인해 주세요</div>
+                <div style="text-align:center; font-size:12px; color:#aaa; line-height:1.7; margin-bottom:20px;">멤버십은 2027.04.16에 자동 종료됩니다.<br>지금 해지하셔도 남은 기간 혜택은<br><strong style="color:#555;">복구되지 않습니다.</strong></div>
+                <button onclick="mp2GoStep(3)" style="width:100%; padding:14px; border:1px solid #ddd; border-radius:8px; background:#fff; font-size:13px; color:#999; font-weight:600; cursor:pointer; font-family:inherit; margin-bottom:8px;">그래도 해지할게요</button>
+                <button onclick="mp2ClosePopup()" style="width:100%; padding:14px; border:none; border-radius:8px; background:#6C47FF; font-size:13px; color:#fff; font-weight:700; cursor:pointer; font-family:inherit;">유지하기</button>
+              </div>
+              <div id="mp2-step3" class="mp2-step" style="display:none;">
+                <div style="width:34px; height:4px; background:#e0e0e0; border-radius:99px; margin:0 auto 20px;"></div>
+                <div style="text-align:center; font-size:34px; margin-bottom:10px;">✅</div>
+                <div style="text-align:center; font-size:15px; font-weight:800; color:#111; margin-bottom:7px;">해지 신청이 접수되었습니다</div>
+                <div style="text-align:center; font-size:12px; color:#aaa; line-height:1.7; margin-bottom:22px;">영업일 기준 7일 이내 처리됩니다.<br>처리 완료 후 별도 안내 드립니다.</div>
+                <button onclick="mp2ClosePopup()" style="width:100%; padding:14px; border:none; border-radius:8px; background:#111; font-size:13px; color:#fff; font-weight:700; cursor:pointer; font-family:inherit;">확인</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1514,11 +1582,11 @@ function switchCond(btn, caseId) {
     b.style.background = 'white'; b.style.color = 'var(--text-sub)'; b.style.border = '1.5px solid var(--border)';
   });
   btn.style.background = 'var(--purple)'; btn.style.color = 'white'; btn.style.border = 'none';
-  ['c1','c2','c3','c4'].forEach(c => {
-    const panel = document.getElementById('panel-'+c);
-    const phone = document.getElementById('phone-'+c);
-    if (panel) panel.style.display = c===caseId ? 'block' : 'none';
-    if (phone) phone.style.display = c===caseId ? 'flex' : 'none';
+  ['c1','c2','c3','c4'].forEach(id => {
+    const panel = document.getElementById('panel-'+id);
+    const phone = document.getElementById('phone-'+id);
+    if (panel) panel.style.display = id===caseId ? 'block' : 'none';
+    if (phone) phone.style.display = id===caseId ? 'flex' : 'none';
   });
   currentRouletteCase = caseId;
 }
